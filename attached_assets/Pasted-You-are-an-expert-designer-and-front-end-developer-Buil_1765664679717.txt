@@ -1,0 +1,284 @@
+You are an expert designer and front-end developer. Build a SINGLE-PAGE, responsive website for LOGIC Health’s “CCM Revenue Rep Program.”
+
+OBJECTIVE
+Create a landing page that CLONES the overall layout, structure, and visual language of this page, but with completely original copy and assets focused on recruiting high-performing CCM reps:
+
+STYLE & STRUCTURE REFERENCE (CLONE THE DESIGN, NOT THE CONTENT):
+https://www.amplemarket.com/ads-demo-all-in-one
+
+Use that URL as your ONLY visual and structural reference. Match it as closely as possible in:
+
+Page structure and section order
+
+Layout (hero with form, logo strip, testimonial, “before/after” section, feature grids, event stream, metrics/social proof, final CTA, footer)
+
+Spacing, padding, and visual hierarchy
+
+Typography style (bold modern SaaS headings, clean body text)
+
+Component shapes (cards, buttons, pills, badges, etc.)
+
+Interactions (hover states, scroll behavior, responsiveness)
+
+BUT IMPORTANTLY:
+
+Do NOT copy any of their text, headlines, or microcopy.
+
+Do NOT copy their logo or brand imagery.
+
+Do NOT copy their code (HTML, CSS, or JS).
+
+Use original words and your own code, while making the design feel like a very close structural and stylistic twin.
+
+BRAND & AUDIENCE
+
+Brand: LOGIC Health
+
+Offer: CCM Revenue Rep Program
+
+Audience: Top-performing, results-driven sales reps (pharma, med device, home health, RCM/billing, and other independent healthcare reps) who want to monetize their existing provider relationships. They are independent contractors, commission-only, can be full-time or part-time, and can “add us to their bag.”
+
+TONE & CONTENT PRINCIPLES
+
+Direct, performance- and outcome-oriented, but professional.
+
+Lead with financial upside, leverage, and residual income.
+
+Short, punchy headlines with 1–2 line explanations and bullets.
+
+Emphasize:
+
+Residual commission on recurring CCM revenue
+
+Unlimited upside / no clinic cap
+
+Low operational burden (LOGIC runs CCM)
+
+Ability to bolt on to an existing portfolio of products/services
+
+TECH REQUIREMENTS
+
+Semantic HTML, modern CSS (Flexbox/Grid), light JavaScript as needed.
+
+Fully responsive (mobile, tablet, desktop).
+
+No heavy JS frameworks required.
+
+SECTION-BY-SECTION INSTRUCTIONS
+Mirror the sections and flow of the reference page, but adapt all language and imagery to CCM and rep recruiting.
+
+GLOBAL NAV + HERO (CLONE STRUCTURE)
+
+Sticky top navigation visually similar to the reference (logo left, nav links, and a highlighted CTA button).
+
+Replace nav items with revenue- and rep-focused labels, e.g.: “Opportunity,” “Comp & Upside,” “Who It’s For,” “How It Works,” “Apply.”
+
+Hero section:
+
+Big headline focused on income and leverage. Example (rewrite/improve): “Turn Your Clinic Relationships Into Residual Income.”
+
+Subheadline: one sentence about adding CCM to their bag and earning commission on recurring clinic revenue.
+
+Primary CTA button: “Apply to Be a CCM Revenue Rep.”
+
+Secondary CTA: “View Comp Structure” (scroll anchor).
+
+On the right, clone the style and placement of the reference’s hero form, but change the fields to a rep application form:
+
+Fields: Name, Work Email, Current Role, Region(s) Covered, “Estimated Number of Provider Relationships,” and a simple dropdown: “Current Focus (Pharma / Med Device / Home Health / Billing / Other).”
+
+Submit button styled similarly to “Get free trial,” but labeled “Submit Application.”
+
+“TRUSTED BY” STYLE LOGO STRIP
+
+Clone the “Trusted by industry leaders” logo band design.
+
+Replace logos with generic text or placeholder clinic/provider group labels such as:
+
+“Independent Primary Care Group”
+
+“Regional Specialty Network”
+
+“Community Health Clinics”
+
+Maintain the horizontal logo strip look and spacing, but avoid using real brand marks.
+
+TOP TESTIMONIAL / QUOTE BLOCK
+
+Clone the prominent testimonial section style near the top of the reference.
+
+Replace with a fictional rep testimonial focused on revenue and leverage.
+
+Example content direction: how CCM became their most profitable add-on, created a sticky revenue stream, and fit into existing clinic calls.
+
+Attribution: “Healthcare Sales Rep, Southeast Region” (no real names).
+
+Match typography, image/avatar placement, and card style.
+
+“BEFORE / AFTER” SECTION (MAP TO REP ECONOMICS)
+
+Where the reference shows a “before vs with” section, mirror the two-column layout:
+
+Left side: “Before CCM Revenue” with 3 pain-point cards for reps:
+
+“One-off deals with no residuals.”
+
+“Leaving clinic revenue opportunities unused.”
+
+“Limited leverage on existing provider relationships.”
+
+Right side: “With a CCM Revenue Stream” with 3 benefit cards:
+
+“Recurring commission from enrolled CCM patients.”
+
+“Deeper, stickier relationships with clinics.”
+
+“More value for providers with no new staffing burden.”
+
+Preserve the visual tension/layout of the reference, but swap all copy and icons to fit rep economics and CCM.
+
+MAIN FEATURE / VALUE SECTION (CLONE CARD GRID)
+
+Mirror the multi-card feature grid structure from the reference site.
+
+Create 4 core feature cards, each with a clear heading, 1–2 line description, and an icon:
+
+“Residual Commission” – “Earn recurring income as clinics grow their CCM panel.”
+
+“Unlimited Clinics” – “No cap on the number of practices you can enroll.”
+
+“Clinic-First Economics” – “Align with providers by driving new revenue and better patient coverage.”
+
+“Low Operational Load” – “LOGIC Health runs CCM operations; you focus on opening doors.”
+
+“SIGNALS” / EVENT STREAM REIMAGINED FOR CCM & REPS
+
+Where the reference shows a dynamic list of sales signals/events, clone that component’s visual design.
+
+Replace the content with CCM and revenue-relevant “events” reps care about, e.g.:
+
+“Clinic A launches CCM with 40 eligible patients.”
+
+“Clinic B enrolls 10 new CCM patients this month.”
+
+“Your commission from Clinic C just updated.”
+
+“New independent clinic prospect added to your pipeline.”
+
+Display 10–15 concise event lines that visually echo the reference’s signal list, but in CCM-rep terms.
+
+METRICS / SOCIAL PROOF CLUSTER (CLONE STRUCTURE)
+
+Clone the reference’s section with metrics + quote blocks.
+
+Replace metrics with conceptual placeholders tied to rep performance and clinic outcomes (no real stats):
+
+“XX+ clinics supported with CCM.”
+
+“XX CCM patients per active clinic (avg).”
+
+“XX% of reps add CCM to existing portfolios.”
+
+Include 2–3 short quotes from fictional reps or clinic admins about:
+
+Bigger book of business from CCM.
+
+Stickier provider relationships.
+
+Predictable, residual-style income.
+
+“WHO THRIVES IN THIS ROLE” REP PROFILE SECTION
+
+Insert a rep-targeted section that fits into the flow like a feature block from the reference.
+
+Headline: “Who Thrives in This Role”
+
+4 cards for:
+
+“Pharma Sales Reps” – already calling on PCPs and specialists.
+
+“Medical Device Reps” – high-touch relationships in specialty practices.
+
+“Home Health Reps” – close to high-risk patient populations.
+
+“Billing / RCM Reps” – focused on practice finance and recurring revenue.
+
+Each card: one punchy line about layering CCM on top of existing clinic calls.
+
+“HOW IT WORKS” / SIMPLE 3-STEP FUNNEL
+
+In the spot where the reference explains workflow or product steps, create a 3-step funnel for reps:
+
+Step 1: “Apply & Qualify” – Share your background, territory, and provider relationships.
+
+Step 2: “Get Equipped” – Receive CCM training, pitch deck, one-pagers, and simple CRM access.
+
+Step 3: “Activate Your Network” – Approach clinics, identify CCM fit, and hand off interested practices to LOGIC Health.
+
+Use the same type of numbered or icon-based step layout as the reference.
+
+COMP & FLEXIBILTY SECTION (MAP TO A FEATURE/METRIC BLOCK)
+
+Use a layout similar to one of the reference’s feature + visual sections.
+
+Left side (or top on mobile):
+
+Headline: “High-Upside Commission With Flexible Commitment.”
+
+3 bullets:
+
+“Commission-only with residual potential per enrolled clinic.”
+
+“Independent contractor — part-time or full-time.”
+
+“Designed to bolt onto your existing portfolio.”
+
+Right side:
+
+2–3 scenario cards with placeholder math, styled like metric cards:
+
+“Clinic A: XX CCM patients → Approx. $X clinic revenue → Your recurring commission: $Y (placeholder).”
+
+“Clinic A + Clinic B: combined CCM revenue → larger residual stream.”
+
+FINAL CTA SECTION (CLONE FOOTER-ADJACENT CTA)
+
+Clone the visual style of the final high-impact CTA section from the reference page.
+
+Headline: “Ready to Add a New Revenue Stream?”
+
+Subheadline: “Use your existing clinic relationships to drive CCM revenue — and residual income for yourself.”
+
+Prominent button: “Apply to Be a CCM Revenue Rep.”
+
+Optionally include a small secondary link: “Learn more about CCM” (scrolls up to a section or opens an informational modal).
+
+FOOTER (CLONE LAYOUT, CHANGE LINKS)
+
+Match the multi-column footer layout of the reference, but with LOGIC Health content:
+
+Columns like: “Program,” “For Reps,” “For Clinics,” “Resources,” “Contact.”
+
+Use descriptive placeholder links relevant to CCM and the rep program, plus generic “Privacy Policy” and “Terms of Service.”
+
+Include a simple © LOGIC Health 2024 line.
+
+DESIGN & UX DETAILS
+
+Use a color palette inspired by modern SaaS with a performance feel: one strong primary, a secondary accent, and neutral backgrounds, mimicking the reference’s energy and contrast.
+
+Buttons, cards, and interactive elements should have hover states similar in feel to the reference (subtle shadows, movement, or color shifts).
+
+Maintain strong whitespace, consistent spacing, and section rhythm so the page clearly “belongs to” the same design family as the reference.
+
+Ensure all sections stack cleanly on mobile while keeping CTAs highly visible.
+
+ACCESSIBILITY
+
+Maintain good color contrast, keyboard accessibility, and alt text for key imagery.
+
+Forms should have clear labels and intuitive error states.
+
+REMINDER
+
+Clone the design language, layout, and interaction patterns of the reference URL as closely as possible, but write entirely new copy and use your own HTML/CSS/JS implementation tailored to LOGIC Health’s CCM Revenue Rep Program for high-performing, commission-driven sales reps.
