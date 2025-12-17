@@ -1,0 +1,80 @@
+Change hero paragraph to 
+“Add Chronic Care Management (CCM) to your bag. Earn recurring commissions on clinic revenue without the operational headache. No base salary, no hourly, just performance.”
+
+
+
+Application card (right side)
+Add a one-line disclaimer inside the form (near the title or above submit).
+ Under “See if you qualify for the program.” add:
+“Independent contractor (1099). Commission-only. Non-exclusive.”
+
+
+Replace the tiny footer line under the button.
+ Current: “No commitment required. Free to apply.”
+ Replace with:
+“Commission-only 1099 role. Part-time friendly. Non-exclusive.”
+
+
+Add two fields that force the “bag / cross-sell” framing.
+Dropdown: Availability (Part-time / Full-time / Side-by-side with current job)
+
+
+Checkbox or dropdown: “Are you adding CCM to an existing book of business?” (Yes—existing clinics / Yes—new clinic prospecting / Both)
+
+
+“Why Reps Are Switching to Residuals” section
+This section is strong, but add one hard disqualifier line above the comparison cards:
+“This is not a W-2 role. No base salary. Commission-only (1099).”
+
+
+Feature cards (“Residual Commission / Unlimited Clinics / …”)
+add one compact line under the grid:
+“Non-exclusive rep role: keep your current products and cross-sell CCM to the same clinics.”
+
+
+“Real-Time Revenue Signals” section
+add one bullet that explicitly frames cross-selling:
+“Designed for cross-sell: introduce CCM on your existing clinic calls.”
+
+
+Replace “"The residual income is real. It took about 3 months to ramp up, but now it covers my mortgage every single month."” with : 
+
+“Added CCM to cross-sell existing clinic relationship.”
+
+
+“Who Thrives in This Role?” section
+Replace “Designed for reps with existing relationships.” with: 
+“Best fit: reps already visiting clinics who want a simple add-on offer to cross-sell.”
+
+
+Add one line to each card to emphasize “bag”:
+Pharma: “Add CCM alongside your current portfolio.”
+
+
+Med device: “Cross-sell to practices you already call on.”
+
+
+Home health: “Introduce CCM as a complementary revenue stream.”
+
+
+Billing/RCM: “CCM is a clean ‘found revenue’ add-on.”
+
+
+Footer / FAQ (make it impossible to miss)
+Add (or surface) a visible FAQ block with these exact questions:
+Is this commission-only? Yes—1099 commission-only. No base salary.
+
+
+Can I do this part-time? Yes—built for part-time or full-time.
+
+
+Can I keep my current job? Yes—non-exclusive; designed to add to your bag.
+
+
+Is this cross-sell friendly? Yes—ideal for reps with existing clinic relationships.
+
+
+Remove “Login: button. 
+“Rep Portal (Approved Reps)” or simply remove until live.
+
+
