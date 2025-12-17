@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -166,3 +167,11 @@ Thumbs.db
 .vscode/
 .idea/
 
+=======
+node_modules
+dist
+.DS_Store
+server/public
+vite.config.ts.*
+*.tar.gz
+>>>>>>> 370c8b6 (Extracted stack files)
