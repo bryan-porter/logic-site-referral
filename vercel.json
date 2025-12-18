@@ -1,21 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "dist/index.cjs"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "dist/index.cjs"
+      "dest": "/index.html"
     }
-  ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  ]
 }
