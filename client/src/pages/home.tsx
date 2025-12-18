@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -42,6 +42,24 @@ import {
 } from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import {
   MultiColorChart,
@@ -215,7 +233,7 @@ function Hero() {
             Turn Your Clinic Relationships Into <span className="text-blue-400">Residual Income.</span>
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-            Cross-sell Chronic Care Managment to your current accounts. Earn recurring commissions on clinic revenue without the operational headache while improving patient outcomes. Results-based commissions, with unlimited upside based on your results.
+            LOGIC is designed to be operationally light for providers and straightforward for you to introduce. You bring the relationship—we bring the implementation, ongoing support, and the care-management engine that creates measurable value. Make the call with confidence: minimal lift, meaningful value, strong support.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -447,6 +465,405 @@ function LogoStrip() {
   );
 }
 
+function ValuePillars() {
+  const [activeTile, setActiveTile] = useState<number>(0);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const [userInteracting, setUserInteracting] = useState(false);
+  const [stageHeight, setStageHeight] = useState<number>(0);
+
+  const shouldReduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const stageRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
+  const userInteractTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Set mounted after first render to avoid hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const pillars = [
+    {
+      title: "Ease of Implementation",
+      lead: "Make the introduction—we handle the heavy lift.",
+      body: "LOGIC takes it from first call to signed agreement, then runs onboarding and go-live with a dedicated implementation team. No 40-hour hand-holding and minimal disruption to day-to-day clinic operations—so you're not pulled into delivery to make the account successful.",
+      bullets: [
+        "LOGIC-led discovery, demo, proposal, and contracting",
+        "LOGIC-led onboarding and go-live (you're not the project manager)",
+        "Minimal disruption to day-to-day clinic workflows"
+      ]
+    },
+    {
+      title: "Clinical and Financial Value-Add",
+      lead: "Be the consultant your accounts remember.",
+      body: "LOGIC helps practices and small hospitals improve care continuity and unlock sustainable revenue tied to active patient management—so you show up with a solution that impacts both outcomes and operations.",
+      bullets: [
+        "You bring a value-based solution, not another widget",
+        "The impact is visible to clinicians and administrators",
+        "Creates \"trusted partner\" positioning inside the account"
+      ]
+    },
+    {
+      title: "Differentiated Advantage",
+      lead: "Sharper story for key accounts, backed by an operating model that delivers.",
+      body: "LOGIC is built as a comprehensive care-management partner—not a point solution. We bring a complete operating model (sales support, implementation, and ongoing care-management operations) that's easy to explain, easy for clinics to adopt, and clearly distinct from basic CCM-only offerings.",
+      bullets: [
+        "Clear differentiation beyond basic CCM-only programs",
+        "Executive-ready talking points for administrators and clinicians",
+        "A strong reason to re-engage priority accounts in your territory"
+      ]
+    }
+  ];
+
+  // Scroll-driven progression
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end center"]
+  });
+
+  // Update activeTile based on scroll progress (unless user is interacting)
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!mounted || !sectionRef.current || userInteracting || shouldReduceMotion) return;
+
+    // Determine which tile should be active based on scroll position
+    const idx = latest < 0.33 ? 0 : latest < 0.66 ? 1 : 2;
+    setActiveTile(idx);
+  });
+
+  // Measure stage heights on mount to prevent layout shift
+  useEffect(() => {
+    const measureHeights = () => {
+      const heights = stageRefs.current
+        .filter((ref): ref is HTMLDivElement => ref !== null)
+        .map(ref => ref.scrollHeight);
+
+      if (heights.length > 0) {
+        const maxHeight = Math.max(...heights);
+        setStageHeight(maxHeight);
+      }
+    };
+
+    // Delay to ensure content is rendered
+    const timer = setTimeout(measureHeights, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    if (activeTile !== index) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -7;
+    const rotateY = ((x - centerX) / centerX) * 7;
+
+    setTilt({ rotateX, rotateY });
+  };
+
+  const handleTileEnter = (index: number) => {
+    setActiveTile(index);
+    setUserInteracting(true);
+
+    // Clear existing timeout
+    if (userInteractTimeoutRef.current) {
+      clearTimeout(userInteractTimeoutRef.current);
+    }
+
+    // Resume scroll-driven progression after 2 seconds of inactivity
+    userInteractTimeoutRef.current = setTimeout(() => {
+      setUserInteracting(false);
+    }, 2000);
+  };
+
+  const handleTileLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0 });
+  };
+
+  return (
+    <section ref={sectionRef} className="relative bg-slate-50/50 py-20 lg:py-28">
+        <div className="container-padding mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold font-heading text-foreground mb-4">
+              Three reasons reps love selling LOGIC
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Designed for busy physician practices and small hospitals. Built for low-lift selling: LOGIC provides the deal support and operational engine that delivers measurable value—without adding workload to the clinic.
+            </p>
+          </div>
+
+          {/* Hidden measurement divs for stable height */}
+          <div className="fixed opacity-0 pointer-events-none -z-50">
+            {pillars.map((pillar, i) => (
+              <div key={i} ref={el => stageRefs.current[i] = el} className="w-[600px]">
+                <div className="space-y-6 p-10">
+                  <div>
+                    <h3 className="text-2xl font-bold font-heading leading-tight mb-3">{pillar.title}</h3>
+                    <p className="text-lg font-bold leading-relaxed">{pillar.lead}</p>
+                  </div>
+                  <p className="text-base leading-relaxed">{pillar.body}</p>
+                  <ul className="space-y-3 pt-2">
+                    {pillar.bullets.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="mt-0.5 shrink-0" size={20} />
+                        <span className="text-sm leading-relaxed">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: Master-Detail Layout */}
+          <div className="hidden lg:grid lg:grid-cols-[1fr_1.3fr] gap-8 xl:gap-12">
+          {/* Left: Tiles (Master List) */}
+          <div className="space-y-4">
+            {pillars.map((pillar, i) => {
+              const isActive = activeTile === i;
+              const isInactive = activeTile !== i;
+
+              return (
+                <div
+                  key={i}
+                  onMouseEnter={() => handleTileEnter(i)}
+                  onMouseLeave={handleTileLeave}
+                  onFocus={() => handleTileEnter(i)}
+                  onBlur={handleTileLeave}
+                  tabIndex={0}
+                  className="outline-none"
+                >
+                  <div
+                    className="tilt-inner"
+                    onMouseMove={(e) => handleMouseMove(e, i)}
+                    style={{
+                      transform: isActive
+                        ? `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) translateZ(10px)`
+                        : 'none',
+                      transition: isActive ? 'transform 0.1s ease-out' : 'transform 0.2s ease-out',
+                      willChange: isActive ? 'transform' : 'auto',
+                    }}
+                  >
+                    <Card
+                      className={`cursor-pointer transition-all duration-200 ${
+                        isActive
+                          ? 'border-primary/40 shadow-xl'
+                          : 'hover:border-primary/30 hover:shadow-md'
+                      }`}
+                      style={{
+                        opacity: isInactive ? 0.6 : 1,
+                      }}
+                    >
+                      <CardContent className="p-5 relative overflow-hidden">
+                        {isActive && (
+                          <div
+                            className="absolute inset-0 opacity-15 pointer-events-none"
+                            style={{
+                              background: `radial-gradient(circle at ${50 + tilt.rotateY * 5}% ${50 - tilt.rotateX * 5}%, rgba(255,255,255,0.9) 0%, transparent 60%)`,
+                            }}
+                          />
+                        )}
+                        <h3 className="text-lg font-bold font-heading text-foreground relative z-10">{pillar.title}</h3>
+                        <p className={`text-sm font-semibold mt-2 relative z-10 transition-opacity duration-200 ${isInactive ? 'opacity-70' : 'text-foreground'}`}>
+                          {pillar.lead}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right: Stage Panel (Detail View) */}
+          <div className="self-start">
+            <Card className="border-2 border-primary/20 shadow-2xl bg-gradient-to-br from-white via-white to-slate-50">
+              <CardContent
+                className="p-8 lg:p-10"
+                style={{
+                  minHeight: stageHeight > 0 ? `${stageHeight}px` : undefined,
+                }}
+              >
+                {!shouldReduceMotion && (
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTile}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="space-y-6"
+                    >
+                    <div>
+                      <h3 className="text-2xl font-bold font-heading text-foreground leading-tight mb-3">
+                        {pillars[activeTile].title}
+                      </h3>
+                      <p className="text-lg font-bold text-primary leading-relaxed">
+                        {pillars[activeTile].lead}
+                      </p>
+                    </div>
+
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      {pillars[activeTile].body}
+                    </p>
+
+                    <ul className="space-y-3 pt-2">
+                      {pillars[activeTile].bullets.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 className="text-primary mt-0.5 shrink-0" size={20} />
+                          <span className="text-sm text-foreground leading-relaxed">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </AnimatePresence>
+                )}
+
+                {shouldReduceMotion && (
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-2xl font-bold font-heading text-foreground leading-tight mb-3">
+                        {pillars[activeTile].title}
+                      </h3>
+                      <p className="text-lg font-bold text-primary leading-relaxed">
+                        {pillars[activeTile].lead}
+                      </p>
+                    </div>
+
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      {pillars[activeTile].body}
+                    </p>
+
+                    <ul className="space-y-3 pt-2">
+                      {pillars[activeTile].bullets.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 className="text-primary mt-0.5 shrink-0" size={20} />
+                          <span className="text-sm text-foreground leading-relaxed">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Tablet/Mobile: Tiles with tap to expand */}
+        <div className="lg:hidden space-y-4">
+          {pillars.map((pillar, i) => (
+            <Card
+              key={i}
+              className={`cursor-pointer transition-all duration-200 ${
+                activeTile === i ? 'border-primary/40 shadow-lg' : 'hover:border-primary/30'
+              }`}
+              onClick={() => handleTileEnter(i)}
+            >
+              <CardContent className="p-6">
+                <h3 className="text-lg font-bold font-heading text-foreground">{pillar.title}</h3>
+                <p className="text-sm font-semibold text-foreground mt-2">{pillar.lead}</p>
+
+                {activeTile === i && (
+                  <div className="mt-4 pt-4 border-t border-border space-y-4">
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                      {pillar.body}
+                    </p>
+                    <ul className="space-y-3">
+                      {pillar.bullets.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <CheckCircle2 className="text-primary mt-0.5 shrink-0" size={18} />
+                          <span className="text-sm text-foreground leading-relaxed">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RisksMitigated() {
+  const risks = [
+    {
+      value: "item-1",
+      number: "01",
+      title: "Relationship Risk",
+      lead: "Your reputation matters—our support protects it.",
+      body: "We operate with a \"back-end owned by LOGIC\" mindset: responsive support, proactive issue resolution, and a structured escalation path so small issues don't become account-level frustrations."
+    },
+    {
+      value: "item-2",
+      number: "02",
+      title: "Implementation Burden",
+      lead: "Clinics are overloaded. We keep the lift light.",
+      body: "Our model is built to minimize staff burden and operational disruption. LOGIC runs onboarding and go-live with a dedicated implementation team so busy clinics can adopt without adding work they don't have capacity for."
+    },
+    {
+      value: "item-3",
+      number: "03",
+      title: "Regulatory and Compliance Stability",
+      lead: "Healthcare requires confidence, not gray areas.",
+      body: "We provide a documented compliance posture and standard contracting framework (including HIPAA-aligned processes and applicable agreements, such as a BAA when appropriate) so you can sell professionally and consistently—without feeling like you're putting your name on something uncertain."
+    }
+  ];
+
+  return (
+    <section className="py-20 lg:py-28 bg-slate-900 text-slate-50 relative">
+      <div className="container-padding mx-auto max-w-6xl">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Title + Subhead */}
+          <div className="lg:sticky lg:top-24">
+            <h2 className="text-3xl lg:text-4xl font-bold font-heading text-white mb-6">
+              We address the three risks reps worry about
+            </h2>
+            <p className="text-lg text-slate-300 leading-relaxed">
+              You shouldn't have to risk your relationships to offer care management. LOGIC is built for predictable delivery—strong support, low clinic lift, and a clear compliance posture—so you're not left carrying operational issues in the account.
+            </p>
+          </div>
+
+          {/* Right Column: Accordion */}
+          <div>
+            <Accordion type="single" collapsible defaultValue="item-1" className="w-full space-y-4">
+              {risks.map((risk) => (
+                <AccordionItem
+                  key={risk.value}
+                  value={risk.value}
+                  className="group border border-slate-700 rounded-lg bg-slate-800/50 px-6 py-2 transition-all duration-300 hover:border-slate-600 hover:bg-slate-800/70 data-[state=open]:border-blue-500/50 data-[state=open]:bg-slate-800/80 data-[state=open]:shadow-lg data-[state=open]:shadow-blue-500/10 relative data-[state=open]:before:content-[''] data-[state=open]:before:absolute data-[state=open]:before:left-0 data-[state=open]:before:top-0 data-[state=open]:before:bottom-0 data-[state=open]:before:w-1 data-[state=open]:before:bg-blue-400 data-[state=open]:before:rounded-l-lg"
+                >
+                  <AccordionTrigger className="text-left text-lg font-bold text-white hover:no-underline py-4">
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm font-mono text-slate-500 group-data-[state=open]:text-blue-400 transition-colors flex-shrink-0">
+                        {risk.number}
+                      </span>
+                      <span>{risk.title}</span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-2 pb-4 pl-10">
+                    <p className="font-bold text-blue-300 leading-relaxed text-base">
+                      {risk.lead}
+                    </p>
+                    <p className="text-slate-300 leading-relaxed">
+                      {risk.body}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Testimonial() {
   return (
     <section className="py-20 lg:py-28 bg-background">
@@ -480,12 +897,12 @@ function BeforeAfter() {
     <section className="py-20 bg-slate-50 border-y border-border/50" id="opportunity">
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-4">Why Reps Are Switching to Residuals</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop leaving revenue on the table. Compare the traditional model with the CCM opportunity.</p>
+          <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-4">Why Reps are Adding Care Management</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop leaving revenue on the table. Compare the traditional model to the care management opportunity.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 relative">
-          
+
           {/* Divider Badge */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -mt-2 z-10 hidden lg:flex">
              <div className="w-12 h-12 bg-background border-4 border-slate-50 rounded-full flex items-center justify-center shadow-sm">
@@ -496,13 +913,13 @@ function BeforeAfter() {
           {/* Before */}
           <div className="space-y-6">
             <div className="text-center mb-8">
-               <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before CCM Revenue</h3>
+               <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
             </div>
-            
+
             {[
-              { icon: MultiColorX, title: "One-off commissions", desc: "Income resets each month—when new deals slow down, earnings do too.", color: "" },
-              { icon: MultiColorKey, title: "Unused Clinic Access", desc: "Walking past revenue opportunities in clinics you already visit.", color: "" },
-              { icon: MultiColorClock, title: "Low Leverage", desc: "Trading time for money with no asset value built over time.", color: "" },
+              { icon: MultiColorX, title: "One-off commissions", desc: "Revenue tied to monthly product/service volume", color: "" },
+              { icon: MultiColorKey, title: "Clinic opportunities go undiscovered", desc: "Multiple opportunities for revenue go undiscovered each month in each clinic you already visit", color: "" },
+              { icon: MultiColorClock, title: "Low Leverage", desc: "Usually requires the provider to identity a need", color: "" },
             ].map((item, i) => (
               <Card key={i} className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
                 <CardContent className="flex items-start gap-4 p-5">
@@ -521,13 +938,13 @@ function BeforeAfter() {
           {/* After */}
           <div className="space-y-6">
             <div className="text-center mb-8">
-               <h3 className="text-2xl font-bold text-primary tracking-tight">With CCM Revenue Stream</h3>
+               <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
             </div>
-            
+
              {[
-              { icon: MultiColorDollar, title: "Recurring Commission", desc: "Earn monthly on every active patient enrolled in the program.", color: "" },
-              { icon: MultiColorUsers, title: "Stickier Relationships", desc: "Become a strategic partner to the practice, not just a vendor.", color: "" },
-              { icon: MultiColorBuilding, title: "Zero Operational Lift", desc: "LOGIC Health handles the staffing and tech. You just open the door.", color: "" },
+              { icon: MultiColorDollar, title: "Recurring commissions for enrolled patients", desc: "Each month, for each patient", color: "" },
+              { icon: MultiColorUsers, title: "Stronger provider relationships", desc: "drives provider revenue and solves daily operational pain points", color: "" },
+              { icon: MultiColorBuilding, title: "Better visibility", desc: "Care team reports to the provider monthly, creating natural openings for your other services without constant drop-ins.", color: "" },
             ].map((item, i) => (
               <Card key={i} className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
                 <CardContent className="flex items-start gap-4 p-5">
@@ -558,7 +975,7 @@ function Features() {
   const features = [
     {
       title: "Residual Commission",
-      desc: "Earn recurring income as clinics grow their CCM panel. Your check grows with the practice.",
+      desc: "Earn recurring income as clinics grow their Care Management panel. Your check grows with the practice.",
       icon: MultiColorChart,
       color: ""
     },
@@ -570,13 +987,13 @@ function Features() {
     },
     {
       title: "Clinic-First Economics",
-      desc: "Align with providers by driving new revenue for them and better coverage for patients.",
+      desc: "Align with providers by driving new revenue for them and better outcomes for patients.",
       icon: MultiColorHandshake,
       color: ""
     },
     {
       title: "Low Operational Load",
-      desc: "LOGIC Health runs CCM operations, staffing, and software. You focus on opening doors.",
+      desc: "LOGIC Health runs Care Management operations, staffing, and software. You focus on opening doors.",
       icon: MultiColorZap,
       color: ""
     },
@@ -628,7 +1045,7 @@ function EventStream() {
   ];
 
   return (
-    <section className="py-20 overflow-hidden bg-slate-900 text-slate-50">
+    <section className="py-20 overflow-hidden bg-slate-900 text-slate-50 relative">
       <div className="container-padding mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">
@@ -653,7 +1070,7 @@ function EventStream() {
           </ul>
         </div>
 
-        <div className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-slate-800/50 border border-slate-700 shadow-2xl">
+        <div className="relative h-[400px] w-full overflow-hidden rounded-2xl bg-slate-800/50">
           {/* Mask for top/bottom fade */}
           <div 
             className="absolute inset-0 z-10 pointer-events-none"
@@ -665,7 +1082,7 @@ function EventStream() {
           <div className="h-full w-full p-6 overflow-hidden">
             <div className="animate-scrolling-up">
               {[...events, ...events].map((evt, i) => ( 
-                <div key={i} className="flex items-center gap-4 p-4 mb-3 rounded-xl bg-slate-800 border border-slate-700 shadow-sm backdrop-blur-sm">
+                <div key={i} className="flex items-center gap-4 p-4 mb-3 bg-slate-800">
                    <div className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
                       <Activity size={14} />
                    </div>
@@ -788,9 +1205,9 @@ function Metrics() {
 function WhoThrives() {
   const profiles = [
     { title: "Pharma Sales Reps", desc: "Leverage your frequent access to PCPs and specialists to introduce a high-value reimbursement program. Add CCM alongside your current portfolio.", icon: MultiColorStethoscope, color: "" },
-    { title: "Medical Device Reps", desc: "Use your deep clinical trust to help surgeons and specialists capture post-op chronic care revenue. Cross-sell to practices you already call on.", icon: MultiColorActivity, color: "" },
-    { title: "Home Health Reps", desc: "You're already dealing with complex patients. Help clinics manage them better and get paid for it. Introduce CCM as a complementary revenue stream.", icon: MultiColorBuilding, color: "" },
-    { title: "Billing / RCM Reps", desc: "You understand practice economics. CCM is one of the most straightforward ‘new revenue’ conversations you can bring to a clinic.", icon: MultiColorDollar, color: "" },
+    { title: "Medical Device Reps", desc: "Use the trust you've built with surgeons and specialists to improve peri-operative care and support high-risk patients between visits—within the practices you already serve.", icon: MultiColorActivity, color: "" },
+    { title: "Home Health Reps", desc: "Bring care management to your referring-provider network. Our care team supports ongoing oversight and helps uncover home health opportunities.", icon: MultiColorBuilding, color: "" },
+    { title: "Billing / RCM Reps", desc: "You're a trusted part of the practice's business team. Care management can increase clinic revenue and billable services while strengthening compliance and improving patient outcomes.", icon: MultiColorDollar, color: "" },
   ];
 
   return (
@@ -855,27 +1272,27 @@ function CompSection() {
       <div className="container-padding mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="order-2 lg:order-1">
           <Card className="bg-slate-50 border-none shadow-inner p-6 space-y-4">
-             <div className="bg-white p-4 rounded-xl shadow-sm border border-border/50 flex justify-between items-center">
-                <div>
-                   <div className="text-xs font-semibold text-muted-foreground uppercase">Clinic A (Small)</div>
-                   <div className="font-bold">250 CCM Patients</div>
+             <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
+                <div className="flex-1">
+                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic A (Small)</div>
+                   <div className="font-bold text-base mt-1">250 Chronic Management Patients</div>
                 </div>
-                <div className="text-right">
-                   <div className="text-xs font-semibold text-muted-foreground uppercase">Est. Revenue</div>
-                   <div className="font-bold text-green-600">+$15k / mo</div>
-                </div>
-             </div>
-             <div className="bg-white p-4 rounded-xl shadow-sm border border-border/50 flex justify-between items-center">
-                <div>
-                   <div className="text-xs font-semibold text-muted-foreground uppercase">Clinic B (Medium)</div>
-                   <div className="font-bold">500 CCM Patients</div>
-                </div>
-                <div className="text-right">
-                   <div className="text-xs font-semibold text-muted-foreground uppercase">Est. Revenue</div>
-                   <div className="font-bold text-green-600">+$30k / mo</div>
+                <div className="text-right flex-shrink-0">
+                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Est. Clinic Revenue</div>
+                   <div className="font-bold text-green-600 text-lg mt-1">$50K - $75K / mo</div>
                 </div>
              </div>
-             
+             <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
+                <div className="flex-1">
+                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic B (Medium)</div>
+                   <div className="font-bold text-base mt-1">500 Chronic Management Patients</div>
+                </div>
+                <div className="text-right flex-shrink-0">
+                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Est. Clinic Revenue</div>
+                   <div className="font-bold text-green-600 text-lg mt-1">$100K - $150K / mo</div>
+                </div>
+             </div>
+
              <div className="pt-4 text-center">
                 <div className="text-sm text-muted-foreground mb-1">Your Residual Commission</div>
                 <div className="text-3xl font-bold text-primary">Recurring % of Revenue</div>
@@ -1012,6 +1429,8 @@ export default function Home() {
       <Hero />
       <LogoStrip />
       <Testimonial />
+      <ValuePillars />
+      <RisksMitigated />
       <BeforeAfter />
       <Features />
       <EventStream />
