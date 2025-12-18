@@ -1106,18 +1106,18 @@ function Metrics() {
            {/* Row 1 */}
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">92%</div>
-                <div className="text-slate-700 font-medium">patient satisfaction</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">96%</div>
+                <div className="text-slate-700 font-medium">Market opportunity</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Valley Primary Care</div>
+              <div className="text-sm text-slate-600 font-medium">Only ~4% of Medicare eligibles are enrolled in any care management program (CMS).</div>
            </div>
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">48+</div>
-                <div className="text-slate-700 font-medium">touchpoints per year</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">1/3</div>
+                <div className="text-slate-700 font-medium">Star Ratings influence</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Midwest Health</div>
+              <div className="text-sm text-slate-600 font-medium">About one-third of Medicare Star Ratings are tied to patient satisfaction (CMS).</div>
            </div>
 
            <div className="bg-indigo-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
@@ -1151,49 +1151,43 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">2h</div>
-                <div className="text-slate-700 font-medium">saved per day</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">12×</div>
+                <div className="text-slate-700 font-medium">More touchpoints</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Heritage Care Group</div>
+              <div className="text-sm text-slate-600 font-medium">LOGIC reaches patients monthly to flag risks early through consistent, predictive outreach.</div>
            </div>
 
            <div className="bg-rose-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">35%</div>
-                <div className="text-slate-700 font-medium">fewer ER visits</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">$0</div>
+                <div className="text-slate-700 font-medium">Cost to start</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Regional Primary Care</div>
+              <div className="text-sm text-slate-600 font-medium">Opex relief with no capex required from the provider.</div>
            </div>
 
            {/* Row 3 */}
            <div className="bg-indigo-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">5x</div>
-                <div className="text-slate-700 font-medium">ROI on CCM program</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">National clinical team</div>
+                <div className="text-slate-700 font-medium">Operational relief</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Mountain View Physicians</div>
+              <div className="text-sm text-slate-600 font-medium">A dedicated support team handles the day-to-day workload (LOGIC Health Management).</div>
            </div>
 
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">120+</div>
-                <div className="text-slate-700 font-medium">clinics enrolled</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">100%</div>
+                <div className="text-slate-700 font-medium">Interaction auditing</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">LOGIC Health Network</div>
+              <div className="text-sm text-slate-600 font-medium">Ambient AI supports QA and brand consistency while maintaining HIPAA-aligned workflows.</div>
            </div>
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
-              <div className="text-lg md:text-xl font-medium text-slate-900 leading-relaxed mb-6">
-                "Our small practice now delivers the same level of chronic care support as large health systems. LOGIC Health handles all the operations."
+              <div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">Industry-leading</div>
+                <div className="text-slate-700 font-medium">Claim performance</div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-rose-200 text-rose-700 font-bold flex items-center justify-center text-sm">LC</div>
-                <div className="flex-1">
-                  <div className="font-bold text-slate-900 text-sm">Linda Chen</div>
-                  <div className="text-xs text-slate-600">Practice Administrator</div>
-                </div>
-                <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:block">Community Health Partners</div>
-              </div>
+              <div className="text-sm text-slate-600 font-medium">High clean-claim rates help unlock recurring revenue.</div>
            </div>
 
          </div>
