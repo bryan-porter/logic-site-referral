@@ -78,6 +78,7 @@ import {
 
 import logicLogo from "@assets/logic_logo_transparent_1765720135384.png";
 import { SlotNumber } from "@/components/slot-number";
+import { getOrCreateVisitorId, getUtmParams, getReferrer } from "@/lib/tracking";
 
 // --- Schema for Hero Form ---
 const formSchema = z.object({
@@ -197,6 +198,15 @@ function Navbar() {
 }
 
 function Hero() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Initialize visitor ID cookie on mount
+  useEffect(() => {
+    getOrCreateVisitorId();
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -209,9 +219,57 @@ function Hero() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // Handle submission
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Get visitor tracking data
+      const visitorId = getOrCreateVisitorId();
+      const utmParams = getUtmParams();
+      const referrer = getReferrer();
+
+      // Build form data
+      const formData = new FormData();
+      formData.append('fullName', values.name);
+      formData.append('email', values.email);
+      formData.append('currentRole', values.currentRole);
+      formData.append('relevantExperience', `Region: ${values.region}\nProvider Relationships: ${values.relationships}\nFocus: ${values.focus}\nAvailability: ${values.availability}\nAdding to Business: ${values.addingToBusiness}`);
+      formData.append('roleSlug', 'sales-referral-partner');
+      formData.append('roleName', 'Referral Partner');
+      formData.append('source', 'referral-partner-landing');
+
+      // Append visitor tracking data
+      formData.append('visitor_id', visitorId);
+      if (utmParams.utm_source) formData.append('utm_source', utmParams.utm_source);
+      if (utmParams.utm_medium) formData.append('utm_medium', utmParams.utm_medium);
+      if (utmParams.utm_campaign) formData.append('utm_campaign', utmParams.utm_campaign);
+      if (utmParams.utm_content) formData.append('utm_content', utmParams.utm_content);
+      if (utmParams.utm_term) formData.append('utm_term', utmParams.utm_term);
+      if (referrer) formData.append('referrer', referrer);
+
+      const res = await fetch('/api/forms/careers', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setSubmitError(data.error || 'Something went wrong. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Success
+      setSubmitSuccess(true);
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      setSubmitError('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -419,9 +477,26 @@ function Hero() {
                     )}
                   />
 
-                  <Button type="submit" className="w-full h-11 text-base font-semibold mt-2 shadow-md">
-                    Submit Application
-                  </Button>
+                  {submitError && (
+                    <div className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-md p-3" role="alert">
+                      {submitError}
+                    </div>
+                  )}
+
+                  {submitSuccess ? (
+                    <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-md p-4 text-center">
+                      <p className="font-semibold">Application submitted successfully!</p>
+                      <p className="mt-1">We'll be in touch soon.</p>
+                    </div>
+                  ) : (
+                    <Button
+                      type="submit"
+                      className="w-full h-11 text-base font-semibold mt-2 shadow-md"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                    </Button>
+                  )}
                 </form>
               </Form>
             </CardContent>
