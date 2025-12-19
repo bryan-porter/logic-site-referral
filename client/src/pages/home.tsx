@@ -1126,10 +1126,10 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="1" />/<SlotNumber value="3" /></div>
-                <div className="text-slate-700 font-medium">Star Ratings influence</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="83" />%</div>
+                <div className="text-slate-700 font-medium">Readmission reduction</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">About one-third of Medicare Star Ratings are tied to patient satisfaction (CMS).</div>
+              <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study</div>
            </div>
 
            <div className="bg-indigo-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
@@ -1180,10 +1180,10 @@ function Metrics() {
            {/* Row 3 */}
            <div className="bg-indigo-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="83" />%</div>
-                <div className="text-slate-700 font-medium">Readmission reduction</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="1" />/<SlotNumber value="3" /></div>
+                <div className="text-slate-700 font-medium">Star Ratings influence</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study</div>
+              <div className="text-sm text-slate-600 font-medium">About one-third of Medicare Star Ratings are tied to patient satisfaction (CMS).</div>
            </div>
 
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
