@@ -77,6 +77,7 @@ import {
 } from "@/components/custom-icons";
 
 import logicLogo from "@assets/logic_logo_transparent_1765720135384.png";
+import { SlotNumber } from "@/components/slot-number";
 
 // --- Schema for Hero Form ---
 const formSchema = z.object({
@@ -433,18 +434,29 @@ function Hero() {
 
 function LogoStrip() {
   const logos = [
-    "Independent Primary Care Group",
-    "Regional Specialty Network",
-    "Community Health Clinics",
-    "Premier Family Medicine",
-    "Integrated Care Partners",
+    "Hackensack Meridian",
+    "Tampa General Hospital",
+    "CommonSpirit Health",
+    "BayCare HomeCare",
+    "Piedmont Healthcare",
+    "UnityHealth",
+    "University of Kentucky",
+    "Frederick Health",
+    "LifePoint Health",
+    "Community Health Systems",
+    "The Wright Center",
+    "Prisma Health",
+    "Main Line Health",
+    "Cardiac Solutions",
+    "Ascension",
+    "Lovelace Hospital",
   ];
 
   return (
     <section className="py-10 border-y border-border/50 bg-slate-50/50 overflow-hidden">
       <div className="container-padding mx-auto text-center mb-8">
         <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
-          Trusted by Industry Leaders & Provider Groups
+          Industry Provider Groups Are Investing in Care Management
         </p>
       </div>
 
@@ -1106,7 +1118,7 @@ function Metrics() {
            {/* Row 1 */}
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">96%</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="96" />%</div>
                 <div className="text-slate-700 font-medium">Market opportunity</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Only ~4% of Medicare eligibles are enrolled in any care management program (CMS).</div>
@@ -1114,7 +1126,7 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">1/3</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="1" />/<SlotNumber value="3" /></div>
                 <div className="text-slate-700 font-medium">Star Ratings influence</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">About one-third of Medicare Star Ratings are tied to patient satisfaction (CMS).</div>
@@ -1151,7 +1163,7 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">12×</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="12" />×</div>
                 <div className="text-slate-700 font-medium">More touchpoints</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">LOGIC reaches patients monthly to flag risks early through consistent, predictive outreach.</div>
@@ -1159,7 +1171,7 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">$0</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">$<SlotNumber value="0" /></div>
                 <div className="text-slate-700 font-medium">Cost to start</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Opex relief with no capex required from the provider.</div>
@@ -1168,18 +1180,18 @@ function Metrics() {
            {/* Row 3 */}
            <div className="bg-indigo-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">National clinical team</div>
-                <div className="text-slate-700 font-medium">Operational relief</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="83" />%</div>
+                <div className="text-slate-700 font-medium">Readmission reduction</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">A dedicated support team handles the day-to-day workload (LOGIC Health Management).</div>
+              <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study</div>
            </div>
 
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">100%</div>
-                <div className="text-slate-700 font-medium">Interaction auditing</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="100" />%</div>
+                <div className="text-slate-700 font-medium mb-8">Interaction auditing</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Ambient AI supports QA and brand consistency while maintaining HIPAA-aligned workflows.</div>
+              <div className="text-sm text-slate-600 font-medium">Ambient AI supports quality and brand while ensuring HIPAA compliance.</div>
            </div>
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
@@ -1345,7 +1357,7 @@ function FAQ() {
   ];
 
   return (
-    <section className="py-20 bg-slate-50 border-t border-border">
+    <section id="faq" className="py-20 bg-slate-50 border-t border-border">
       <div className="container-padding mx-auto max-w-3xl">
         <h2 className="text-3xl font-bold font-heading text-center mb-12">Frequently Asked Questions</h2>
         <div className="grid gap-6">
@@ -1381,17 +1393,15 @@ function Footer() {
             <h4 className="font-bold mb-4">Program</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-primary">Overview</a></li>
-              <li><a href="#" className="hover:text-primary">Compensation</a></li>
-              <li><a href="#" className="hover:text-primary">Success Stories</a></li>
-              <li><a href="#" className="hover:text-primary">FAQ</a></li>
+              <li><a href="#comp" className="hover:text-primary">Compensation</a></li>
+              <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-bold mb-4">For Reps</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-primary">Apply Now</a></li>
-              <li><a href="#" className="hover:text-primary">Resources</a></li>
             </ul>
           </div>
           
