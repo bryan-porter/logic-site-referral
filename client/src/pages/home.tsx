@@ -11,13 +11,12 @@ import {
   Clock,
   ShieldCheck,
   Briefcase,
-  Stethoscope,
   Activity,
   FileText,
   Menu,
   X,
   ChevronRight,
-  BarChart3
+  BarChart3,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -695,8 +694,8 @@ function Testimonial() {
             "Care management quickly became a compelling economic and <span className="text-primary font-bold decoration-2 underline decoration-blue-200 underline-offset-4 whitespace-nowrap">clinical win for the clinics</span> I work with. Practices were able to add a new, sustainable revenue stream while closing care gaps and advancing value-based care — all without hiring staff or investing in new infrastructure. LOGIC's operational support made the business case real."
           </blockquote>
           
-          <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-slate-200" /> {/* Placeholder Avatar */}
+          <div className="flex items-center justify-center gap-3">
+            <ColorfulIcon icon={MultiColorUsers} size={24} />
             <div className="text-left">
               <div className="font-bold text-foreground">Kevin Donahower, Healthcare Vendor</div>
             </div>
@@ -1012,7 +1011,7 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">75k CCM patients</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">75K CCM Patients</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years</div>
            </div>
@@ -1039,16 +1038,41 @@ function WhoThrives() {
            <p className="text-muted-foreground mt-4">Best fit: reps with existing clinic relationships who want to add a high-value care-management solution to their sales motion.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-           {profiles.map((p, i) => (
-             <div key={i} className="group relative p-6 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
-                <div className="mb-4">
-                   <ColorfulIcon icon={p.icon} colorClass={p.color} size={32} />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{p.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-             </div>
-           ))}
+        {/* Selling Background */}
+        <div className="mb-12">
+          <h3 className="text-lg font-semibold text-muted-foreground uppercase tracking-wide text-center mb-6">Selling Background</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+             {profiles.map((p, i) => (
+               <div key={i} className="group relative p-6 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
+                  <div className="mb-4">
+                     <ColorfulIcon icon={p.icon} colorClass={p.color} size={32} />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+               </div>
+             ))}
+          </div>
+        </div>
+
+        {/* Selling Style & Strengths */}
+        <div>
+          <h3 className="text-lg font-semibold text-muted-foreground uppercase tracking-wide text-center mb-6">Selling Style & Strengths</h3>
+          <div className="grid md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+            <div className="group p-5 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
+              <h4 className="text-base font-bold mb-2">Consultative closers</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                You enjoy long-form discovery, mapping stakeholders, and building a straightforward
+                economic and operational case—not just demoing features.
+              </p>
+            </div>
+            <div className="group p-5 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
+              <h4 className="text-base font-bold mb-2">Fluent in numbers and workflows</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                You're comfortable talking about margin, staffing models, care-gap metrics,
+                and VBC incentives, then translating that into a clear pitch.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1160,6 +1184,141 @@ function FinalCTA() {
   );
 }
 
+function SolutionsWeOffer() {
+  const solutions = [
+    {
+      title: "Chronic Care Management (CCM)",
+      body: "Streamlined documentation, supervision logic, and Z‑code overlays.",
+      icon: MultiColorStethoscope,
+    },
+    {
+      title: "Remote Patient Monitoring (RPM)",
+      body: "Device integration, alert routing, and compliance dashboards.",
+      icon: MultiColorActivity,
+    },
+    {
+      title: "Annual Wellness Visit (AWV)",
+      body: "Personalized prevention plans, HRA logic, and Z‑code capture aligned with CMS.",
+      icon: MultiColorChart,
+    },
+    {
+      title: "Behavioral Health Integration (BHI)",
+      body: "Embedded PROMs and risk stratification for integrated behavioral care.",
+      icon: MultiColorUsers,
+    },
+    {
+      title: "Principal Care Management (PCM)",
+      body: "Specialty‑aligned protocols for high‑risk, single‑condition patients.",
+      icon: MultiColorTrendUp,
+    },
+    {
+      title: "Transitional Care Management (TCM)",
+      body: "Discharge coordination, care management, and equity mapping.",
+      icon: MultiColorKey,
+    },
+    {
+      title: "Principal Illness Navigation (PIN)",
+      body: "Care navigation and coordination for high-risk patients with a principal diagnosis, aligned to CMS PIN requirements.",
+      icon: MultiColorZap,
+    },
+    {
+      title: "Community Health Integration (CHI)",
+      body: "Structured SDOH screening, referral workflows, and documentation aligned with CMS requirements.",
+      icon: MultiColorBuilding,
+    },
+  ];
+
+  return (
+    <section className="py-20 bg-slate-50 border-t border-border">
+      <div className="container-padding mx-auto">
+        <div className="mx-auto max-w-3xl text-center mb-10">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl">
+            What you'll be selling
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            Operated with rigor. Equity embedded. Audit-ready at scale.
+          </p>
+        </div>
+
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {solutions.map((solution, i) => (
+            <div key={i} className="h-full">
+              <div className="group h-full p-6 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
+                <div className="flex items-center gap-3">
+                  <ColorfulIcon icon={solution.icon} size={24} />
+                  <h3 className="text-base font-semibold text-slate-900">{solution.title}</h3>
+                </div>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{solution.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhoYoullBeSelling() {
+  const customerTypes = [
+    {
+      title: "Primary Care Clinics",
+      subline: "AWV · CCM · RPM · BHI · CHI · PIN",
+      bullets: [
+        "Longitudinal care mgmt for high-risk patients",
+        "Coordination, patient education, and social support",
+        "Population analytics and quality tracking",
+      ],
+    },
+    {
+      title: "Specialty Clinics",
+      subline: "PCM · RPM · TCM",
+      bullets: [
+        "Condition-specific care coordination",
+        "Ongoing monitoring with defined escalation paths",
+        "Structured transitions across care settings",
+      ],
+    },
+    {
+      title: "Small Hospitals",
+      subline: "TCM · TEAMs-aligned workflows",
+      bullets: [
+        "Discharge coordination and post-acute follow-up",
+        "Inpatient–outpatient continuity of care",
+        "Support for mandatory CMS payment models",
+      ],
+    },
+  ];
+
+  return (
+    <section className="py-20 bg-background">
+      <div className="container-padding mx-auto">
+        <div className="mx-auto max-w-4xl text-center mb-12">
+          <h2 className="text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl">
+            Who you'll be selling to
+          </h2>
+          <p className="mt-3 text-muted-foreground">
+            You're selling alleviating operational pain points and improving financial performance by closing care gaps and improving patient care quality metrics for the following customers.
+          </p>
+        </div>
+
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-3">
+          {customerTypes.map((customer, i) => (
+            <div key={i} className="group h-full p-6 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
+              <h3 className="text-lg font-bold text-slate-900">{customer.title}</h3>
+              <p className="mt-2 text-sm font-medium text-primary">{customer.subline}</p>
+              <ul className="mt-5 space-y-2">
+                {customer.bullets.map((bullet, j) => (
+                  <li key={j} className="text-sm text-muted-foreground leading-relaxed">{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FAQ() {
   const faqs = [
     { q: "Is this commission-only?", a: "Yes—1099 commission-only. No base salary." },
@@ -1169,15 +1328,15 @@ function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-slate-50 border-t border-border">
+    <section id="faq" className="py-20 bg-slate-900 text-slate-50">
       <div className="container-padding mx-auto max-w-3xl">
-        <h2 className="text-3xl font-bold font-heading text-center mb-12">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-bold font-heading text-center mb-12 text-white">Frequently Asked Questions</h2>
         <div className="grid gap-6">
           {faqs.map((faq, i) => (
-            <Card key={i} className="shadow-sm hover:shadow-md transition-shadow">
+            <Card key={i} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all">
               <CardContent className="p-6">
-                <h3 className="text-lg font-bold mb-2">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
+                <h3 className="text-lg font-bold mb-2 text-white">{faq.q}</h3>
+                <p className="text-slate-300">{faq.a}</p>
               </CardContent>
             </Card>
           ))}
@@ -1274,6 +1433,8 @@ export default function Home() {
           <HowItWorks />
           <CompSection />
           <FinalCTA />
+          <SolutionsWeOffer />
+          <WhoYoullBeSelling />
           <FAQ />
           <Footer />
           <ApplicationTakeover />
