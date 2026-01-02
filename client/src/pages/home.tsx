@@ -303,7 +303,7 @@ function ValuePillars() {
       lead: "Lead the sale—we handle the heavy lift.",
       body: "LOGIC supports the sales process from first call to signed agreement, then runs onboarding and go-live with a dedicated implementation team.",
       bullets: [
-        "LOGIC-led discovery, demo, proposal, and contracting",
+        "LOGIC-supported discovery, demo, proposal, and contracting",
         "LOGIC-led onboarding and go-live (you're not the project manager)",
         "Minimal disruption to day-to-day clinic workflows"
       ]
