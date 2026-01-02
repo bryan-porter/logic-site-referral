@@ -1,21 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  TrendingUp, 
-  Users, 
-  Building2, 
-  DollarSign, 
-  Clock, 
-  ShieldCheck, 
-  Briefcase, 
-  Stethoscope, 
-  Activity, 
+import {
+  ArrowRight,
+  CheckCircle2,
+  TrendingUp,
+  Users,
+  Building2,
+  DollarSign,
+  Clock,
+  ShieldCheck,
+  Briefcase,
+  Stethoscope,
+  Activity,
   FileText,
   Menu,
   X,
@@ -24,22 +21,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -53,13 +34,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 import {
   MultiColorChart,
@@ -78,19 +52,12 @@ import {
 
 import logicLogo from "@assets/logic_logo_transparent_1765720135384.png";
 import { SlotNumber } from "@/components/slot-number";
-import { getOrCreateVisitorId, getUtmParams, getReferrer } from "@/lib/tracking";
 
-// --- Schema for Hero Form ---
-const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  currentRole: z.string().min(2, "Role is required"),
-  region: z.string().min(2, "Region is required"),
-  relationships: z.string().min(1, "Estimate is required"),
-  focus: z.string().min(1, "Please select a focus"),
-  availability: z.string().min(1, "Please select availability"),
-  addingToBusiness: z.string().min(1, "Please select an option"),
-});
+// Takeover components
+import { FullPageTakeover } from "@/components/ui/full-page-takeover";
+import { ApplicationForm } from "@/components/application-form";
+import { TakeoverProvider, useTakeoverContext } from "@/contexts/takeover-context";
+import { FormStateProvider } from "@/contexts/form-state-context";
 
 // --- Components ---
 
@@ -108,6 +75,7 @@ function ColorfulIcon({ icon: Icon, colorClass, size = 24 }: { icon: any, colorC
 }
 
 function Navbar() {
+  const { openTakeover } = useTakeoverContext();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -153,7 +121,7 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button size="sm" className={`font-semibold shadow-md ${scrolled ? '' : 'bg-white text-slate-900 hover:bg-slate-200'}`}>
+          <Button size="sm" className={`font-semibold shadow-md ${scrolled ? '' : 'bg-white text-slate-900 hover:bg-slate-200'}`} onClick={openTakeover}>
             Apply Now
           </Button>
         </div>
@@ -188,7 +156,7 @@ function Navbar() {
                 </a>
               ))}
               <Separator />
-              <Button className="w-full">Apply Now</Button>
+              <Button className="w-full" onClick={() => { setIsOpen(false); openTakeover(); }}>Apply Now</Button>
             </div>
           </motion.div>
         )}
@@ -198,79 +166,7 @@ function Navbar() {
 }
 
 function Hero() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-
-  // Initialize visitor ID cookie on mount
-  useEffect(() => {
-    getOrCreateVisitorId();
-  }, []);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      currentRole: "",
-      region: "",
-      relationships: "",
-      focus: "",
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      // Get visitor tracking data
-      const visitorId = getOrCreateVisitorId();
-      const utmParams = getUtmParams();
-      const referrer = getReferrer();
-
-      // Build form data
-      const formData = new FormData();
-      formData.append('fullName', values.name);
-      formData.append('email', values.email);
-      formData.append('currentRole', values.currentRole);
-      formData.append('relevantExperience', `Region: ${values.region}\nProvider Relationships: ${values.relationships}\nFocus: ${values.focus}\nAvailability: ${values.availability}\nAdding to Business: ${values.addingToBusiness}`);
-      formData.append('roleSlug', 'sales-referral-partner');
-      formData.append('roleName', 'Referral Partner');
-      formData.append('source', 'referral-partner-landing');
-
-      // Append visitor tracking data
-      formData.append('visitor_id', visitorId);
-      if (utmParams.utm_source) formData.append('utm_source', utmParams.utm_source);
-      if (utmParams.utm_medium) formData.append('utm_medium', utmParams.utm_medium);
-      if (utmParams.utm_campaign) formData.append('utm_campaign', utmParams.utm_campaign);
-      if (utmParams.utm_content) formData.append('utm_content', utmParams.utm_content);
-      if (utmParams.utm_term) formData.append('utm_term', utmParams.utm_term);
-      if (referrer) formData.append('referrer', referrer);
-
-      const res = await fetch('/api/forms/careers', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.ok) {
-        setSubmitError(data.error || 'Something went wrong. Please try again.');
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Success
-      setSubmitSuccess(true);
-      form.reset();
-    } catch (error) {
-      console.error('Error submitting application:', error);
-      setSubmitError('Network error. Please check your connection and try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+  const { openTakeover } = useTakeoverContext();
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-slate-900 text-slate-50">
@@ -286,24 +182,28 @@ function Hero() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-blue-400 text-xs font-semibold uppercase tracking-wide mb-6 border border-slate-700">
-            For High-Performing Reps
+            For Experienced Healthcare Sales Reps
           </div>
-          <h1 className="text-4xl lg:text-6xl font-heading font-bold text-white leading-[1.1] mb-6 tracking-tight">
-            Turn Your Clinic Relationships Into <span className="text-blue-400">Residual Income.</span>
+          <h1 className="text-4xl lg:text-[3.375rem] font-heading font-bold text-white leading-[1.1] mb-6 tracking-tight">
+            Sell Care Management<br className="hidden lg:block" />to Clinics. Build<br className="hidden lg:block" /><span className="text-blue-400">Long-Term Earnings.</span>
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-            LOGIC is designed to be operationally light for providers and straightforward for you to introduce. You bring the relationship—we bring the implementation, ongoing support, and the care-management engine that creates measurable value. Make the call with confidence: minimal lift, meaningful value, strong support.
+            LOGIC is designed to be operationally light for providers and straightforward for you to sell. You focus on prospecting, selling, and activating clinics—we handle the implementation, ongoing support, and the care-management engine that creates measurable value. Make the sales call with confidence: minimal lift, meaningful value, and strong operational support.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="h-12 px-8 text-base font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 bg-white text-slate-900 hover:bg-slate-200 border-none">
-              Apply to Be a CCM Rep
+            <Button
+              size="lg"
+              className="h-12 px-8 text-base font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 bg-white text-slate-900 hover:bg-slate-200 border-none"
+              onClick={openTakeover}
+            >
+              Apply to Sell Care Management
             </Button>
-            <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium bg-transparent border-slate-600 text-white hover:bg-white/10 hover:text-white">
-              View Comp Structure
+            <Button size="lg" variant="outline" className="h-12 px-8 text-base font-medium bg-transparent border-slate-600 text-white hover:bg-white/10 hover:text-white" asChild>
+              <a href="#comp">View Compensation</a>
             </Button>
           </div>
-          
+
           <div className="mt-8 flex items-center gap-4 text-sm text-slate-400">
             <div className="flex -space-x-2">
               {[1, 2, 3].map((i) => (
@@ -312,11 +212,11 @@ function Hero() {
                 </div>
               ))}
             </div>
-            <p>Join 500+ independent reps earning today.</p>
+            <p>Recruiting a founding group of experienced healthcare sales agents.</p>
           </div>
         </motion.div>
 
-        {/* Right Form */}
+        {/* Right - Application Card */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -326,179 +226,7 @@ function Hero() {
           <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-lg opacity-70" />
           <Card className="relative border-none shadow-2xl bg-white text-slate-900">
             <CardContent className="p-6 lg:p-8">
-              <div className="mb-6">
-                <h3 className="text-xl font-bold font-heading text-slate-900">Rep Application</h3>
-                <p className="text-sm text-slate-500 mb-1">See if you qualify for the program.</p>
-                <p className="text-xs text-muted-foreground font-medium text-slate-400">Independent contractor. Part-time friendly. Non-exclusive.</p>
-              </div>
-              
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <Label className="text-xs uppercase font-semibold text-muted-foreground">Full Name</Label>
-                          <FormControl>
-                            <Input placeholder="John Doe" {...field} className="bg-background/50" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                     <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <Label className="text-xs uppercase font-semibold text-muted-foreground">Work Email</Label>
-                          <FormControl>
-                            <Input placeholder="john@company.com" {...field} className="bg-background/50" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  
-                  <FormField
-                    control={form.control}
-                    name="currentRole"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label className="text-xs uppercase font-semibold text-muted-foreground">Current Role</Label>
-                        <FormControl>
-                          <Input placeholder="e.g. Independent Pharma Rep" {...field} className="bg-background/50" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="region"
-                      render={({ field }) => (
-                        <FormItem>
-                          <Label className="text-xs uppercase font-semibold text-muted-foreground">Region</Label>
-                          <FormControl>
-                            <Input placeholder="e.g. Southeast" {...field} className="bg-background/50" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="relationships"
-                      render={({ field }) => (
-                        <FormItem>
-                          <Label className="text-xs uppercase font-semibold text-muted-foreground"># of Providers</Label>
-                          <FormControl>
-                            <Input placeholder="Est. count" {...field} className="bg-background/50" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="focus"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label className="text-xs uppercase font-semibold text-muted-foreground">Current Focus</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="bg-background/50">
-                              <SelectValue placeholder="Select primary focus" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="pharma">Pharma</SelectItem>
-                            <SelectItem value="device">Med Device</SelectItem>
-                            <SelectItem value="home_health">Home Health</SelectItem>
-                            <SelectItem value="billing">Billing / RCM</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="availability"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label className="text-xs uppercase font-semibold text-muted-foreground">Availability</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="bg-background/50">
-                              <SelectValue placeholder="Select availability" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="part_time">Part-time</SelectItem>
-                            <SelectItem value="full_time">Full-time</SelectItem>
-                            <SelectItem value="side_by_side">Side-by-side with current job</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="addingToBusiness"
-                    render={({ field }) => (
-                      <FormItem>
-                        <Label className="text-xs uppercase font-semibold text-muted-foreground">Adding CCM to Business?</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                            <SelectTrigger className="bg-background/50">
-                              <SelectValue placeholder="Select an option" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="existing">Yes—existing clinics</SelectItem>
-                            <SelectItem value="new">Yes—new clinic prospecting</SelectItem>
-                            <SelectItem value="both">Both</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {submitError && (
-                    <div className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-md p-3" role="alert">
-                      {submitError}
-                    </div>
-                  )}
-
-                  {submitSuccess ? (
-                    <div className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-md p-4 text-center">
-                      <p className="font-semibold">Application submitted successfully!</p>
-                      <p className="mt-1">We'll be in touch soon.</p>
-                    </div>
-                  ) : (
-                    <Button
-                      type="submit"
-                      className="w-full h-11 text-base font-semibold mt-2 shadow-md"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                    </Button>
-                  )}
-                </form>
-              </Form>
+              <ApplicationForm showHeader={true} />
             </CardContent>
           </Card>
         </motion.div>
@@ -572,8 +300,8 @@ function ValuePillars() {
   const pillars = [
     {
       title: "Ease of Implementation",
-      lead: "Make the introduction—we handle the heavy lift.",
-      body: "LOGIC takes it from first call to signed agreement, then runs onboarding and go-live with a dedicated implementation team. No 40-hour hand-holding and minimal disruption to day-to-day clinic operations—so you're not pulled into delivery to make the account successful.",
+      lead: "Lead the sale—we handle the heavy lift.",
+      body: "LOGIC supports the sales process from first call to signed agreement, then runs onboarding and go-live with a dedicated implementation team.",
       bullets: [
         "LOGIC-led discovery, demo, proposal, and contracting",
         "LOGIC-led onboarding and go-live (you're not the project manager)",
@@ -583,7 +311,7 @@ function ValuePillars() {
     {
       title: "Clinical and Financial Value-Add",
       lead: "Be the consultant your accounts remember.",
-      body: "LOGIC helps practices and small hospitals improve care continuity and unlock sustainable revenue tied to active patient management—so you show up with a solution that impacts both outcomes and operations.",
+      body: "LOGIC helps practices and small hospitals improve care continuity and unlock sustainable care-management revenue through a proven operating model—so you show up with a solution that impacts both outcomes and operations.",
       bullets: [
         "You bring a value-based solution, not another widget",
         "The impact is visible to clinicians and administrators",
@@ -678,14 +406,14 @@ function ValuePillars() {
               Three reasons reps love selling LOGIC
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Designed for busy physician practices and small hospitals. Built for low-lift selling: LOGIC provides the deal support and operational engine that delivers measurable value—without adding workload to the clinic.
+              Designed for busy physician practices and small hospitals. Built for low-lift selling: reps lead the sale and clinic activation, while LOGIC provides deal support and the operational engine that delivers measurable value—without adding workload to the clinic.
             </p>
           </div>
 
           {/* Hidden measurement divs for stable height */}
           <div className="fixed opacity-0 pointer-events-none -z-50">
             {pillars.map((pillar, i) => (
-              <div key={i} ref={el => stageRefs.current[i] = el} className="w-[600px]">
+              <div key={i} ref={el => { stageRefs.current[i] = el; }} className="w-[600px]">
                 <div className="space-y-6 p-10">
                   <div>
                     <h3 className="text-2xl font-bold font-heading leading-tight mb-3">{pillar.title}</h3>
@@ -897,7 +625,7 @@ function RisksMitigated() {
       value: "item-3",
       number: "03",
       title: "Regulatory and Compliance Stability",
-      lead: "Healthcare requires confidence, not gray areas.",
+      lead: "Healthcare requires clarity and consistency.",
       body: "We provide a documented compliance posture and standard contracting framework (including HIPAA-aligned processes and applicable agreements, such as a BAA when appropriate) so you can sell professionally and consistently—without feeling like you're putting your name on something uncertain."
     }
   ];
@@ -964,13 +692,13 @@ function Testimonial() {
           </div>
           
           <blockquote className="text-2xl lg:text-3xl font-medium font-heading leading-tight text-foreground mt-6 mb-8">
-            "Care management quickly became the most valuable service I offered my provider network. It delivered immediate profit to clinics with no upfront investment, no added staff, and minimal training. It also helped providers close care gaps, improve outcomes, and strengthen value-based care performance. Just as importantly, it increased utilization of other services and products I already supported while generating <span className="text-primary font-bold decoration-2 underline decoration-blue-200 underline-offset-4 whitespace-nowrap">recurring, residual income</span> for me."
+            "Care management quickly became a compelling economic and <span className="text-primary font-bold decoration-2 underline decoration-blue-200 underline-offset-4 whitespace-nowrap">clinical win for the clinics</span> I work with. Practices were able to add a new, sustainable revenue stream while closing care gaps and advancing value-based care — all without hiring staff or investing in new infrastructure. LOGIC's operational support made the business case real."
           </blockquote>
           
           <div className="flex items-center justify-center gap-4">
             <div className="w-12 h-12 rounded-full bg-slate-200" /> {/* Placeholder Avatar */}
             <div className="text-left">
-              <div className="font-bold text-foreground">Kevin Donahower</div>
+              <div className="font-bold text-foreground">Kevin Donahower, Healthcare Vendor</div>
             </div>
           </div>
         </motion.div>
@@ -985,7 +713,7 @@ function BeforeAfter() {
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-4">Why Reps are Adding Care Management</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop leaving revenue on the table. Compare the traditional model to the care management opportunity.</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop limiting your upside to one-off sales. Compare the traditional rep model to a long-term care management opportunity.</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 relative">
@@ -997,55 +725,87 @@ function BeforeAfter() {
              </div>
           </div>
 
-          {/* Before */}
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-               <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
-            </div>
-
-            {[
-              { icon: MultiColorX, title: "One-off commissions", desc: "Revenue tied to monthly product/service volume", color: "" },
-              { icon: MultiColorKey, title: "Clinic opportunities go undiscovered", desc: "Multiple opportunities for revenue go undiscovered each month in each clinic you already visit", color: "" },
-              { icon: MultiColorClock, title: "Low Leverage", desc: "Usually requires the provider to identity a need", color: "" },
-            ].map((item, i) => (
-              <Card key={i} className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
-                <CardContent className="flex items-start gap-4 p-5">
-                  <div className="mt-1">
-                    <ColorfulIcon icon={item.icon} colorClass={item.color} size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground">{item.title}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed mt-1">{item.desc}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          {/* Before Header */}
+          <div className="text-center mb-2">
+             <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
           </div>
 
-          {/* After */}
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-               <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
-            </div>
-
-             {[
-              { icon: MultiColorDollar, title: "Recurring commissions for enrolled patients", desc: "Each month, for each patient", color: "" },
-              { icon: MultiColorUsers, title: "Stronger provider relationships", desc: "drives provider revenue and solves daily operational pain points", color: "" },
-              { icon: MultiColorBuilding, title: "Better visibility", desc: "Care team reports to the provider monthly, creating natural openings for your other services without constant drop-ins.", color: "" },
-            ].map((item, i) => (
-              <Card key={i} className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
-                <CardContent className="flex items-start gap-4 p-5">
-                  <div className="mt-1">
-                     <ColorfulIcon icon={item.icon} colorClass={item.color} size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground">{item.title}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed mt-1">{item.desc}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          {/* After Header */}
+          <div className="text-center mb-2">
+             <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
           </div>
+
+          {/* Row 1 */}
+          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorX} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">One-off commissions</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Compensation tied to individual product or service sales</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorDollar} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">Durable, recurring earnings</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Earn ongoing compensation as clinics successfully adopt and sustain care-management programs</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Row 2 */}
+          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorKey} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">Limited strategic value</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Multiple opportunities for revenue go undiscovered each month in each clinic you already visit</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorUsers} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">Stronger provider relationships</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Bringing a real operating solution positions you as a trusted, long-term partner—not just another vendor</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Row 3 */}
+          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorClock} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">Limited account signal</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Reps operate with incomplete information between interactions</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+            <CardContent className="flex items-start gap-4 p-5 h-full">
+              <div className="mt-1">
+                <ColorfulIcon icon={MultiColorBuilding} colorClass="" size={24} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground">Higher-quality account insight</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Program activity creates signal around engagement and readiness—so reps can tailor outreach and protect hard-won relationships.</p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="mt-12 text-center">
@@ -1061,20 +821,20 @@ function BeforeAfter() {
 function Features() {
   const features = [
     {
-      title: "Residual Commission",
-      desc: "Earn recurring income as clinics grow their Care Management panel. Your check grows with the practice.",
+      title: "Durable Commissions",
+      desc: "Build a book of activated clinics that generates ongoing earnings over time.",
       icon: MultiColorChart,
       color: ""
     },
     {
       title: "Unlimited Clinics",
-      desc: "No cap on the number of practices you can enroll. Scale your book of business without limits.",
+      desc: "No cap on the number of practices you can activate. Scale your book of business without limits.",
       icon: MultiColorBuilding,
       color: ""
     },
     {
       title: "Clinic-First Economics",
-      desc: "Align with providers by driving new revenue for them and better outcomes for patients.",
+      desc: "Sell a solution clinics want—one that strengthens financial performance while improving patient outcomes.",
       icon: MultiColorHandshake,
       color: ""
     },
@@ -1119,16 +879,11 @@ function Zap(props: any) {
 
 function EventStream() {
   const events = [
-    "Clinic A launches CCM with 40 patients",
-    "Your commission from Clinic C updated: +$450",
-    "New independent clinic added to pipeline",
-    "Clinic B enrolled 10 new CCM patients",
-    "Monthly payout processed: $2,400",
-    "Dr. Smith approved program expansion",
-    "Clinic D onboarding scheduled",
-    "Patient adherence rate hit 95%",
-    "Recurring revenue verified for Q3",
-    "Referral bonus applied to account",
+    "Clinic A enrolled first patients",
+    "Clinic B added an active provider",
+    "Patient adherence rate at Clinic C hit 95%",
+    "Your clinic activation commission this quarter to date: $15,000",
+    "Your active provider monthly fee last month: $2500",
   ];
 
   return (
@@ -1136,10 +891,10 @@ function EventStream() {
       <div className="container-padding mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">
-            Real-Time Revenue Signals
+            Clear Visibility Into Your Book of Business
           </h2>
           <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-            Stay plugged into your portfolio's performance. Watch your clinics activate, patients enroll, and your monthly recurring commission grow in real-time.
+            Stay plugged into your portfolio's performance. Track clinic activation, provider participation, and commission status with full transparency.
           </p>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
@@ -1152,7 +907,7 @@ function EventStream() {
             </li>
             <li className="flex items-start gap-3">
               <CheckCircle2 className="text-green-400 mt-0.5" size={20} />
-              <span className="font-medium">Cross-sell CCM on your existing clinic calls</span>
+              <span className="font-medium">Add care-management to existing clinic discussions</span>
             </li>
           </ul>
         </div>
@@ -1208,32 +963,18 @@ function Metrics() {
            </div>
 
            <div className="bg-indigo-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
-              <div className="text-lg md:text-xl font-medium text-slate-900 leading-relaxed mb-6">
-                "CCM has transformed how we care for chronic patients. We catch issues before they escalate and patients feel genuinely supported between visits."
+              <div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">6 in 10 Adults Live With a Chronic Condition.</div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-indigo-200 text-indigo-700 font-bold flex items-center justify-center text-sm">SM</div>
-                <div className="flex-1">
-                  <div className="font-bold text-slate-900 text-sm">Dr. Sarah Martinez</div>
-                  <div className="text-xs text-slate-600">Medical Director</div>
-                </div>
-                <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:block">Coastal Family Medicine</div>
-              </div>
+              <div className="text-sm text-slate-600 font-medium">Chronic disease management is a persistent, growing need across primary care</div>
            </div>
 
            {/* Row 2 */}
            <div className="bg-white rounded-3xl p-8 md:col-span-2 shadow-sm border border-slate-100 flex flex-col justify-between h-full min-h-[200px]">
-              <div className="text-lg md:text-xl font-medium text-slate-900 leading-relaxed mb-6">
-                "Adding CCM to my portfolio was the best decision. It's a natural fit when calling on independent clinics—they see the patient impact immediately."
+              <div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">80% of Medicare Spend Is Tied to Chronic Disease.</div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-600 font-bold flex items-center justify-center text-sm">MT</div>
-                <div className="flex-1">
-                  <div className="font-bold text-slate-900 text-sm">Marcus Thompson</div>
-                  <div className="text-xs text-slate-600">CCM Mission Rep</div>
-                </div>
-                <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide hidden sm:block">LOGIC Health</div>
-              </div>
+              <div className="text-sm text-slate-600 font-medium">Primary care clinics are under pressure to manage complex, ongoing patient needs.</div>
            </div>
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
@@ -1271,10 +1012,9 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">Industry-leading</div>
-                <div className="text-slate-700 font-medium">Claim performance</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">75k CCM patients</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">High clean-claim rates help unlock recurring revenue.</div>
+              <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years</div>
            </div>
 
          </div>
@@ -1285,10 +1025,10 @@ function Metrics() {
 
 function WhoThrives() {
   const profiles = [
-    { title: "Pharma Sales Reps", desc: "Leverage your frequent access to PCPs and specialists to introduce a high-value reimbursement program. Add CCM alongside your current portfolio.", icon: MultiColorStethoscope, color: "" },
+    { title: "Pharma Sales Reps", desc: "Leverage your experience calling on clinics to introduce a solution that improves continuity of care and supports clinic operations.", icon: MultiColorStethoscope, color: "" },
     { title: "Medical Device Reps", desc: "Use the trust you've built with surgeons and specialists to improve peri-operative care and support high-risk patients between visits—within the practices you already serve.", icon: MultiColorActivity, color: "" },
-    { title: "Home Health Reps", desc: "Bring care management to your referring-provider network. Our care team supports ongoing oversight and helps uncover home health opportunities.", icon: MultiColorBuilding, color: "" },
-    { title: "Billing / RCM Reps", desc: "You're a trusted part of the practice's business team. Care management can increase clinic revenue and billable services while strengthening compliance and improving patient outcomes.", icon: MultiColorDollar, color: "" },
+    { title: "Home Health Reps", desc: "Support referring clinics with care-management programs that surface patient needs earlier and lead to better-timed, more successful home health episodes.", icon: MultiColorBuilding, color: "" },
+    { title: "Billing / RCM Reps", desc: "You're a trusted part of the practice's business team. Care management can increase clinic revenue while strengthening compliance and improving patient outcomes.", icon: MultiColorDollar, color: "" },
   ];
 
   return (
@@ -1296,7 +1036,7 @@ function WhoThrives() {
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
            <h2 className="text-3xl lg:text-4xl font-bold font-heading">Who Thrives in This Role?</h2>
-           <p className="text-muted-foreground mt-4">Best fit: reps already visiting clinics who want a simple add-on offer to cross-sell.</p>
+           <p className="text-muted-foreground mt-4">Best fit: reps with existing clinic relationships who want to add a high-value care-management solution to their sales motion.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1316,6 +1056,8 @@ function WhoThrives() {
 }
 
 function HowItWorks() {
+  const { openTakeover } = useTakeoverContext();
+
   return (
     <section className="py-20 bg-slate-900 text-slate-50" id="how-it-works">
       <div className="container-padding mx-auto">
@@ -1323,12 +1065,12 @@ function HowItWorks() {
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">Simple 3-Step Process</h2>
             <p className="text-slate-400 mb-8 text-lg">We keep it simple so you can focus on what you do best: opening doors and managing relationships.</p>
-            <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-200 border-none font-bold">Start Process Now</Button>
+            <Button size="lg" className="bg-white text-slate-900 hover:bg-slate-200 border-none font-bold" onClick={openTakeover}>Start Process Now</Button>
           </div>
           
           <div className="space-y-8">
             {[
-              { num: "01", title: "Apply & Qualify", desc: "Share your background, territory, and provider relationships to see if you're a fit." },
+              { num: "01", title: "Apply & Qualify", desc: "Share your background, territory, and experience working with clinics to see if you're a fit." },
               { num: "02", title: "Get Equipped", desc: "Receive full training, pitch decks, one-pagers, and access to our simple CRM." },
               { num: "03", title: "Activate Network", desc: "Approach your clinics. Once they're interested, hand off the implementation to us." },
             ].map((step, i) => (
@@ -1356,38 +1098,34 @@ function CompSection() {
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
                 <div className="flex-1">
                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic A (Small)</div>
-                   <div className="font-bold text-base mt-1">250 Chronic Management Patients</div>
+                   <div className="font-bold text-base mt-1">2 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Est. Clinic Revenue</div>
-                   <div className="font-bold text-green-600 text-lg mt-1">$50K - $75K / mo</div>
+                   <div className="font-bold text-green-600 text-lg">$50K</div>
                 </div>
              </div>
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
                 <div className="flex-1">
                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic B (Medium)</div>
-                   <div className="font-bold text-base mt-1">500 Chronic Management Patients</div>
+                   <div className="font-bold text-base mt-1">4 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                   <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Est. Clinic Revenue</div>
-                   <div className="font-bold text-green-600 text-lg mt-1">$100K - $150K / mo</div>
+                   <div className="font-bold text-green-600 text-lg">$110K</div>
                 </div>
              </div>
 
              <div className="pt-4 text-center">
-                <div className="text-sm text-muted-foreground mb-1">Your Residual Commission</div>
-                <div className="text-3xl font-bold text-primary">Recurring % of Revenue</div>
-                <div className="text-xs text-muted-foreground mt-2">*Illustrative figures based on industry averages</div>
+                <div className="text-xs text-muted-foreground mt-2">Indicative 3-year compensation</div>
              </div>
           </Card>
         </div>
 
         <div className="order-1 lg:order-2">
-           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">High-Upside Commission With Flexible Commitment.</h2>
+           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">High-Upside Earnings With Flexible Commitment.</h2>
            <div className="space-y-4">
              <div className="flex gap-3">
                <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 size={14} /></div>
-               <p className="text-lg text-muted-foreground">Commission-only with residual potential per enrolled clinic.</p>
+               <p className="text-lg text-muted-foreground">Commission-only compensation with long-term cash flows tied to activated clinics.</p>
              </div>
              <div className="flex gap-3">
                <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 size={14} /></div>
@@ -1405,19 +1143,18 @@ function CompSection() {
 }
 
 function FinalCTA() {
+  const { openTakeover } = useTakeoverContext();
+
   return (
     <section className="py-24 bg-slate-900 text-slate-50 text-center">
       <div className="container-padding mx-auto max-w-3xl">
         <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-6 text-white">Ready to Add a New Revenue Stream?</h2>
-        <p className="text-xl text-slate-300 mb-10">Use your existing clinic relationships to drive CCM revenue — and build a lasting residual income for yourself.</p>
+        <p className="text-xl text-slate-300 mb-10">Offer clinics a care-management solution they love—and build durable, long-term earnings as you grow your book.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-xl bg-white text-slate-900 hover:bg-slate-200 border-none">
-            Apply to Be a CCM Revenue Rep
+          <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-xl bg-white text-slate-900 hover:bg-slate-200 border-none" onClick={openTakeover}>
+            Apply to Sell Care Management
           </Button>
         </div>
-        <button className="mt-8 text-sm font-medium text-slate-400 hover:text-white underline underline-offset-4 decoration-slate-600">
-          Learn more about CCM
-        </button>
       </div>
     </section>
   );
@@ -1428,7 +1165,7 @@ function FAQ() {
     { q: "Is this commission-only?", a: "Yes—1099 commission-only. No base salary." },
     { q: "Can I do this part-time?", a: "Yes—built for part-time or full-time." },
     { q: "Can I keep my current job?", a: "Yes—non-exclusive; designed to add to your bag." },
-    { q: "Is this cross-sell friendly?", a: "Yes—ideal for reps with existing clinic relationships." },
+    { q: "Is this cross-sell friendly?", a: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
   ];
 
   return (
@@ -1451,6 +1188,7 @@ function FAQ() {
 }
 
 function Footer() {
+  const { openTakeover } = useTakeoverContext();
   return (
     <footer className="bg-slate-50 pt-20 pb-10 border-t border-border">
       <div className="container-padding mx-auto">
@@ -1460,7 +1198,7 @@ function Footer() {
               <img src={logicLogo} alt="LOGIC Health" className="h-12 w-auto" />
             </div>
             <p className="text-muted-foreground text-sm max-w-xs mb-6">
-              Empowering healthcare sales professionals to monetize their networks and improve patient care through Chronic Care Management.
+              Empowering healthcare sales professionals to sell care-management solutions that clinics and patients love.
             </p>
           </div>
           
@@ -1485,7 +1223,7 @@ function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
-              <li><a href="#" className="hover:text-primary">Contact Us</a></li>
+              <li><button onClick={openTakeover} className="hover:text-primary">Contact Us</button></li>
             </ul>
           </div>
         </div>
@@ -1500,26 +1238,47 @@ function Footer() {
   );
 }
 
+// --- Application Takeover Component ---
+function ApplicationTakeover() {
+  const { isOpen, closeTakeover } = useTakeoverContext();
+
+  return (
+    <FullPageTakeover
+      isOpen={isOpen}
+      onClose={closeTakeover}
+      title="Rep Application"
+      description="See if you qualify for the program."
+    >
+      <ApplicationForm />
+    </FullPageTakeover>
+  );
+}
+
 // --- Main Page Component ---
 export default function Home() {
   return (
-    <div className="min-h-screen font-sans selection:bg-primary/20">
-      <Navbar />
-      <Hero />
-      <LogoStrip />
-      <Testimonial />
-      <ValuePillars />
-      <RisksMitigated />
-      <BeforeAfter />
-      <Features />
-      <EventStream />
-      <Metrics />
-      <WhoThrives />
-      <HowItWorks />
-      <CompSection />
-      <FinalCTA />
-      <FAQ />
-      <Footer />
-    </div>
+    <TakeoverProvider>
+      <FormStateProvider>
+        <div className="min-h-screen font-sans selection:bg-primary/20">
+          <Navbar />
+          <Hero />
+          <LogoStrip />
+          <Testimonial />
+          <ValuePillars />
+          <RisksMitigated />
+          <BeforeAfter />
+          <Features />
+          <EventStream />
+          <Metrics />
+          <WhoThrives />
+          <HowItWorks />
+          <CompSection />
+          <FinalCTA />
+          <FAQ />
+          <Footer />
+          <ApplicationTakeover />
+        </div>
+      </FormStateProvider>
+    </TakeoverProvider>
   );
 }
