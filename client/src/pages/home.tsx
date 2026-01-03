@@ -978,7 +978,7 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="12" />×</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="6" />×–<SlotNumber value="12" />×</div>
                 <div className="text-slate-700 font-medium">More touchpoints</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">LOGIC reaches patients monthly to flag risks early through consistent, predictive outreach.</div>
@@ -1131,7 +1131,7 @@ function CompSection() {
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
                 <div className="flex-1">
                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic B (Medium)</div>
-                   <div className="font-bold text-base mt-1">4 Providers</div>
+                   <div className="font-bold text-base mt-1">5 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
                    <div className="font-bold text-green-600 text-lg">$110K</div>
