@@ -86,9 +86,10 @@ function Navbar() {
 
   const navLinks = [
     { name: "Opportunity", href: "#opportunity" },
-    { name: "Comp & Upside", href: "#comp" },
-    { name: "Who It’s For", href: "#who-its-for" },
+    { name: "Who It's For", href: "#who-its-for" },
     { name: "How It Works", href: "#how-it-works" },
+    { name: "Comp & Upside", href: "#comp" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
