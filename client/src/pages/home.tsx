@@ -1011,7 +1011,7 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">75K CCM Patients</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">&gt;75K CCM Patients</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years</div>
            </div>
@@ -1380,8 +1380,8 @@ function Footer() {
           <div>
             <h4 className="font-bold mb-4">Legal</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
+              <li><Link href="/privacy" className="hover:text-primary">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-primary">Terms of Service</Link></li>
               <li><button onClick={openTakeover} className="hover:text-primary">Contact Us</button></li>
             </ul>
           </div>
