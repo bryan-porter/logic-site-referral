@@ -1390,7 +1390,8 @@ function Footer() {
             <h4 className="font-bold mb-4">Contact</h4>
             <address className="not-italic text-sm text-muted-foreground space-y-1">
               <p>LOGIC Health Management</p>
-              <p>5900 Balcones Dr. Suite 100</p>
+              <p>5900 Balcones Dr.</p>
+              <p>Suite 100</p>
               <p>Austin, TX 78731</p>
               <p>Email: info@ccm-logichm.com</p>
             </address>
