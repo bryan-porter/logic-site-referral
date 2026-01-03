@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowUp } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function PrivacyPolicy() {
   useEffect(() => {
@@ -16,9 +16,6 @@ export default function PrivacyPolicy() {
     window.scrollTo(0, 0);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,29 +33,6 @@ export default function PrivacyPolicy() {
         <article className="prose prose-slate max-w-none">
           <h1 className="text-4xl font-bold font-heading text-foreground mb-2">Privacy Policy</h1>
           <p className="text-muted-foreground mb-8">Last Updated: October 1, 2025</p>
-
-          {/* Table of Contents */}
-          <nav className="bg-slate-50 rounded-lg p-6 mb-10 border border-border">
-            <h2 className="text-lg font-semibold mb-4 mt-0">Table of Contents</h2>
-            <ul className="space-y-2 text-sm list-none pl-0 mb-0">
-              <li><a href="#intro" className="text-primary hover:underline">Introduction</a></li>
-              <li><a href="#scope" className="text-primary hover:underline">Scope</a></li>
-              <li><a href="#information-we-collect" className="text-primary hover:underline">Information We Collect</a></li>
-              <li><a href="#sensitive-information" className="text-primary hover:underline">Sensitive Information</a></li>
-              <li><a href="#how-we-collect" className="text-primary hover:underline">How We Collect Information</a></li>
-              <li><a href="#how-we-use" className="text-primary hover:underline">How We Use Information</a></li>
-              <li><a href="#how-we-share" className="text-primary hover:underline">How We Share Information</a></li>
-              <li><a href="#cookies" className="text-primary hover:underline">Cookies and Analytics</a></li>
-              <li><a href="#your-choices" className="text-primary hover:underline">Your Choices</a></li>
-              <li><a href="#data-retention" className="text-primary hover:underline">Data Retention</a></li>
-              <li><a href="#security" className="text-primary hover:underline">Security</a></li>
-              <li><a href="#childrens-privacy" className="text-primary hover:underline">Children's Privacy</a></li>
-              <li><a href="#state-rights" className="text-primary hover:underline">State-Specific Privacy Rights</a></li>
-              <li><a href="#international" className="text-primary hover:underline">International Users</a></li>
-              <li><a href="#changes" className="text-primary hover:underline">Changes to This Policy</a></li>
-              <li><a href="#contact" className="text-primary hover:underline">Contact Us</a></li>
-            </ul>
-          </nav>
 
           {/* Introduction */}
           <section id="intro" className="mb-10 scroll-mt-8">
@@ -265,15 +239,15 @@ export default function PrivacyPolicy() {
             </address>
           </section>
 
-          {/* Back to Top */}
+          {/* Back to Home */}
           <div className="border-t border-border pt-8 mt-12">
-            <button
-              onClick={scrollToTop}
+            <Link
+              href="/"
               className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
             >
-              <ArrowUp size={16} />
-              Back to top
-            </button>
+              <ArrowLeft size={16} />
+              Back to Home
+            </Link>
           </div>
         </article>
       </main>

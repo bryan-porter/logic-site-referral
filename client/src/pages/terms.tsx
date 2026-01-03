@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowUp } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export default function TermsOfService() {
   useEffect(() => {
@@ -16,9 +16,6 @@ export default function TermsOfService() {
     window.scrollTo(0, 0);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,27 +33,6 @@ export default function TermsOfService() {
         <article className="prose prose-slate max-w-none">
           <h1 className="text-4xl font-bold font-heading text-foreground mb-2">Website Terms of Use</h1>
           <p className="text-muted-foreground mb-8">Last Updated: October 1, 2025</p>
-
-          {/* Table of Contents */}
-          <nav className="bg-slate-50 rounded-lg p-6 mb-10 border border-border">
-            <h2 className="text-lg font-semibold mb-4 mt-0">Table of Contents</h2>
-            <ul className="space-y-2 text-sm list-none pl-0 mb-0">
-              <li><a href="#acceptance" className="text-primary hover:underline">1. Acceptance of Terms</a></li>
-              <li><a href="#website-use" className="text-primary hover:underline">2. Website Use</a></li>
-              <li><a href="#intellectual-property" className="text-primary hover:underline">3. Intellectual Property</a></li>
-              <li><a href="#privacy" className="text-primary hover:underline">4. Privacy</a></li>
-              <li><a href="#cookies" className="text-primary hover:underline">5. Cookies and Tracking</a></li>
-              <li><a href="#third-party" className="text-primary hover:underline">6. Links to Third-Party Websites</a></li>
-              <li><a href="#international" className="text-primary hover:underline">7. International Users</a></li>
-              <li><a href="#disclaimers" className="text-primary hover:underline">8. Disclaimers</a></li>
-              <li><a href="#limitation" className="text-primary hover:underline">9. Limitation of Liability</a></li>
-              <li><a href="#indemnification" className="text-primary hover:underline">10. Indemnification</a></li>
-              <li><a href="#governing-law" className="text-primary hover:underline">11. Governing Law; Venue</a></li>
-              <li><a href="#contact" className="text-primary hover:underline">12. Contact Information</a></li>
-              <li><a href="#severability" className="text-primary hover:underline">13. Severability</a></li>
-              <li><a href="#entire-agreement" className="text-primary hover:underline">14. Entire Agreement</a></li>
-            </ul>
-          </nav>
 
           {/* 1. Acceptance of Terms */}
           <section id="acceptance" className="mb-10 scroll-mt-8">
@@ -222,15 +198,15 @@ export default function TermsOfService() {
             </p>
           </section>
 
-          {/* Back to Top */}
+          {/* Back to Home */}
           <div className="border-t border-border pt-8 mt-12">
-            <button
-              onClick={scrollToTop}
+            <Link
+              href="/"
               className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
             >
-              <ArrowUp size={16} />
-              Back to top
-            </button>
+              <ArrowLeft size={16} />
+              Back to Home
+            </Link>
           </div>
         </article>
       </main>
