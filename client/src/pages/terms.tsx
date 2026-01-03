@@ -178,7 +178,7 @@ export default function TermsOfService() {
               5900 BALCONES DR STE 100<br />
               AUSTIN, TX 78731<br />
               United States<br />
-              Email: <a href="mailto:legal@logichm.com" className="text-primary hover:underline">legal@logichm.com</a>
+              Email: legal@logichm.com
             </address>
           </section>
 
