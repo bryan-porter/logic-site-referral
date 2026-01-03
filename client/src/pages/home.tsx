@@ -1351,21 +1351,16 @@ function Footer() {
   return (
     <footer className="bg-slate-50 pt-20 pb-10 border-t border-border">
       <div className="container-padding mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
-          <div className="col-span-2 lg:col-span-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10 mb-16">
+          <div className="col-span-2">
             <div className="mb-6">
               <img src={logicLogo} alt="LOGIC Health" className="h-12 w-auto" />
             </div>
-            <p className="text-muted-foreground text-sm max-w-xs mb-4">
+            <p className="text-muted-foreground text-sm max-w-xs">
               LOGIC is an outsourced care-management operator that stands up, staffs, operates, audits, and improves CMS-reimbursable care-management programs—without adding provider headcount.
             </p>
-            <address className="not-italic text-muted-foreground text-sm">
-              LOGIC Health Management<br />
-              5900 Balcones Dr. Suite 100<br />
-              Austin, TX 78731
-            </address>
           </div>
-          
+
           <div>
             <h4 className="font-bold mb-4">Program</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
@@ -1381,7 +1376,7 @@ function Footer() {
               <li><a href="#" className="hover:text-primary">Apply Now</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-bold mb-4">Legal</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
