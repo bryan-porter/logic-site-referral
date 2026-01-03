@@ -44,8 +44,8 @@ export default function PrivacyPolicy() {
             </p>
             <address className="not-italic bg-slate-50 rounded-lg p-4 mt-4 text-foreground">
               LOGIC Health Management<br />
-              5900 BALCONES DR STE 100<br />
-              AUSTIN, TX 78731<br />
+              5900 Balcones Dr. Suite 100<br />
+              Austin, TX 78731<br />
               United States<br />
               Email: legal@logichm.com
             </address>
@@ -232,8 +232,8 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-bold font-heading text-foreground mb-4">Contact Us</h2>
             <address className="not-italic bg-slate-50 rounded-lg p-4 text-foreground">
               LOGIC Health Management<br />
-              5900 BALCONES DR STE 100<br />
-              AUSTIN, TX 78731<br />
+              5900 Balcones Dr. Suite 100<br />
+              Austin, TX 78731<br />
               United States<br />
               Email: legal@logichm.com
             </address>

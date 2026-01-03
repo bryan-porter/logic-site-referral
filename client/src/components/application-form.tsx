@@ -152,6 +152,12 @@ export function ApplicationForm({
           <p className="text-xs text-muted-foreground font-medium text-slate-400">
             Independent contractor. Part-time friendly. Non-exclusive.
           </p>
+          <address className="not-italic text-xs text-slate-400 mt-3">
+            LOGIC Health Management<br />
+            5900 Balcones Dr. Suite 100<br />
+            Austin, TX 78731<br />
+            Email: info@ccm-logichm.com
+          </address>
         </div>
       )}
 

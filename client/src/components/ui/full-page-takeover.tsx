@@ -236,6 +236,12 @@ export function FullPageTakeover({
             <p className="text-center text-sm text-slate-400 mt-6">
               Independent contractor. Part-time friendly. Non-exclusive.
             </p>
+            <address className="not-italic text-center text-xs text-slate-400 mt-3">
+              LOGIC Health Management<br />
+              5900 Balcones Dr. Suite 100<br />
+              Austin, TX 78731<br />
+              Email: info@ccm-logichm.com
+            </address>
           </motion.div>
         </motion.div>
       )}

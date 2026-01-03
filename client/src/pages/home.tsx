@@ -839,7 +839,7 @@ function Features() {
     },
     {
       title: "Low Operational Load",
-      desc: "LOGIC Health runs Care Management operations, staffing, and software. You focus on opening doors.",
+      desc: "LOGIC Health runs Care Management, staffing, and operating platform. You focus on opening doors.",
       icon: MultiColorZap,
       color: ""
     },
@@ -1095,7 +1095,7 @@ function HowItWorks() {
           <div className="space-y-8">
             {[
               { num: "01", title: "Apply & Qualify", desc: "Share your background, territory, and experience working with clinics to see if you're a fit." },
-              { num: "02", title: "Get Equipped", desc: "Receive full training, pitch decks, one-pagers, and access to our simple CRM." },
+              { num: "02", title: "Get Equipped", desc: "Receive full training, pitch decks, one-pagers, and access to our partner portal." },
               { num: "03", title: "Activate Network", desc: "Approach your clinics. Once they're interested, hand off the implementation to us." },
             ].map((step, i) => (
               <div key={i} className="flex gap-6">
@@ -1193,7 +1193,7 @@ function SolutionsWeOffer() {
     },
     {
       title: "Remote Patient Monitoring (RPM)",
-      body: "Device integration, alert routing, and compliance dashboards.",
+      body: "Device integration, alert routing, and audit-ready documentation.",
       icon: MultiColorActivity,
     },
     {
@@ -1356,9 +1356,14 @@ function Footer() {
             <div className="mb-6">
               <img src={logicLogo} alt="LOGIC Health" className="h-12 w-auto" />
             </div>
-            <p className="text-muted-foreground text-sm max-w-xs mb-6">
-              Empowering healthcare sales professionals to sell care-management solutions that clinics and patients love.
+            <p className="text-muted-foreground text-sm max-w-xs mb-4">
+              LOGIC is an outsourced care-management operator that stands up, staffs, operates, audits, and improves CMS-reimbursable care-management programs—without adding provider headcount.
             </p>
+            <address className="not-italic text-muted-foreground text-sm">
+              LOGIC Health Management<br />
+              5900 Balcones Dr. Suite 100<br />
+              Austin, TX 78731
+            </address>
           </div>
           
           <div>
@@ -1384,6 +1389,16 @@ function Footer() {
               <li><Link href="/terms" className="hover:text-primary">Terms of Service</Link></li>
               <li><button onClick={openTakeover} className="hover:text-primary">Contact Us</button></li>
             </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-4">Contact</h4>
+            <address className="not-italic text-sm text-muted-foreground space-y-1">
+              <p>LOGIC Health Management</p>
+              <p>5900 Balcones Dr. Suite 100</p>
+              <p>Austin, TX 78731</p>
+              <p>Email: info@ccm-logichm.com</p>
+            </address>
           </div>
         </div>
         

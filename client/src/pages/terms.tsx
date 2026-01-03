@@ -175,8 +175,8 @@ export default function TermsOfService() {
             </p>
             <address className="not-italic bg-slate-50 rounded-lg p-4 mt-4 text-foreground">
               LOGIC Health Management<br />
-              5900 BALCONES DR STE 100<br />
-              AUSTIN, TX 78731<br />
+              5900 Balcones Dr. Suite 100<br />
+              Austin, TX 78731<br />
               United States<br />
               Email: legal@logichm.com
             </address>
