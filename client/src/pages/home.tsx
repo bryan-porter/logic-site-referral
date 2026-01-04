@@ -190,6 +190,9 @@ function Hero() {
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
             LOGIC is designed to be operationally light for providers and straightforward for you to sell. You focus on prospecting, selling, and activating clinics—we handle the implementation, ongoing support, and the care-management engine that creates measurable value. Make the sales call with confidence: minimal lift, meaningful value, and strong operational support.
           </p>
+          <p className="text-sm text-slate-400 mb-6 max-w-xl">
+            LOGIC is an outsourced care-management operator. We staff and run the program end-to-end—LOGIC does not sell software.
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
