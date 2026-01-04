@@ -35,39 +35,45 @@ const allowlist = [
 
 // Route metadata for static HTML generation
 const BASE_URL = "https://logic-site-referral.vercel.app";
+const CANONICAL_OVERRIDES: Record<string, string> = {
+  "partner-program": "",
+  "compensation": "comp",
+};
 const ROUTE_META: Record<string, { title: string; description: string }> = {
   "partner-program": {
     title: "LOGIC Health | Referral Partner Program",
-    description: "Introduce providers to an end-to-end care management operator. LOGIC runs implementation and operations; you earn recurring commission.",
+    description: "Introduce providers to LOGIC—an outsourced care-management operator. LOGIC runs implementation and ongoing operations; you earn recurring commission.",
   },
   "opportunity": {
     title: "LOGIC Health | Opportunity",
-    description: "A simple way to monetize provider relationships with recurring commissions and a low-lift handoff to LOGIC.",
+    description: "Monetize provider relationships with recurring commissions and a simple handoff. LOGIC runs the care-management program end-to-end—no headcount added.",
   },
   "who-its-for": {
     title: "LOGIC Health | Who It's For",
-    description: "Best fit: reps with existing clinic relationships who want to add a high-value care-management solution to their sales motion.",
+    description: "Best fit for reps with provider relationships who want a high-value care-management offering. LOGIC leads the sales process and runs operations after launch.",
   },
   "how-it-works": {
     title: "LOGIC Health | How It Works",
-    description: "You open the door; LOGIC leads discovery through contracting, activation, and ongoing care-management operations.",
+    description: "You open the door; LOGIC runs discovery, contracting, activation, and ongoing care-management operations. Clear process, minimal partner lift, monthly reporting.",
   },
   "comp": {
     title: "LOGIC Health | Compensation",
-    description: "Transparent recurring commissions tied to activated provider accounts.",
+    description: "Transparent recurring commissions tied to activated provider accounts. Upside scales with successful implementations and ongoing program performance.",
   },
   "faq": {
     title: "LOGIC Health | FAQ",
-    description: "Common questions about the LOGIC partner program, process, and expectations.",
+    description: "Answers to common questions about the LOGIC referral partner program, process, expectations, and how LOGIC supports providers after launch.",
   },
   "compensation": {
     title: "LOGIC Health | Compensation",
-    description: "Transparent recurring commissions tied to activated provider accounts.",
+    description: "Transparent recurring commissions tied to activated provider accounts. Upside scales with successful implementations and ongoing program performance.",
   },
 };
 
 function generateRouteHtml(baseHtml: string, route: string, meta: { title: string; description: string }): string {
-  const canonicalUrl = `${BASE_URL}/${route}`;
+  const routeUrl = `${BASE_URL}/${route}`;
+  const canonicalPath = CANONICAL_OVERRIDES[route] ?? route;
+  const canonicalUrl = canonicalPath ? `${BASE_URL}/${canonicalPath}` : `${BASE_URL}/`;
   let html = baseHtml;
 
   // Replace <title>
@@ -93,10 +99,10 @@ function generateRouteHtml(baseHtml: string, route: string, meta: { title: strin
   if (/<meta\s+property="og:url"/.test(html)) {
     html = html.replace(
       /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/,
-      `<meta property="og:url" content="${canonicalUrl}" />`
+      `<meta property="og:url" content="${routeUrl}" />`
     );
   } else {
-    html = html.replace(/<\/head>/, `    <meta property="og:url" content="${canonicalUrl}" />\n  </head>`);
+    html = html.replace(/<\/head>/, `    <meta property="og:url" content="${routeUrl}" />\n  </head>`);
   }
 
   // Replace og:title

@@ -47,7 +47,7 @@ export default function PrivacyPolicy() {
               5900 Balcones Dr. Suite 100<br />
               Austin, TX 78731<br />
               United States<br />
-              Email: legal@logichm.com
+              Email: legal@ccm-logichm.com
             </address>
           </section>
 
@@ -175,7 +175,7 @@ export default function PrivacyPolicy() {
               <li>Opt out of certain marketing communications (if any are sent), via the unsubscribe link or by contacting us</li>
             </ul>
             <p className="text-foreground leading-relaxed mt-4">
-              To exercise these choices, contact legal@logichm.com.
+              To exercise these choices, contact legal@ccm-logichm.com.
             </p>
           </section>
 
@@ -207,7 +207,7 @@ export default function PrivacyPolicy() {
           <section id="state-rights" className="mb-10 scroll-mt-8">
             <h2 className="text-2xl font-bold font-heading text-foreground mb-4">State-Specific Privacy Rights</h2>
             <p className="text-foreground leading-relaxed">
-              Certain U.S. states provide residents additional privacy rights (which may include rights to access, delete, correct, or obtain a copy of personal information; and to opt out of certain processing such as targeted advertising, where applicable). To submit a request, email legal@logichm.com. We may take steps to verify your identity before fulfilling a request.
+              Certain U.S. states provide residents additional privacy rights (which may include rights to access, delete, correct, or obtain a copy of personal information; and to opt out of certain processing such as targeted advertising, where applicable). To submit a request, email legal@ccm-logichm.com. We may take steps to verify your identity before fulfilling a request.
             </p>
           </section>
 
@@ -235,7 +235,7 @@ export default function PrivacyPolicy() {
               5900 Balcones Dr. Suite 100<br />
               Austin, TX 78731<br />
               United States<br />
-              Email: legal@logichm.com
+              Email: legal@ccm-logichm.com
             </address>
           </section>
 

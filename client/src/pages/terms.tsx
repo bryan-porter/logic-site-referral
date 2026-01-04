@@ -178,7 +178,7 @@ export default function TermsOfService() {
               5900 Balcones Dr. Suite 100<br />
               Austin, TX 78731<br />
               United States<br />
-              Email: legal@logichm.com
+              Email: legal@ccm-logichm.com
             </address>
           </section>
 

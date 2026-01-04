@@ -1509,12 +1509,33 @@ function FAQ() {
     { q: "Can I do this part-time?", a: "Yes—built for part-time or full-time." },
     { q: "Can I keep my current job?", a: "Yes—non-exclusive; designed to add to your bag." },
     { q: "Is this cross-sell friendly?", a: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
+    { q: "What is LOGIC?", a: "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations." },
+    { q: "Who does LOGIC serve?", a: "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers." },
+    { q: "What programs does LOGIC operate?", a: "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs." },
+    { q: "How does it work?", a: "You introduce the provider ? LOGIC leads discovery and contracting ? launch and staffing ? patient outreach and documentation ? compliance and QA ? monthly performance reporting." },
+    { q: "Is LOGIC compliant with CMS standards?", a: "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking." },
   ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
 
   return (
     <section id="faq" className="py-20 bg-slate-900 text-slate-50">
       <div className="container-padding mx-auto max-w-3xl">
         <h2 className="text-3xl font-bold font-heading text-center mb-12 text-white">Frequently Asked Questions</h2>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
         <div className="grid gap-6">
           {faqs.map((faq, i) => (
             <Card key={i} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all">
