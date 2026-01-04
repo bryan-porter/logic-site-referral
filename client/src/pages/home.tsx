@@ -959,14 +959,14 @@ function Metrics() {
                 <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="83" />%</div>
                 <div className="text-slate-700 font-medium">Readmission reduction</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study</div>
+              <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study.</div>
            </div>
 
            <div className="bg-indigo-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
                 <div className="text-4xl font-bold font-heading text-slate-900 mb-1">6 in 10 Adults Live With a Chronic Condition.</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Chronic disease management is a persistent, growing need across primary care</div>
+              <div className="text-sm text-slate-600 font-medium">Chronic disease management is a persistent, growing need across primary care.</div>
            </div>
 
            {/* Row 2 */}
@@ -1014,7 +1014,7 @@ function Metrics() {
               <div>
                 <div className="text-4xl font-bold font-heading text-slate-900 mb-1">&gt;75K CCM Patients</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years</div>
+              <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years.</div>
            </div>
 
          </div>
@@ -1097,7 +1097,7 @@ function HowItWorks() {
             {[
               { num: "01", title: "Apply & Qualify", desc: "Share your background, territory, and experience working with clinics to see if you're a fit." },
               { num: "02", title: "Get Equipped", desc: "Receive full training, pitch decks, one-pagers, and access to our partner portal." },
-              { num: "03", title: "Activate Network", desc: "Approach your clinics. Once they're interested, hand off the implementation to us." },
+              { num: "03", title: "Activate Network", desc: "Approach your clinics. Once they're interested, hand off the implementation to us—LOGIC leads discovery/demo/proposal/contracting, owns implementation, then runs ongoing operations." },
             ].map((step, i) => (
               <div key={i} className="flex gap-6">
                 <div className="text-4xl font-bold text-slate-700 font-heading">{step.num}</div>
@@ -1259,11 +1259,121 @@ function SolutionsWeOffer() {
   );
 }
 
+function ProgramChip({
+  chipKey,
+  shortLabel,
+  fullLabel,
+  details,
+  activeChipKey,
+  setActiveChipKey,
+  setChipRef,
+}: {
+  chipKey: string;
+  shortLabel: string;
+  fullLabel: string;
+  details: string[];
+  activeChipKey: string | null;
+  setActiveChipKey: (key: string | null) => void;
+  setChipRef: (key: string, node: HTMLDivElement | null) => void;
+}) {
+  const isOpen = activeChipKey === chipKey;
+  const tooltipId = `${chipKey}-tooltip`;
+
+  return (
+    <div
+      ref={(node) => setChipRef(chipKey, node)}
+      className="relative inline-flex"
+      onMouseEnter={() => setActiveChipKey(chipKey)}
+      onMouseLeave={() => setActiveChipKey(null)}
+    >
+      <button
+        type="button"
+        aria-label={fullLabel}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-describedby={isOpen ? tooltipId : undefined}
+        onFocus={() => setActiveChipKey(chipKey)}
+        onBlur={() => setActiveChipKey(null)}
+        onClick={() => setActiveChipKey(isOpen ? null : chipKey)}
+        className="inline-flex items-center rounded-full bg-slate-100 px-2 py-1 text-[11px] font-medium text-primary"
+      >
+        {shortLabel}
+      </button>
+      {isOpen && (
+        <div
+          id={tooltipId}
+          role="tooltip"
+          className="absolute left-0 top-full z-50 mt-2 w-80 max-w-sm rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-lg transition-opacity duration-75 sm:w-96"
+        >
+          <div className="font-semibold text-slate-900">{fullLabel}</div>
+          <ul className="mt-2 space-y-2 text-slate-600">
+            {details.map((detail, idx) => (
+              <li key={idx}>{detail}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function WhoYoullBeSelling() {
+  const [activeChipKey, setActiveChipKey] = useState<string | null>(null);
+  const chipRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const customerTypes = [
     {
       title: "Primary Care Clinics",
-      subline: "AWV · CCM · RPM · BHI · CHI · PIN",
+      tags: [
+        {
+          key: "primary-awv",
+          shortLabel: "Wellness (AWV)",
+          fullLabel: "Annual Wellness Visits (AWV)",
+          details: [
+            "Annual Wellness Visit (AWV) with personalized prevention plans, Health Risk Assessment (HRA) logic, and Z-code capture aligned with CMS.",
+            "Prevention and Wellness Visit evidence-based screenings, immunizations, and lifestyle interventions aligned with CMS and U.S. Preventive Services Task Force (USPSTF) guidelines.",
+          ],
+        },
+        {
+          key: "primary-ccm",
+          shortLabel: "Chronic Care (CCM)",
+          fullLabel: "Chronic Care Management (CCM)",
+          details: [
+            "Chronic Care Management (CCM) with streamlined documentation, supervision logic, and Z-code overlays.",
+          ],
+        },
+        {
+          key: "primary-rpm",
+          shortLabel: "Monitoring (RPM)",
+          fullLabel: "Remote Patient Monitoring (RPM)",
+          details: [
+            "Remote Patient Monitoring (RPM) with device integration, alert routing, and compliance dashboards.",
+          ],
+        },
+        {
+          key: "primary-bhi",
+          shortLabel: "Behavioral (BHI)",
+          fullLabel: "Behavioral Health Integration (BHI)",
+          details: [
+            "Behavioral Health Integration (BHI) with embedded Patient-Reported Outcome Measures (PROMs) and risk stratification.",
+          ],
+        },
+        {
+          key: "primary-chi",
+          shortLabel: "Community (CHI)",
+          fullLabel: "Community Health Integration (CHI)",
+          details: [
+            "Community Health Integration (CHI) with Social Determinants of Health (SDoH)-driven workflows.",
+          ],
+        },
+        {
+          key: "primary-pin",
+          shortLabel: "Illness Navigation (PIN)",
+          fullLabel: "Principal Illness Navigation (PIN)",
+          details: [
+            "Principal Illness Navigation (PIN) with Social Determinants of Health (SDoH)-driven workflows.",
+          ],
+        },
+      ],
       bullets: [
         "Longitudinal care mgmt for high-risk patients",
         "Coordination, patient education, and social support",
@@ -1272,7 +1382,32 @@ function WhoYoullBeSelling() {
     },
     {
       title: "Specialty Clinics",
-      subline: "PCM · RPM · TCM",
+      tags: [
+        {
+          key: "specialty-pcm",
+          shortLabel: "Care Management (PCM)",
+          fullLabel: "Principal Care Management (PCM)",
+          details: [
+            "Principal Care Management (PCM) tailored for high-risk patients and specialty alignment.",
+          ],
+        },
+        {
+          key: "specialty-rpm",
+          shortLabel: "Monitoring (RPM)",
+          fullLabel: "Remote Patient Monitoring (RPM)",
+          details: [
+            "Remote Patient Monitoring (RPM) with device integration, alert routing, and compliance dashboards.",
+          ],
+        },
+        {
+          key: "specialty-tcm",
+          shortLabel: "Transitional (TCM)",
+          fullLabel: "Transitional Care Management (TCM)",
+          details: [
+            "Transitional Care Management (TCM) with discharge coordination, care management, and equity mapping.",
+          ],
+        },
+      ],
       bullets: [
         "Condition-specific care coordination",
         "Ongoing monitoring with defined escalation paths",
@@ -1281,7 +1416,24 @@ function WhoYoullBeSelling() {
     },
     {
       title: "Small Hospitals",
-      subline: "TCM · TEAMs-aligned workflows",
+      tags: [
+        {
+          key: "hospital-tcm",
+          shortLabel: "Transitional (TCM)",
+          fullLabel: "Transitional Care Management (TCM)",
+          details: [
+            "Transitional Care Management (TCM) with discharge coordination, care management, and equity mapping.",
+          ],
+        },
+        {
+          key: "hospital-teams",
+          shortLabel: "Team-aligned workflows",
+          fullLabel: "Team-aligned transition workflows",
+          details: [
+            "Hospital-based Team Evaluation and Augmented Management (TEAMs) models for scalable inpatient and outpatient care.",
+          ],
+        },
+      ],
       bullets: [
         "Discharge coordination and post-acute follow-up",
         "Inpatient–outpatient continuity of care",
@@ -1289,6 +1441,19 @@ function WhoYoullBeSelling() {
       ],
     },
   ];
+
+  useEffect(() => {
+    if (!activeChipKey) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const activeNode = chipRefs.current[activeChipKey];
+      if (!activeNode || activeNode.contains(event.target as Node)) return;
+      setActiveChipKey(null);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [activeChipKey]);
 
   return (
     <section className="py-20 bg-background">
@@ -1306,7 +1471,22 @@ function WhoYoullBeSelling() {
           {customerTypes.map((customer, i) => (
             <div key={i} className="group h-full p-6 rounded-2xl border border-border hover:border-primary/50 bg-card hover:bg-slate-50 transition-all">
               <h3 className="text-lg font-bold text-slate-900">{customer.title}</h3>
-              <p className="mt-2 text-sm font-medium text-primary">{customer.subline}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {customer.tags.map((tag, j) => (
+                  <ProgramChip
+                    key={tag.key ?? `${customer.title}-${j}`}
+                    chipKey={tag.key ?? `${customer.title}-${j}`}
+                    shortLabel={tag.shortLabel}
+                    fullLabel={tag.fullLabel}
+                    details={tag.details}
+                    activeChipKey={activeChipKey}
+                    setActiveChipKey={setActiveChipKey}
+                    setChipRef={(key, node) => {
+                      chipRefs.current[key] = node;
+                    }}
+                  />
+                ))}
+              </div>
               <ul className="mt-5 space-y-2">
                 {customer.bullets.map((bullet, j) => (
                   <li key={j} className="text-sm text-muted-foreground leading-relaxed">{bullet}</li>
