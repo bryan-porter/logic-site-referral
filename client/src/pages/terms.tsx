@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
+import { ArrowLeft } from "lucide-react";
 import { LegalHeader } from "@/components/legal-header";
 
 export default function TermsOfService() {
@@ -22,7 +23,7 @@ export default function TermsOfService() {
       <LegalHeader />
 
       {/* Main Content */}
-      <main className="container-padding mx-auto py-12 max-w-4xl">
+      <main className="container-padding mx-auto pt-28 pb-12 max-w-4xl">
         <article className="prose prose-slate max-w-none">
           <h1 className="text-4xl font-bold font-heading text-foreground mb-2">Website Terms of Use</h1>
           <p className="text-muted-foreground mb-8">Last Updated: October 1, 2025</p>
