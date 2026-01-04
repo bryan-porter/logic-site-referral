@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import { LegalHeader } from "@/components/legal-header";
 
 export default function TermsOfService() {
   useEffect(() => {
@@ -19,14 +19,7 @@ export default function TermsOfService() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-slate-900 text-white py-8">
-        <div className="container-padding mx-auto">
-          <Link href="/" className="text-sm text-slate-400 hover:text-white transition-colors">
-            &larr; Back to Home
-          </Link>
-        </div>
-      </header>
+      <LegalHeader />
 
       {/* Main Content */}
       <main className="container-padding mx-auto py-12 max-w-4xl">

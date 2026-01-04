@@ -943,6 +943,28 @@ function EventStream() {
 }
 
 function Metrics() {
+  const SOURCES = [
+    { id: "internal-3", label: "CMS: Whole blood 2024 sections highlighted", url: "https://prehospitaltransfusion.org/wp-content/uploads/2024/10/CMS-whole-blood-2024-14828-sections-highlighted.pdf", date: "2024" },
+    { id: "pmc-96", label: "PMC: Chronic disease burden and prevalence (review)", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11368639/", date: "2024" },
+    { id: "hrs-frederick-83", label: "Health Recovery Solutions: Frederick Health case study (Oct 2018–Apr 2019) – 83% reduction in 30-day readmissions", url: "https://www.healthrecoverysolutions.com/hubfs/Frederick%20Health%20Case%20Study.pdf", date: "2019 data period" },
+    { id: "cdc-6in10", label: "CDC (Preventing Chronic Disease): Chronic disease affects 6 in 10 adults", url: "https://www.cdc.gov/pcd/issues/2023/23_0120.htm", date: "2023" },
+    { id: "cms-93pct", label: "CMS: Beneficiaries with 2+ chronic conditions account for ~93% of Medicare spending (CY2011)", url: "https://www.cms.gov/newsroom/press-releases/medicare-dashboard-advances-aca-goals-chronic-conditions", date: "2012 (press release)" },
+    { id: "internal-4", label: "Internal: 6×–12× more touchpoints model", url: null, date: "Internal" },
+    { id: "internal-0", label: "Internal: $0 cost to start (LOGIC operating model)", url: null, date: "Internal" },
+    { id: "cms-stars-2026", label: "CMS: 2026 Star Ratings Technical Notes (patient experience/complaints and access measures weight = 2)", url: "https://www.cms.gov/files/document/2026-star-ratings-technical-notes.pdf", date: "09/25/2025 update" },
+    { id: "internal-1", label: "Internal: 100% interaction auditing via Ambient AI workflow (LOGIC). What it does: flags missing documentation elements, tracks outreach attempts vs completed touches, supports QA review. What it does not do: diagnose, replace clinical judgment, or operate unsupervised.", url: null, date: "Internal" },
+    { id: "internal-2", label: "Internal: >75K CCM patients previously supported by LOGIC leadership team (10+ years)", url: null, date: "Internal" },
+  ];
+  const sourceIndex = Object.fromEntries(SOURCES.map((source, index) => [source.id, index + 1]));
+  const renderSourceRef = (ids: string[], label: string) => {
+    const numbers = ids.map((id) => sourceIndex[id]).filter(Boolean).join(",");
+    return (
+      <a href="#sources" aria-label={`View sources for ${label}`} className="ml-1 text-slate-500 hover:text-slate-700">
+        <sup className="text-[10px] font-semibold">[{numbers}]</sup>
+      </a>
+    );
+  };
+
   return (
     <section className="py-20 bg-slate-50/50 border-b border-border/50">
       <div className="container-padding mx-auto max-w-6xl">
@@ -951,7 +973,10 @@ function Metrics() {
            {/* Row 1 */}
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="96" />%</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  <SlotNumber value="96" />%
+                  {renderSourceRef(["internal-3", "pmc-96"], "Market opportunity")}
+                </div>
                 <div className="text-slate-700 font-medium">Market opportunity</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Only ~4% of Medicare eligibles are enrolled in any care management program (CMS).</div>
@@ -959,7 +984,10 @@ function Metrics() {
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="83" />%</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  <SlotNumber value="83" />%
+                  {renderSourceRef(["hrs-frederick-83"], "Readmission reduction")}
+                </div>
                 <div className="text-slate-700 font-medium">Readmission reduction</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study.</div>
@@ -967,7 +995,10 @@ function Metrics() {
 
            <div className="bg-indigo-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">6 in 10 Adults Live With a Chronic Condition.</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  6 in 10 Adults Live With a Chronic Condition.
+                  {renderSourceRef(["cdc-6in10"], "Chronic condition prevalence")}
+                </div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Chronic disease management is a persistent, growing need across primary care.</div>
            </div>
@@ -975,14 +1006,20 @@ function Metrics() {
            {/* Row 2 */}
            <div className="bg-white rounded-3xl p-8 md:col-span-2 shadow-sm border border-slate-100 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">80% of Medicare Spend Is Tied to Chronic Disease.</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  93% of Medicare Spend Is Tied to Chronic Disease.
+                  {renderSourceRef(["cms-93pct"], "Medicare spend and chronic disease")}
+                </div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Primary care clinics are under pressure to manage complex, ongoing patient needs.</div>
            </div>
 
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="6" />×–<SlotNumber value="12" />×</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  <SlotNumber value="6" />×–<SlotNumber value="12" />×
+                  {renderSourceRef(["internal-4"], "More touchpoints")}
+                </div>
                 <div className="text-slate-700 font-medium">More touchpoints</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">LOGIC reaches patients monthly to flag risks early through consistent, predictive outreach.</div>
@@ -990,7 +1027,10 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">$<SlotNumber value="0" /></div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  $<SlotNumber value="0" />
+                  {renderSourceRef(["internal-0"], "Cost to start")}
+                </div>
                 <div className="text-slate-700 font-medium">Cost to start</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Opex relief with no capex required from the provider.</div>
@@ -999,15 +1039,23 @@ function Metrics() {
            {/* Row 3 */}
            <div className="bg-indigo-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="1" />/<SlotNumber value="3" /></div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  2×
+                  {renderSourceRef(["cms-stars-2026"], "Star Ratings influence")}
+                </div>
                 <div className="text-slate-700 font-medium">Star Ratings influence</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">About one-third of Medicare Star Ratings are tied to patient satisfaction (CMS).</div>
+              <div className="text-sm text-slate-600 font-medium">
+                Patient experience &amp; access measures are double-weighted in Medicare Advantage Star Ratings (2026).
+              </div>
            </div>
 
            <div className="bg-yellow-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1"><SlotNumber value="100" />%</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  <SlotNumber value="100" />%
+                  {renderSourceRef(["internal-1"], "Interaction auditing")}
+                </div>
                 <div className="text-slate-700 font-medium mb-8">Interaction auditing</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Ambient AI supports quality and brand while ensuring HIPAA compliance.</div>
@@ -1015,12 +1063,33 @@ function Metrics() {
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
               <div>
-                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">&gt;75K CCM Patients</div>
+                <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
+                  &gt;75K CCM Patients
+                  {renderSourceRef(["internal-2"], "CCM patients supported")}
+                </div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Previously supported by LOGIC leadership team over the last 10+ years.</div>
            </div>
 
          </div>
+         <details id="sources" className="mt-8 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
+           <summary className="cursor-pointer font-semibold text-slate-900">Sources</summary>
+           <ol className="mt-3 space-y-3 pl-5">
+             {SOURCES.map((source, index) => (
+               <li key={source.id} className="list-decimal">
+                 <div className="font-medium text-slate-900">[{index + 1}] {source.label}</div>
+                 {source.url ? (
+                   <>
+                     <div className="text-xs text-slate-500">{source.date}</div>
+                     <a href={source.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">
+                       Open source
+                     </a>
+                   </>
+                 ) : null}
+               </li>
+             ))}
+           </ol>
+         </details>
       </div>
     </section>
   );
@@ -1306,7 +1375,7 @@ function ProgramChip({
         <div
           id={tooltipId}
           role="tooltip"
-          className="absolute left-0 top-full z-50 mt-2 w-80 max-w-sm rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-lg transition-opacity duration-75 sm:w-96"
+          className="absolute left-0 top-full z-50 mt-2 w-80 max-w-sm rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-xl transition-opacity duration-75 sm:w-96"
         >
           <div className="font-semibold text-slate-900">{fullLabel}</div>
           <ul className="mt-2 space-y-2 text-slate-600">
@@ -1505,28 +1574,42 @@ function WhoYoullBeSelling() {
 
 function FAQ() {
   const faqs = [
-    { q: "Is this commission-only?", a: "Yes—1099 commission-only. No base salary." },
-    { q: "Can I do this part-time?", a: "Yes—built for part-time or full-time." },
-    { q: "Can I keep my current job?", a: "Yes—non-exclusive; designed to add to your bag." },
-    { q: "Is this cross-sell friendly?", a: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
-    { q: "What is LOGIC?", a: "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations." },
-    { q: "Who does LOGIC serve?", a: "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers." },
-    { q: "What programs does LOGIC operate?", a: "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs." },
-    { q: "How does it work?", a: "You introduce the provider ? LOGIC leads discovery and contracting ? launch and staffing ? patient outreach and documentation ? compliance and QA ? monthly performance reporting." },
-    { q: "Is LOGIC compliant with CMS standards?", a: "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking." },
+    { question: "Is this commission-only?", answer: "Yes—1099 commission-only. No base salary." },
+    { question: "Can I do this part-time?", answer: "Yes—built for part-time or full-time." },
+    { question: "Can I keep my current job?", answer: "Yes—non-exclusive; designed to add to your bag." },
+    { question: "Is this cross-sell friendly?", answer: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
+    { question: "What is LOGIC?", answer: "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations." },
+    { question: "Who does LOGIC serve?", answer: "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers." },
+    { question: "What programs does LOGIC operate?", answer: "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs." },
+    { question: "How does it work?", answer: "You introduce the provider, LOGIC leads discovery and contracting, launch and staffing, patient outreach and documentation, compliance and QA, monthly performance reporting." },
+    { question: "Is LOGIC compliant with CMS standards?", answer: "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking." },
+    { question: "Do I have to run demos or handle implementation?", answer: "No. You open the door and make the intro. LOGIC runs discovery, contracting, launch, and ongoing operations." },
+    { question: "What does my involvement look like after the introduction?", answer: "Light-touch. We keep you in the loop, but LOGIC owns delivery and ongoing support." },
+    { question: "How long does it take to launch after a provider says yes?", answer: "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing so the provider isn’t burdened." },
+    { question: "Do providers need to hire staff or change their operations?", answer: "No additional headcount is required. LOGIC provides the care team and operates the workflows alongside the clinic." },
+    { question: "Will this disrupt a clinic’s workflow?", answer: "Minimal disruption. LOGIC plugs into the clinic’s cadence with defined outreach, documentation, escalation paths, and reporting." },
+    { question: "What types of provider organizations are the best fit?", answer: "Organizations with chronic populations and a desire to improve outcomes, documentation, and financial performance—especially groups that want to avoid hiring and managing a care-management team." },
+    { question: "Do you work with small hospitals and rural providers?", answer: "Yes. LOGIC supports small hospitals and rural providers." },
+    { question: "Do you require a specific EMR or integration?", answer: "No. LOGIC operates without requiring disclosure of or dependency on a specific EMR vendor or FHIR build." },
+    { question: "Does LOGIC bill on behalf of the provider?", answer: "LOGIC supports documentation and billing workflows. The exact billing arrangement depends on the provider model and agreement." },
+    { question: "Can I bring multiple provider accounts?", answer: "Yes. This model is designed to scale across a portfolio of provider relationships." },
+    { question: "Do you provide partner enablement or materials?", answer: "Yes. LOGIC provides messaging, qualification guidance, and a clear handoff process so you can sell confidently without heavy lift." },
+    { question: "What if a provider asks for outcomes proof?", answer: "We share LOGIC results when available and clearly labeled industry benchmarks where appropriate, with sources." },
   ];
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.q,
+      "name": faq.question,
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": faq.a,
+        "text": faq.answer,
       },
     })),
   };
+const visibleFaqs = faqs.slice(0, 6);
+  const extraFaqs = faqs.slice(6);
 
   return (
     <section id="faq" className="py-20 bg-slate-900 text-slate-50">
@@ -1537,15 +1620,31 @@ function FAQ() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
         <div className="grid gap-6">
-          {faqs.map((faq, i) => (
+          {visibleFaqs.map((faq, i) => (
             <Card key={i} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all">
               <CardContent className="p-6">
-                <h3 className="text-lg font-bold mb-2 text-white">{faq.q}</h3>
-                <p className="text-slate-300">{faq.a}</p>
+                <h3 className="text-lg font-bold mb-2 text-white">{faq.question}</h3>
+                <p className="text-slate-300">{faq.answer}</p>
               </CardContent>
             </Card>
           ))}
         </div>
+        <details className="mt-6 group">
+          <summary className="text-sm font-semibold text-slate-300 hover:text-white underline-offset-4 hover:underline cursor-pointer">
+            <span className="group-open:hidden">Show more FAQs</span>
+            <span className="hidden group-open:inline">Show fewer FAQs</span>
+          </summary>
+          <div className="mt-6 grid gap-6">
+            {extraFaqs.map((faq, i) => (
+              <Card key={i + visibleFaqs.length} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold mb-2 text-white">{faq.question}</h3>
+                  <p className="text-slate-300">{faq.answer}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </details>
       </div>
     </section>
   );
