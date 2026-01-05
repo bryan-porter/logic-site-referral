@@ -13,8 +13,8 @@ export default function PrivacyPolicy() {
       metaDescription.setAttribute("content", "LOGIC Health Management Privacy Policy. Learn how we collect, use, and protect your information when you visit our website.");
     }
 
-    // Scroll to top on mount
-    window.scrollTo(0, 0);
+    // Scroll to top on mount (robust for client-side routing)
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
 

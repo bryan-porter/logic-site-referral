@@ -188,7 +188,7 @@ function Hero() {
             Sell Care Management<br className="hidden lg:block" />to Clinics. Build<br className="hidden lg:block" /><span className="text-blue-400">Long-Term Earnings.</span>
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-            LOGIC is designed to be operationally light for providers and straightforward for you to sell. You focus on prospecting, selling, and activating clinics—we handle the implementation, ongoing support, and the care-management engine that creates measurable value. Make the sales call with confidence: minimal lift, meaningful value, and strong operational support.
+            LOGIC is designed to be operationally light for providers and straightforward for you to sell. You focus on prospecting, selling, and activating clinics—we handle implementation, staffing, outreach workflows, documentation, QA, and ongoing program support, the operating team and workflows that deliver measurable value. Make the sales call with confidence: minimal lift, meaningful value, and strong operational support.
           </p>
           <p className="text-sm text-slate-400 mb-6 max-w-xl">
             LOGIC is an outsourced care-management operator. We staff and run the program end-to-end—LOGIC does not sell software.
@@ -288,6 +288,7 @@ function ValuePillars() {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [userInteracting, setUserInteracting] = useState(false);
   const [stageHeight, setStageHeight] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
@@ -298,6 +299,19 @@ function ValuePillars() {
   // Set mounted after first render to avoid hydration issues
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(max-width: 1023px)");
+    const updateMatch = () => setIsMobile(media.matches);
+    updateMatch();
+    if (media.addEventListener) {
+      media.addEventListener("change", updateMatch);
+      return () => media.removeEventListener("change", updateMatch);
+    }
+    media.addListener(updateMatch);
+    return () => media.removeListener(updateMatch);
   }, []);
 
   const pillars = [
@@ -314,9 +328,9 @@ function ValuePillars() {
     {
       title: "Clinical and Financial Value-Add",
       lead: "Be the consultant your accounts remember.",
-      body: "LOGIC helps practices and small hospitals improve care continuity and unlock sustainable care-management revenue through a proven operating model—so you show up with a solution that impacts both outcomes and operations.",
+      body: "LOGIC operates CMS-recognized care-management programs on behalf of practices and small hospitals—providing the staffing, workflows, and day-to-day execution required to improve care continuity and generate sustainable revenue.",
       bullets: [
-        "You bring a value-based solution, not another widget",
+        "You get a fully delivered value-based care program, not another add-on",
         "The impact is visible to clinicians and administrators",
         "Creates \"trusted partner\" positioning inside the account"
       ]
@@ -324,7 +338,7 @@ function ValuePillars() {
     {
       title: "Differentiated Advantage",
       lead: "Sharper story for key accounts, backed by an operating model that delivers.",
-      body: "LOGIC is built as a comprehensive care-management partner—not a point solution. We bring a complete operating model (sales support, implementation, and ongoing care-management operations) that's easy to explain, easy for clinics to adopt, and clearly distinct from basic CCM-only offerings.",
+      body: "LOGIC is built as a comprehensive care-management partner—not a narrow offering. We bring a complete operating model (sales support, implementation, and ongoing care-management operations) that's easy to explain, easy for clinics to adopt, and clearly distinct from basic CCM-only offerings.",
       bullets: [
         "Clear differentiation beyond basic CCM-only programs",
         "Executive-ready talking points for administrators and clinicians",
@@ -341,11 +355,11 @@ function ValuePillars() {
 
   // Update activeTile based on scroll progress (unless user is interacting)
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (!mounted || !sectionRef.current || userInteracting || shouldReduceMotion) return;
+    if (!mounted || !sectionRef.current || userInteracting || shouldReduceMotion || isMobile) return;
 
     // Determine which tile should be active based on scroll position
-    const idx = latest < 0.33 ? 0 : latest < 0.66 ? 1 : 2;
-    setActiveTile(idx);
+    const nextIdx = latest < 0.4 ? 0 : latest < 0.7 ? 1 : 2;
+    setActiveTile((current) => (current === nextIdx ? current : nextIdx));
   });
 
   // Measure stage heights on mount to prevent layout shift
@@ -409,7 +423,7 @@ function ValuePillars() {
               Three reasons reps love selling LOGIC
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Designed for busy physician practices and small hospitals. Built for low-lift selling: reps lead the sale and clinic activation, while LOGIC provides deal support and the operational engine that delivers measurable value—without adding workload to the clinic.
+              Designed for busy physician practices and small hospitals. Built for low-lift selling: reps lead the sale and clinic activation, while LOGIC provides deal support and the operating team and workflows that deliver measurable value—without adding workload to the clinic.
             </p>
           </div>
 
@@ -719,7 +733,7 @@ function BeforeAfter() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop limiting your upside to one-off sales. Compare the traditional rep model to a long-term care management opportunity.</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative">
 
           {/* Divider Badge */}
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -mt-2 z-10 hidden lg:flex">
@@ -728,87 +742,89 @@ function BeforeAfter() {
              </div>
           </div>
 
-          {/* Before Header */}
-          <div className="text-center mb-2">
-             <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
+          <div className="space-y-4">
+            <div className="text-center mb-2">
+              <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
+            </div>
+
+            <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorX} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">One-off commissions</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Compensation tied to individual product or service sales</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorKey} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">Limited strategic value</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Multiple opportunities for revenue go undiscovered each month in each clinic you already visit</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorClock} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">Limited account signal</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Reps operate with incomplete information between interactions</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* After Header */}
-          <div className="text-center mb-2">
-             <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
+          <div className="space-y-4">
+            <div className="text-center mb-2">
+              <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
+            </div>
+
+            <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorDollar} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">Durable, recurring earnings</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Earn ongoing compensation as clinics successfully adopt and sustain care-management programs</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorUsers} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">Stronger provider relationships</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Bringing a real operating solution positions you as a trusted, long-term partner??"not just another vendor</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
+              <CardContent className="flex items-start gap-4 p-5 h-full">
+                <div className="mt-1">
+                  <ColorfulIcon icon={MultiColorBuilding} colorClass="" size={24} />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">Higher-quality account insight</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Program activity creates signal around engagement and readiness??"so reps can tailor outreach and protect hard-won relationships.</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-
-          {/* Row 1 */}
-          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorX} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">One-off commissions</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Compensation tied to individual product or service sales</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorDollar} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">Durable, recurring earnings</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Earn ongoing compensation as clinics successfully adopt and sustain care-management programs</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Row 2 */}
-          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorKey} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">Limited strategic value</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Multiple opportunities for revenue go undiscovered each month in each clinic you already visit</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorUsers} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">Stronger provider relationships</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Bringing a real operating solution positions you as a trusted, long-term partner—not just another vendor</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Row 3 */}
-          <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorClock} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">Limited account signal</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Reps operate with incomplete information between interactions</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
-            <CardContent className="flex items-start gap-4 p-5 h-full">
-              <div className="mt-1">
-                <ColorfulIcon icon={MultiColorBuilding} colorClass="" size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-foreground">Higher-quality account insight</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">Program activity creates signal around engagement and readiness—so reps can tailor outreach and protect hard-won relationships.</p>
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         <div className="mt-12 text-center">
@@ -837,13 +853,13 @@ function Features() {
     },
     {
       title: "Clinic-First Economics",
-      desc: "Sell a solution clinics want—one that strengthens financial performance while improving patient outcomes.",
+      desc: "Sell a program clinics want—one that strengthens financial performance while improving patient outcomes.",
       icon: MultiColorHandshake,
       color: ""
     },
     {
       title: "Low Operational Load",
-      desc: "LOGIC Health runs Care Management, staffing, and operating platform. You focus on opening doors.",
+      desc: "LOGIC Health runs care management staffing and operations end-to-end. You focus on opening doors.",
       icon: MultiColorZap,
       color: ""
     },
@@ -1108,7 +1124,7 @@ function WhoThrives() {
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
            <h2 className="text-3xl lg:text-4xl font-bold font-heading">Who Thrives in This Role?</h2>
-           <p className="text-muted-foreground mt-4">Best fit: reps with existing clinic relationships who want to add a high-value care-management solution to their sales motion.</p>
+          <p className="text-muted-foreground mt-4">Best fit: reps with existing clinic relationships who want to add a high-value care-management program to their sales motion.</p>
         </div>
 
         {/* Selling Background */}
@@ -1246,7 +1262,7 @@ function FinalCTA() {
     <section className="py-24 bg-slate-900 text-slate-50 text-center">
       <div className="container-padding mx-auto max-w-3xl">
         <h2 className="text-4xl lg:text-5xl font-bold font-heading mb-6 text-white">Ready to Add a New Revenue Stream?</h2>
-        <p className="text-xl text-slate-300 mb-10">Offer clinics a care-management solution they love—and build durable, long-term earnings as you grow your book.</p>
+        <p className="text-xl text-slate-300 mb-10">Offer clinics a fully-operated care-management solution they love—and build durable, long-term earnings as you grow your book.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button size="lg" className="h-14 px-8 text-lg font-bold shadow-xl bg-white text-slate-900 hover:bg-slate-200 border-none" onClick={openTakeover}>
             Apply to Sell Care Management
@@ -1348,15 +1364,33 @@ function ProgramChip({
   setActiveChipKey: (key: string | null) => void;
   setChipRef: (key: string, node: HTMLDivElement | null) => void;
 }) {
+  const [isMobile, setIsMobile] = useState(false);
   const isOpen = activeChipKey === chipKey;
   const tooltipId = `${chipKey}-tooltip`;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(max-width: 639px)");
+    const updateMatch = () => setIsMobile(media.matches);
+    updateMatch();
+    if (media.addEventListener) {
+      media.addEventListener("change", updateMatch);
+      return () => media.removeEventListener("change", updateMatch);
+    }
+    media.addListener(updateMatch);
+    return () => media.removeListener(updateMatch);
+  }, []);
 
   return (
     <div
       ref={(node) => setChipRef(chipKey, node)}
       className="relative inline-flex"
-      onMouseEnter={() => setActiveChipKey(chipKey)}
-      onMouseLeave={() => setActiveChipKey(null)}
+      onMouseEnter={() => {
+        if (!isMobile) setActiveChipKey(chipKey);
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) setActiveChipKey(null);
+      }}
     >
       <button
         type="button"
@@ -1375,7 +1409,11 @@ function ProgramChip({
         <div
           id={tooltipId}
           role="tooltip"
-          className="absolute left-0 top-full z-50 mt-2 w-80 max-w-sm rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-xl transition-opacity duration-75 sm:w-96"
+          className={`rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-xl transition-opacity duration-75 ${
+            isMobile
+              ? "fixed left-1/2 top-1/2 z-[100] w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 max-h-[80vh] overflow-y-auto"
+              : "absolute left-0 top-full z-50 mt-2 w-80 max-w-sm sm:w-96"
+          }`}
         >
           <div className="font-semibold text-slate-900">{fullLabel}</div>
           <ul className="mt-2 space-y-2 text-slate-600">
@@ -1579,7 +1617,7 @@ function FAQ() {
     { question: "Can I keep my current job?", answer: "Yes—non-exclusive; designed to add to your bag." },
     { question: "Is this cross-sell friendly?", answer: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
     { question: "What is LOGIC?", answer: "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations." },
-    { question: "Who does LOGIC serve?", answer: "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers." },
+    { question: "Who does LOGIC serve?", answer: "Provider organizations including primary care clinics, specialty clinics, small hospitals, and MSOs." },
     { question: "What programs does LOGIC operate?", answer: "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs." },
     { question: "How does it work?", answer: "You introduce the provider, LOGIC leads discovery and contracting, launch and staffing, patient outreach and documentation, compliance and QA, monthly performance reporting." },
     { question: "Is LOGIC compliant with CMS standards?", answer: "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking." },

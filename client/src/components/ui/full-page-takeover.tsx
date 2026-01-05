@@ -168,7 +168,7 @@ export function FullPageTakeover({
           aria-modal="true"
           aria-labelledby="takeover-title"
           aria-describedby={description ? "takeover-description" : undefined}
-          className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto"
+          className="fixed inset-0 z-[100] flex items-start justify-center overflow-hidden"
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
@@ -177,7 +177,7 @@ export function FullPageTakeover({
           onKeyDown={handleKeyDown}
         >
           {/* Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+          <div className="absolute inset-0 bg-slate-950/95 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
             {/* Subtle decorative elements */}
             <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-blue-500/10 to-transparent pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-indigo-500/10 to-transparent pointer-events-none" />
@@ -197,7 +197,7 @@ export function FullPageTakeover({
 
           {/* Content container */}
           <motion.div
-            className="relative z-10 w-full max-w-2xl mx-auto px-4 py-16 sm:py-20"
+            className="relative z-10 w-full max-w-2xl mx-auto px-4 py-16 sm:py-20 max-h-screen overflow-y-auto overscroll-contain"
             variants={contentVariants}
             initial="hidden"
             animate="visible"

@@ -140,7 +140,7 @@ export function ApplicationForm({
   }
 
   return (
-    <div className={className}>
+    <div className={`flex flex-col ${className}`}>
       {showHeader && (
         <div className="mb-6">
           <h3 className="text-xl font-bold font-heading text-slate-900">
@@ -152,12 +152,6 @@ export function ApplicationForm({
           <p className="text-xs text-muted-foreground font-medium text-slate-400">
             Independent contractor. Part-time friendly. Non-exclusive.
           </p>
-          <address className="not-italic text-xs text-slate-400 mt-3">
-            LOGIC Health Management<br />
-            5900 Balcones Dr. Suite 100<br />
-            Austin, TX 78731<br />
-            Email: partners@ccm-logichm.com
-          </address>
         </div>
       )}
 
@@ -344,6 +338,15 @@ export function ApplicationForm({
           )}
         </form>
       </Form>
+
+      {showHeader && (
+        <address className="not-italic text-xs text-slate-400 mt-6">
+          LOGIC Health Management<br />
+          5900 Balcones Dr. Suite 100<br />
+          Austin, TX 78731<br />
+          Email: partners@ccm-logichm.com
+        </address>
+      )}
     </div>
   );
 }
