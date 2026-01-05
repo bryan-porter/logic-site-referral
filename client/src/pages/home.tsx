@@ -295,11 +295,19 @@ function ValuePillars() {
   const stageRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const userInteractTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [mounted, setMounted] = useState(false);
+  const mobileCardRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
+  const activeTileRef = useRef<number>(0);
+  const mobileRatiosRef = useRef<Record<number, number>>({});
+  const rafRef = useRef<number | null>(null);
 
   // Set mounted after first render to avoid hydration issues
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    activeTileRef.current = activeTile;
+  }, [activeTile]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -313,6 +321,77 @@ function ValuePillars() {
     media.addListener(updateMatch);
     return () => media.removeListener(updateMatch);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const cards = mobileCardRefs.current.filter(
+      (node): node is HTMLDivElement => node !== null
+    );
+    if (cards.length === 0) return;
+
+    const updateActiveFromRatios = () => {
+      rafRef.current = null;
+      let bestIndex = activeTileRef.current;
+      let bestRatio = mobileRatiosRef.current[bestIndex] ?? 0;
+      let bestDistance = Infinity;
+
+      cards.forEach((card, index) => {
+        const ratio = mobileRatiosRef.current[index] ?? 0;
+        if (ratio <= 0) return;
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+
+        if (ratio > bestRatio + 0.1) {
+          bestIndex = index;
+          bestRatio = ratio;
+          bestDistance = distance;
+          return;
+        }
+
+        if (Math.abs(ratio - bestRatio) <= 0.1 && distance < bestDistance - 20) {
+          bestIndex = index;
+          bestDistance = distance;
+        }
+      });
+
+      if (bestIndex !== activeTileRef.current) {
+        setActiveTile(bestIndex);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cards.indexOf(entry.target as HTMLDivElement);
+          if (index >= 0) {
+            mobileRatiosRef.current[index] = entry.intersectionRatio;
+          }
+        });
+
+        if (rafRef.current === null) {
+          rafRef.current = window.requestAnimationFrame(updateActiveFromRatios);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -35% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      observer.disconnect();
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [isMobile]);
 
   const pillars = [
     {
@@ -594,7 +673,12 @@ function ValuePillars() {
               }`}
               onClick={() => handleTileEnter(i)}
             >
-              <CardContent className="p-6">
+              <CardContent
+                ref={(node) => {
+                  mobileCardRefs.current[i] = node;
+                }}
+                className="p-6"
+              >
                 <h3 className="text-lg font-bold font-heading text-foreground">{pillar.title}</h3>
                 <p className="text-sm font-semibold text-foreground mt-2">{pillar.lead}</p>
 
