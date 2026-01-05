@@ -24,311 +24,325 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script type="application/ld+json">
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "Organization",
+      "@id": "https://logic-site-referral.vercel.app/#organization",
+      "name": "LOGIC Health Management",
+      "legalName": "LOGIC Health Management LLC",
+      "url": "https://logic-site-referral.vercel.app/",
+      "email": "legal@ccm-logichm.com",
+      "termsOfService": "https://logic-site-referral.vercel.app/terms",
+      "contactPoint": [
         {
-          "@type": "Organization",
-          "@id": "https://logic-site-referral.vercel.app/#organization",
-          "name": "LOGIC Health Management",
-          "legalName": "LOGIC Health Management LLC",
-          "url": "https://logic-site-referral.vercel.app/",
-          "email": "legal@ccm-logichm.com",
-          "termsOfService": "https://logic-site-referral.vercel.app/terms",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "legal",
-            "email": "legal@ccm-logichm.com"
-          },
-          "hasOfferCatalog": { "@id": "https://logic-site-referral.vercel.app/#offer-catalog" },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "5900 Balcones Dr Ste 100",
-            "addressLocality": "Austin",
-            "addressRegion": "TX",
-            "postalCode": "78731",
-            "addressCountry": "US"
+          "@type": "ContactPoint",
+          "contactType": "legal",
+          "email": "legal@ccm-logichm.com"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "5900 Balcones Dr Ste 100",
+        "addressLocality": "Austin",
+        "addressRegion": "TX",
+        "postalCode": "78731",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://logic-site-referral.vercel.app/#website",
+      "name": "LOGIC Health Referral Partner Program",
+      "url": "https://logic-site-referral.vercel.app/",
+      "publisher": { "@id": "https://logic-site-referral.vercel.app/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://logic-site-referral.vercel.app/#webpage",
+      "name": "LOGIC Health Referral Partner Program",
+      "url": "https://logic-site-referral.vercel.app/",
+      "isPartOf": { "@id": "https://logic-site-referral.vercel.app/#website" },
+      "about": { "@id": "https://logic-site-referral.vercel.app/#organization" },
+      "mainEntity": { "@id": "https://logic-site-referral.vercel.app/#care-management-operator-service" },
+      "inLanguage": "en-US",
+      "description": "Referral partner program for introducing provider organizations to LOGIC - an outsourced care-management operator that staffs and runs compliant programs end-to-end."
+    },
+    {
+      "@type": "Service",
+      "@id": "https://logic-site-referral.vercel.app/#care-management-operator-service",
+      "name": "Outsourced Care Management Operations",
+      "provider": { "@id": "https://logic-site-referral.vercel.app/#organization" },
+      "areaServed": "US",
+      "audience": [
+        "Healthcare administrators",
+        "Clinical leadership",
+        "MSOs",
+        "ACOs",
+        "IPAs",
+        "CINs",
+        "Small hospitals",
+        "Rural providers"
+      ],
+      "serviceType": [
+        "Care management operations",
+        "Chronic Care Management (CCM) operations",
+        "Remote Patient Monitoring (RPM) operations",
+        "Transitional Care Management (TCM) operations"
+      ],
+      "description": "LOGIC is an outsourced care-management operator that hires, trains, and manages the care team. We run day-to-day operations including outreach, documentation, quality assurance, and reporting. LOGIC does not sell software and does not hand off playbooks.",
+      "hasOfferCatalog": { "@id": "https://logic-site-referral.vercel.app/#offer-catalog" }
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://logic-site-referral.vercel.app/#offer-catalog",
+      "name": "Managed Care Management Programs",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Chronic Care Management Operations",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Chronic Care Management Operations",
+            "description": "Staffing, outreach workflows, documentation, QA, and reporting for chronic care management programs."
           }
         },
         {
-          "@type": "WebSite",
-          "@id": "https://logic-site-referral.vercel.app/#website",
-          "name": "LOGIC Health Referral Partner Program",
-          "url": "https://logic-site-referral.vercel.app/",
-          "publisher": { "@id": "https://logic-site-referral.vercel.app/#organization" }
+          "@type": "Offer",
+          "name": "Remote Patient Monitoring Operations",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Remote Patient Monitoring Operations",
+            "description": "Device-supported monitoring operations including alert routing, patient follow-up, compliance tracking, and reporting."
+          }
         },
         {
-          "@type": "WebPage",
-          "@id": "https://logic-site-referral.vercel.app/#webpage",
-          "name": "LOGIC Health Referral Partner Program",
-          "url": "https://logic-site-referral.vercel.app/",
-          "isPartOf": { "@id": "https://logic-site-referral.vercel.app/#website" },
-          "about": { "@id": "https://logic-site-referral.vercel.app/#organization" },
-          "mainEntity": { "@id": "https://logic-site-referral.vercel.app/#service" },
-          "inLanguage": "en-US",
-          "description": "Referral partner program for introducing provider organizations to LOGIC—an outsourced care-management operator that staffs and runs compliant programs end-to-end."
+          "@type": "Offer",
+          "name": "Transitional Care Management Operations",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Transitional Care Management Operations",
+            "description": "Post-discharge coordination, outreach, documentation, and escalation pathways to support care transitions."
+          }
         },
         {
-          "@type": "Service",
-          "@id": "https://logic-site-referral.vercel.app/#service",
-          "name": "Outsourced Care Management Operations",
-          "provider": { "@id": "https://logic-site-referral.vercel.app/#organization" },
-          "areaServed": "US",
-          "audience": [
-            "Healthcare administrators",
-            "Clinical leadership",
-            "MSOs",
-            "ACOs",
-            "IPAs",
-            "CINs",
-            "Small hospitals",
-            "Rural providers"
-          ],
-          "serviceType": [
-            "Care management operations",
-            "Chronic Care Management (CCM) operations",
-            "Remote Patient Monitoring (RPM) operations",
-            "Transitional Care Management (TCM) operations"
-          ],
-          "description": "LOGIC is an outsourced care-management operator that hires, trains, and manages the care team. We run day-to-day operations including outreach, documentation, quality assurance, and reporting. LOGIC does not sell software and does not hand off playbooks."
+          "@type": "Offer",
+          "name": "Behavioral Health Integration Operations",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Behavioral Health Integration Operations",
+            "description": "Operational support for behavioral health integration workflows including risk stratification and follow-up."
+          }
         },
         {
-          "@type": "OfferCatalog",
-          "@id": "https://logic-site-referral.vercel.app/#offer-catalog",
-          "name": "Managed Care Management Programs",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "name": "Chronic Care Management Operations",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Chronic Care Management Operations",
-                "description": "Staffing, outreach workflows, documentation, QA, and reporting for chronic care management programs."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Remote Patient Monitoring Operations",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Remote Patient Monitoring Operations",
-                "description": "Device-supported monitoring operations including alert routing, patient follow-up, compliance tracking, and reporting."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Transitional Care Management Operations",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Transitional Care Management Operations",
-                "description": "Post-discharge coordination, outreach, documentation, and escalation pathways to support care transitions."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Behavioral Health Integration Operations",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Behavioral Health Integration Operations",
-                "description": "Operational support for behavioral health integration workflows including risk stratification and follow-up."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Annual Wellness Visit Support",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Annual Wellness Visit Support",
-                "description": "Operational support for annual wellness visits including prevention planning and documentation readiness."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Community Health Integration",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Community Health Integration",
-                "description": "SDoH-informed outreach workflows to connect patients with community resources and close care gaps."
-              }
-            },
-            {
-              "@type": "Offer",
-              "name": "Principal Illness Navigation",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Principal Illness Navigation",
-                "description": "Navigation and structured follow-up workflows for patients with principal/high-impact conditions."
-              }
-            }
-          ]
+          "@type": "Offer",
+          "name": "Annual Wellness Visit Support",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Annual Wellness Visit Support",
+            "description": "Operational support for annual wellness visits including prevention planning and documentation readiness."
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Community Health Integration",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Community Health Integration",
+            "description": "SDoH-informed outreach workflows to connect patients with community resources and close care gaps."
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Principal Illness Navigation",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Principal Illness Navigation",
+            "description": "Navigation and structured follow-up workflows for patients with principal/high-impact conditions."
+          }
         }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I do this part-time?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes?built for part-time or full-time."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I keep my current job?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes?non-exclusive; designed to add to your bag."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is this cross-sell friendly?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes?care management integrates naturally into a clinic-focused sales portfolio."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is LOGIC?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Who does LOGIC serve?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What programs does LOGIC operate?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How does it work?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "You introduce the provider, LOGIC leads discovery and contracting, launch and staffing, patient outreach and documentation, compliance and QA, monthly performance reporting."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is LOGIC compliant with CMS standards?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do I have to run demos or handle implementation?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. You open the door and make the intro. LOGIC runs discovery, contracting, launch, and ongoing operations."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What does my involvement look like after the introduction?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Light-touch. We keep you in the loop, but LOGIC owns delivery and ongoing support."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How long does it take to launch after a provider says yes?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing so the provider isn?t burdened."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do providers need to hire staff or change their operations?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No additional headcount is required. LOGIC provides the care team and operates the workflows alongside the clinic."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Will this disrupt a clinic?s workflow?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Minimal disruption. LOGIC plugs into the clinic?s cadence with defined outreach, documentation, escalation paths, and reporting."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What types of provider organizations are the best fit?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Organizations with chronic populations and a desire to improve outcomes, documentation, and financial performance?especially groups that want to avoid hiring and managing a care-management team."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do you work with small hospitals and rural providers?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. LOGIC supports small hospitals and rural providers."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do you require a specific EMR or integration?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "No. LOGIC operates without requiring disclosure of or dependency on a specific EMR vendor or FHIR build."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does LOGIC bill on behalf of the provider?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "LOGIC supports documentation and billing workflows. The exact billing arrangement depends on the provider model and agreement."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I bring multiple provider accounts?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. This model is designed to scale across a portfolio of provider relationships."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do you provide partner enablement or materials?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. LOGIC provides messaging, qualification guidance, and a clear handoff process so you can sell confidently without heavy lift."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What if a provider asks for outcomes proof?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "We share LOGIC results when available and clearly labeled industry benchmarks where appropriate, with sources."
-              }
-            }
-          ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://logic-site-referral.vercel.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this commission-only?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes?1099 commission-only. No base salary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I do this part-time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes?built for part-time or full-time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I keep my current job?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes?non-exclusive; designed to add to your bag."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this cross-sell friendly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes?care management integrates naturally into a clinic-focused sales portfolio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is LOGIC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who does LOGIC serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Provider organizations including MSOs, ACOs, IPAs, CINs, small hospitals, and rural providers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What programs does LOGIC operate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You introduce the provider, LOGIC leads discovery and contracting, launch and staffing, patient outreach and documentation, compliance and QA, monthly performance reporting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is LOGIC compliant with CMS standards?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to run demos or handle implementation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. You open the door and make the intro. LOGIC runs discovery, contracting, launch, and ongoing operations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does my involvement look like after the introduction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Light-touch. We keep you in the loop, but LOGIC owns delivery and ongoing support."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to launch after a provider says yes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing so the provider isn?t burdened."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do providers need to hire staff or change their operations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No additional headcount is required. LOGIC provides the care team and operates the workflows alongside the clinic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will this disrupt a clinic?s workflow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minimal disruption. LOGIC plugs into the clinic?s cadence with defined outreach, documentation, escalation paths, and reporting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of provider organizations are the best fit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Organizations with chronic populations and a desire to improve outcomes, documentation, and financial performance?especially groups that want to avoid hiring and managing a care-management team."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with small hospitals and rural providers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. LOGIC supports small hospitals and rural providers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you require a specific EMR or integration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. LOGIC operates without requiring disclosure of or dependency on a specific EMR vendor or FHIR build."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does LOGIC bill on behalf of the provider?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LOGIC supports documentation and billing workflows. The exact billing arrangement depends on the provider model and agreement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I bring multiple provider accounts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. This model is designed to scale across a portfolio of provider relationships."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide partner enablement or materials?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. LOGIC provides messaging, qualification guidance, and a clear handoff process so you can sell confidently without heavy lift."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a provider asks for outcomes proof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We share LOGIC results when available and clearly labeled industry benchmarks where appropriate, with sources."
+          }
         }
       ]
     }
-    </script>
+  ]
+}
+</script>
   </head>
   <body>
     <div id="root"></div>
