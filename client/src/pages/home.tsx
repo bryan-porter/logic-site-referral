@@ -290,6 +290,7 @@ function ValuePillars() {
   const [stageHeight, setStageHeight] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileStageHeight, setMobileStageHeight] = useState<number>(0);
+  const [mobileRatios, setMobileRatios] = useState<number[]>([0, 0, 0]);
 
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
@@ -362,6 +363,14 @@ function ValuePillars() {
       if (bestIndex !== activeTileRef.current) {
         setActiveTile(bestIndex);
       }
+
+      setMobileRatios((current) => {
+        const next = [0, 0, 0].map((_, idx) => mobileRatiosRef.current[idx] ?? 0);
+        if (current.every((value, idx) => Math.abs(value - next[idx]) < 0.01)) {
+          return current;
+        }
+        return next;
+      });
     };
 
     const observer = new IntersectionObserver(
@@ -379,8 +388,8 @@ function ValuePillars() {
       },
       {
         root: null,
-        rootMargin: "-72px 0px -50% 0px",
-        threshold: [0, 0.6, 1],
+        rootMargin: "-72px 0px 0px 0px",
+        threshold: Array.from({ length: 21 }, (_, i) => i / 20),
       }
     );
 
@@ -698,6 +707,13 @@ function ValuePillars() {
         {/* Tablet/Mobile: Tiles with tap to expand */}
         <div className="lg:hidden space-y-6">
           {pillars.map((pillar, i) => (
+            (() => {
+              const ratio = mobileRatios[i] ?? 0;
+              const progressiveOpacity = Math.min(Math.max(ratio / 0.25, 0), 1);
+              const opacity = activeTile === i ? 1 : progressiveOpacity;
+              const translateY = (1 - opacity) * 8;
+
+              return (
             <Card
               key={i}
               className={`cursor-pointer transition-all duration-200 ${
@@ -712,15 +728,14 @@ function ValuePillars() {
                 className="p-7 transition-opacity transition-transform duration-300 ease-out"
                 style={{
                   minHeight: mobileStageHeight > 0 ? `${mobileStageHeight}px` : undefined,
-                  opacity: activeTile === i ? 1 : 0,
-                  transform: activeTile === i ? "translateY(0)" : "translateY(8px)",
+                  opacity,
+                  transform: `translateY(${translateY}px)`,
                 }}
               >
                 <h3 className="text-lg font-bold font-heading text-foreground">{pillar.title}</h3>
                 <p className="text-sm font-semibold text-foreground mt-2">{pillar.lead}</p>
 
-                {activeTile === i && (
-                  <div className="mt-4 pt-4 border-t border-border space-y-4">
+                <div className="mt-4 pt-4 border-t border-border space-y-4">
                     <p className="text-base text-muted-foreground leading-relaxed">
                       {pillar.body}
                     </p>
@@ -733,9 +748,10 @@ function ValuePillars() {
                       ))}
                     </ul>
                   </div>
-                )}
               </CardContent>
             </Card>
+              );
+            })()
           ))}
         </div>
       </div>
