@@ -240,7 +240,7 @@ export function FullPageTakeover({
               LOGIC Health Management<br />
               5900 Balcones Dr. Suite 100<br />
               Austin, TX 78731<br />
-              Email: info@ccm-logichm.com
+              Email: partners@ccm-logichm.com
             </address>
           </motion.div>
         </motion.div>

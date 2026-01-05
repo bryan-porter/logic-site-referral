@@ -1697,7 +1697,7 @@ function Footer() {
               <p>5900 Balcones Dr.</p>
               <p>Suite 100</p>
               <p>Austin, TX 78731</p>
-              <p>Email: info@ccm-logichm.com</p>
+              <p>Email: partners@ccm-logichm.com</p>
             </address>
           </div>
         </div>
