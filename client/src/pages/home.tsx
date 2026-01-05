@@ -289,6 +289,7 @@ function ValuePillars() {
   const [userInteracting, setUserInteracting] = useState(false);
   const [stageHeight, setStageHeight] = useState<number>(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileStageHeight, setMobileStageHeight] = useState<number>(0);
 
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
@@ -299,6 +300,7 @@ function ValuePillars() {
   const activeTileRef = useRef<number>(0);
   const mobileRatiosRef = useRef<Record<number, number>>({});
   const rafRef = useRef<number | null>(null);
+  const activeScrollGuardRef = useRef<number | null>(null);
 
   // Set mounted after first render to avoid hydration issues
   useEffect(() => {
@@ -377,8 +379,8 @@ function ValuePillars() {
       },
       {
         root: null,
-        rootMargin: "0px 0px -35% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
+        rootMargin: "-72px 0px -50% 0px",
+        threshold: [0, 0.6, 1],
       }
     );
 
@@ -392,6 +394,19 @@ function ValuePillars() {
       }
     };
   }, [isMobile]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const nodes = mobileCardRefs.current.filter(
+      (node): node is HTMLDivElement => node !== null
+    );
+    if (nodes.length === 0) return;
+
+    const maxHeight = Math.max(...nodes.map((node) => node.offsetHeight));
+    if (maxHeight > 0) {
+      setMobileStageHeight(maxHeight);
+    }
+  }, [isMobile, activeTile]);
 
   const pillars = [
     {
@@ -441,6 +456,23 @@ function ValuePillars() {
     setActiveTile((current) => (current === nextIdx ? current : nextIdx));
   });
 
+  useEffect(() => {
+    if (!isMobile) return;
+    const headerOffset = 72;
+    const activeNode = mobileCardRefs.current[activeTile];
+    if (!activeNode) return;
+
+    const rect = activeNode.getBoundingClientRect();
+    if (rect.top < headerOffset + 8) {
+      if (activeScrollGuardRef.current !== activeTile) {
+        activeScrollGuardRef.current = activeTile;
+        window.scrollTo({
+          top: window.scrollY + rect.top - headerOffset - 12,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [activeTile, isMobile]);
   // Measure stage heights on mount to prevent layout shift
   useEffect(() => {
     const measureHeights = () => {
@@ -495,7 +527,7 @@ function ValuePillars() {
   };
 
   return (
-    <section ref={sectionRef} className="relative bg-slate-50/50 py-20 lg:py-28">
+    <section ref={sectionRef} className="relative bg-slate-50/50 py-14 sm:py-16 lg:py-28">
         <div className="container-padding mx-auto">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold font-heading text-foreground mb-4">
@@ -664,7 +696,7 @@ function ValuePillars() {
         </div>
 
         {/* Tablet/Mobile: Tiles with tap to expand */}
-        <div className="lg:hidden space-y-4">
+        <div className="lg:hidden space-y-6">
           {pillars.map((pillar, i) => (
             <Card
               key={i}
@@ -677,7 +709,12 @@ function ValuePillars() {
                 ref={(node) => {
                   mobileCardRefs.current[i] = node;
                 }}
-                className="p-6"
+                className="p-7 transition-opacity transition-transform duration-300 ease-out"
+                style={{
+                  minHeight: mobileStageHeight > 0 ? `${mobileStageHeight}px` : undefined,
+                  opacity: activeTile === i ? 1 : 0,
+                  transform: activeTile === i ? "translateY(0)" : "translateY(8px)",
+                }}
               >
                 <h3 className="text-lg font-bold font-heading text-foreground">{pillar.title}</h3>
                 <p className="text-sm font-semibold text-foreground mt-2">{pillar.lead}</p>
