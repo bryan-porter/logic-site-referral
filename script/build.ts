@@ -34,7 +34,7 @@ const allowlist = [
 ];
 
 // Route metadata for static HTML generation
-const BASE_URL = "https://logic-site-referral.vercel.app";
+const SITE_URL = process.env.VITE_SITE_URL || "https://ccm-logichm.com";
 const CANONICAL_OVERRIDES: Record<string, string> = {
   "partner-program": "",
   "compensation": "comp",
@@ -71,9 +71,9 @@ const ROUTE_META: Record<string, { title: string; description: string }> = {
 };
 
 function generateRouteHtml(baseHtml: string, route: string, meta: { title: string; description: string }): string {
-  const routeUrl = `${BASE_URL}/${route}`;
+  const routeUrl = `${SITE_URL}/${route}`;
   const canonicalPath = CANONICAL_OVERRIDES[route] ?? route;
-  const canonicalUrl = canonicalPath ? `${BASE_URL}/${canonicalPath}` : `${BASE_URL}/`;
+  const canonicalUrl = canonicalPath ? `${SITE_URL}/${canonicalPath}` : `${SITE_URL}/`;
   let html = baseHtml;
 
   // Replace <title>

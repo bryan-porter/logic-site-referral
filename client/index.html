@@ -7,12 +7,12 @@
     <title>LOGIC Health | Referral Partner Program (Care Management Operator)</title>
     <meta name="description" content="Introduce clinics, MSOs, and small hospitals to LOGIC—an end-to-end care management operator that staffs and runs compliant programs. Earn recurring commission." />
 
-    <link rel="canonical" href="https://logic-site-referral.vercel.app/" />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
 
     <meta property="og:title" content="LOGIC Health | Referral Partner Program (Care Management Operator)" />
     <meta property="og:description" content="Introduce clinics, MSOs, and small hospitals to LOGIC—an end-to-end care management operator that staffs and runs compliant programs. Earn recurring commission." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://logic-site-referral.vercel.app/" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
     <meta property="og:image" content="/opengraph.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="LOGIC Health | Referral Partner Program (Care Management Operator)" />
@@ -31,12 +31,12 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://logic-site-referral.vercel.app/#organization",
+      "@id": "%VITE_SITE_URL%/#organization",
       "name": "LOGIC Health Management",
       "legalName": "LOGIC Health Management LLC",
-      "url": "https://logic-site-referral.vercel.app/",
+      "url": "%VITE_SITE_URL%/",
       "email": "legal@ccm-logichm.com",
-      "termsOfService": "https://logic-site-referral.vercel.app/terms",
+      "termsOfService": "%VITE_SITE_URL%/terms",
       "contactPoint": [
         {
           "@type": "ContactPoint",
@@ -57,40 +57,40 @@
         "postalCode": "78731",
         "addressCountry": "US"
       },
-      "privacyPolicy": "https://logic-site-referral.vercel.app/privacy"
+      "privacyPolicy": "%VITE_SITE_URL%/privacy"
     },
     {
       "@type": "WebSite",
-      "@id": "https://logic-site-referral.vercel.app/#website",
+      "@id": "%VITE_SITE_URL%/#website",
       "name": "LOGIC Health Referral Partner Program",
-      "url": "https://logic-site-referral.vercel.app/",
+      "url": "%VITE_SITE_URL%/",
       "publisher": {
-        "@id": "https://logic-site-referral.vercel.app/#organization"
+        "@id": "%VITE_SITE_URL%/#organization"
       }
     },
     {
       "@type": "WebPage",
-      "@id": "https://logic-site-referral.vercel.app/#webpage",
+      "@id": "%VITE_SITE_URL%/#webpage",
       "name": "LOGIC Health Referral Partner Program",
-      "url": "https://logic-site-referral.vercel.app/",
+      "url": "%VITE_SITE_URL%/",
       "isPartOf": {
-        "@id": "https://logic-site-referral.vercel.app/#website"
+        "@id": "%VITE_SITE_URL%/#website"
       },
       "about": {
-        "@id": "https://logic-site-referral.vercel.app/#organization"
+        "@id": "%VITE_SITE_URL%/#organization"
       },
       "mainEntity": {
-        "@id": "https://logic-site-referral.vercel.app/#care-management-operator-service"
+        "@id": "%VITE_SITE_URL%/#care-management-operator-service"
       },
       "inLanguage": "en-US",
       "description": "Referral partner program for introducing provider organizations to LOGIC - an outsourced care-management operator that staffs and runs compliant programs end-to-end."
     },
     {
       "@type": "Service",
-      "@id": "https://logic-site-referral.vercel.app/#care-management-operator-service",
+      "@id": "%VITE_SITE_URL%/#care-management-operator-service",
       "name": "Outsourced Care Management Operations",
       "provider": {
-        "@id": "https://logic-site-referral.vercel.app/#organization"
+        "@id": "%VITE_SITE_URL%/#organization"
       },
       "areaServed": "US",
       "audience": [
@@ -111,12 +111,12 @@
       ],
       "description": "LOGIC is an outsourced care-management operator that hires, trains, and manages the care team. We run day-to-day operations including outreach, documentation, quality assurance, and reporting. LOGIC does not sell software and does not hand off playbooks.",
       "hasOfferCatalog": {
-        "@id": "https://logic-site-referral.vercel.app/#offer-catalog"
+        "@id": "%VITE_SITE_URL%/#offer-catalog"
       }
     },
     {
       "@type": "OfferCatalog",
-      "@id": "https://logic-site-referral.vercel.app/#offer-catalog",
+      "@id": "%VITE_SITE_URL%/#offer-catalog",
       "name": "Managed Care Management Programs",
       "itemListElement": [
         {
@@ -186,7 +186,7 @@
     },
     {
       "@type": "FAQPage",
-      "@id": "https://logic-site-referral.vercel.app/#faq",
+      "@id": "%VITE_SITE_URL%/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -367,3 +367,4 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
