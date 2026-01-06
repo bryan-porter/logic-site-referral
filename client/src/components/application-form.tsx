@@ -33,6 +33,7 @@ const formSchema = z.object({
   relationships: z.string().min(1, "Estimate is required"),
   focus: z.string().min(1, "Please select a focus"),
   availability: z.string().min(1, "Please select availability"),
+  linkedin: z.string().url("Invalid URL").optional().or(z.literal("")),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -94,7 +95,7 @@ export function ApplicationForm({
       formData.append("currentRole", values.currentRole);
       formData.append(
         "relevantExperience",
-        `Region: ${values.region}\nProvider Relationships: ${values.relationships}\nFocus: ${values.focus}\nAvailability: ${values.availability}`
+        `Region: ${values.region}\nProvider Relationships: ${values.relationships}\nFocus: ${values.focus}\nAvailability: ${values.availability}\nLinkedIn: ${values.linkedin || "N/A"}`
       );
       formData.append("roleSlug", "sales-referral-partner");
       formData.append("roleName", "Referral Partner");
@@ -183,12 +184,13 @@ export function ApplicationForm({
               render={({ field }) => (
                 <FormItem>
                   <Label className="text-xs uppercase font-semibold text-muted-foreground">
-                    Work Email
+                    Email
                   </Label>
                   <FormControl>
                     <Input
                       placeholder="john@company.com"
                       {...field}
+                      required
                       className="bg-background/50"
                     />
                   </FormControl>
@@ -259,55 +261,77 @@ export function ApplicationForm({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="focus"
-            render={({ field }) => (
-              <FormItem>
-                <Label className="text-xs uppercase font-semibold text-muted-foreground">
-                  Current Focus
-                </Label>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-background/50">
-                      <SelectValue placeholder="Select primary focus" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="pharma">Pharma</SelectItem>
-                    <SelectItem value="device">Med Device</SelectItem>
-                    <SelectItem value="home_health">Home Health</SelectItem>
-                    <SelectItem value="billing">Billing / RCM</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="focus"
+              render={({ field }) => (
+                <FormItem>
+                  <Label className="text-xs uppercase font-semibold text-muted-foreground">
+                    Current Focus
+                  </Label>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-background/50">
+                        <SelectValue placeholder="Select primary focus" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="pharma">Pharma</SelectItem>
+                      <SelectItem value="device">Med Device</SelectItem>
+                      <SelectItem value="home_health">Home Health</SelectItem>
+                      <SelectItem value="billing">Billing / RCM</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="availability"
+              render={({ field }) => (
+                <FormItem>
+                  <Label className="text-xs uppercase font-semibold text-muted-foreground">
+                    Availability
+                  </Label>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-background/50">
+                        <SelectValue placeholder="Select availability" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="part_time">Part-time</SelectItem>
+                      <SelectItem value="full_time">Full-time</SelectItem>
+                      <SelectItem value="side_by_side">
+                        Side-by-side with current job
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <FormField
             control={form.control}
-            name="availability"
+            name="linkedin"
             render={({ field }) => (
               <FormItem>
                 <Label className="text-xs uppercase font-semibold text-muted-foreground">
-                  Availability
+                  LinkedIn Profile URL
                 </Label>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="bg-background/50">
-                      <SelectValue placeholder="Select availability" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="part_time">Part-time</SelectItem>
-                    <SelectItem value="full_time">Full-time</SelectItem>
-                    <SelectItem value="side_by_side">
-                      Side-by-side with current job
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <Input
+                    placeholder="https://www.linkedin.com/in/yourname"
+                    {...field}
+                    className="bg-background/50"
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
