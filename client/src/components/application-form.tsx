@@ -26,13 +26,13 @@ import { useFormState } from "@/contexts/form-state-context";
 
 // Schema for the application form
 const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().optional().or(z.literal("")),
   email: z.string().email("Invalid email address"),
-  currentRole: z.string().min(2, "Role is required"),
-  region: z.string().min(2, "Region is required"),
-  relationships: z.string().min(1, "Estimate is required"),
-  focus: z.string().min(1, "Please select a focus"),
-  availability: z.string().min(1, "Please select availability"),
+  currentRole: z.string().optional().or(z.literal("")),
+  region: z.string().optional().or(z.literal("")),
+  relationships: z.string().optional().or(z.literal("")),
+  focus: z.string().optional().or(z.literal("")),
+  availability: z.string().optional().or(z.literal("")),
   linkedin: z.string().url("Invalid URL").optional().or(z.literal("")),
 });
 
@@ -87,42 +87,52 @@ export function ApplicationForm({
       const visitorId = getOrCreateVisitorId();
       const utmParams = getUtmParams();
       const referrer = getReferrer();
+      const publicApiKey = import.meta.env.NEXT_PUBLIC_PUBLIC_API_KEY as
+        | string
+        | undefined;
 
-      // Build form data
-      const formData = new FormData();
-      formData.append("fullName", values.name);
-      formData.append("email", values.email);
-      formData.append("currentRole", values.currentRole);
-      formData.append(
-        "relevantExperience",
-        `Region: ${values.region}\nProvider Relationships: ${values.relationships}\nFocus: ${values.focus}\nAvailability: ${values.availability}\nLinkedIn: ${values.linkedin || "N/A"}`
-      );
-      formData.append("roleSlug", "sales-referral-partner");
-      formData.append("roleName", "Referral Partner");
-      formData.append("source", "referral-partner-landing");
+      const payload = {
+        name: values.name || undefined,
+        email: values.email,
+        role: values.currentRole || undefined,
+        provider_count: values.relationships || undefined,
+        form_id: "referral-partner-application",
+        segment_slug: "referral-partner",
+        visitor_id: visitorId,
+        utm_source: utmParams.utm_source || undefined,
+        utm_medium: utmParams.utm_medium || undefined,
+        utm_campaign: utmParams.utm_campaign || undefined,
+        utm_content: utmParams.utm_content || undefined,
+        utm_term: utmParams.utm_term || undefined,
+        referrer: referrer || undefined,
+        message: `Region: ${values.region || "N/A"}\nFocus: ${values.focus || "N/A"}\nAvailability: ${values.availability || "N/A"}\nLinkedIn: ${values.linkedin || "N/A"}`,
+        website: "",
+      };
 
-      // Append visitor tracking data
-      formData.append("visitor_id", visitorId);
-      if (utmParams.utm_source)
-        formData.append("utm_source", utmParams.utm_source);
-      if (utmParams.utm_medium)
-        formData.append("utm_medium", utmParams.utm_medium);
-      if (utmParams.utm_campaign)
-        formData.append("utm_campaign", utmParams.utm_campaign);
-      if (utmParams.utm_content)
-        formData.append("utm_content", utmParams.utm_content);
-      if (utmParams.utm_term) formData.append("utm_term", utmParams.utm_term);
-      if (referrer) formData.append("referrer", referrer);
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (publicApiKey) {
+        headers["x-public-api-key"] = publicApiKey;
+      }
 
-      const res = await fetch("/api/forms/careers", {
+      const res = await fetch("/api/forms/lead", {
         method: "POST",
-        body: formData,
+        headers,
+        body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      const data = contentType.includes("application/json")
+        ? await res.json()
+        : {};
 
       if (!res.ok || !data.ok) {
-        setSubmitError(data.error || "Something went wrong. Please try again.");
+        setSubmitError(
+          data.error ||
+            data.message ||
+            "Something went wrong. Please try again."
+        );
         setIsSubmitting(false);
         return;
       }
@@ -184,7 +194,7 @@ export function ApplicationForm({
               render={({ field }) => (
                 <FormItem>
                   <Label className="text-xs uppercase font-semibold text-muted-foreground">
-                    Email
+                    *Email
                   </Label>
                   <FormControl>
                     <Input
