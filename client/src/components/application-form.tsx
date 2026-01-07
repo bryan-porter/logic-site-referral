@@ -29,11 +29,12 @@ const formSchema = z.object({
   name: z.string().optional().or(z.literal("")),
   email: z.string().email("Invalid email address"),
   currentRole: z.string().optional().or(z.literal("")),
+  phone: z.string().optional().or(z.literal("")),
   region: z.string().optional().or(z.literal("")),
   relationships: z.string().optional().or(z.literal("")),
   focus: z.string().optional().or(z.literal("")),
   availability: z.string().optional().or(z.literal("")),
-  linkedin: z.string().url("Invalid URL").optional().or(z.literal("")),
+  linkedin: z.string().optional().or(z.literal("")),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -95,6 +96,7 @@ export function ApplicationForm({
         name: values.name || undefined,
         email: values.email,
         role: values.currentRole || undefined,
+        phone: values.phone || undefined,
         provider_count: values.relationships || undefined,
         form_id: "referral-partner-application",
         segment_slug: "referral-partner",
@@ -211,25 +213,46 @@ export function ApplicationForm({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="currentRole"
-            render={({ field }) => (
-              <FormItem>
-                <Label className="text-xs uppercase font-semibold text-muted-foreground">
-                  Current Role
-                </Label>
-                <FormControl>
-                  <Input
-                    placeholder="e.g. Independent Pharma Rep"
-                    {...field}
-                    className="bg-background/50"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="currentRole"
+              render={({ field }) => (
+                <FormItem>
+                  <Label className="text-xs uppercase font-semibold text-muted-foreground">
+                    Current Role
+                  </Label>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. Independent Pharma Rep"
+                      {...field}
+                      className="bg-background/50"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <Label className="text-xs uppercase font-semibold text-muted-foreground">
+                    Phone
+                  </Label>
+                  <FormControl>
+                    <Input
+                      placeholder="e.g. (555) 123-4567"
+                      {...field}
+                      className="bg-background/50"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <div className="grid grid-cols-2 gap-4">
             <FormField
