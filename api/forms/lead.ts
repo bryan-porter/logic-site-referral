@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 
-import { query } from "../../server/lib/db";
-import { syncToBrevo } from "../../server/lib/brevo";
+import { query } from "../lib/db";
+import { syncToBrevo } from "../lib/brevo";
 
 // ========================================
 // Helpers
