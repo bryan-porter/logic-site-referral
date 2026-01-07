@@ -1,4 +1,3 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { randomUUID } from "crypto";
 
 import { query } from "../../server/lib/db";
@@ -60,7 +59,7 @@ function getPersonaTag(role: string | undefined): string | undefined {
   return undefined;
 }
 
-function verifyPublicApiKey(req: VercelRequest): boolean {
+function verifyPublicApiKey(req: any): boolean {
   const serverKey = process.env.PUBLIC_API_KEY;
   if (!serverKey) return true;
   const clientKey = req.headers["x-public-api-key"];
@@ -69,7 +68,7 @@ function verifyPublicApiKey(req: VercelRequest): boolean {
   return headerValue === serverKey;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method === "OPTIONS") {
     res.status(204).end();
     return;
