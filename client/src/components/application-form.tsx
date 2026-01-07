@@ -128,10 +128,11 @@ export function ApplicationForm({
         : {};
 
       if (!res.ok || !data.ok) {
+        const statusLabel = res.status ? ` (${res.status})` : "";
         setSubmitError(
           data.error ||
             data.message ||
-            "Something went wrong. Please try again."
+            `Server error${statusLabel}. Please try again.`
         );
         setIsSubmitting(false);
         return;
