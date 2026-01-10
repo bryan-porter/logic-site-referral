@@ -185,10 +185,10 @@ function Hero() {
             For Experienced Healthcare Sales Reps
           </div>
           <h1 className="text-4xl lg:text-[3.375rem] font-heading font-bold text-white leading-[1.1] mb-6 tracking-tight">
-            Sell Care Management<br className="hidden lg:block" />to Clinics. Build<br className="hidden lg:block" /><span className="text-blue-400">Long-Term Earnings.</span>
+            Sell Care Management<br className="hidden lg:block" />to Clinics. Build<br className="hidden lg:block" /><span className="text-blue-400">Unlock High-Dollar Commissions.</span>
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
-            LOGIC is designed to be operationally light for providers and straightforward for you to sell. You focus on prospecting, selling, and activating clinics—we handle implementation, staffing, outreach workflows, documentation, QA, and ongoing program support, the operating team and workflows that deliver measurable value. Make the sales call with confidence: minimal lift, meaningful value, and strong operational support.
+            LOGIC delivers high-impact care-management programs that help clinics strengthen care delivery and practice economics. You lead the sales process—positioning the opportunity and activating clinics. LOGIC handles implementation, staffing, outreach workflows, documentation, QA, and ongoing program support. Make the sales call with confidence—minimal lift, meaningful value, and strong operational support.
           </p>
           <p className="text-sm text-slate-400 mb-6 max-w-xl">
             LOGIC is an outsourced care-management operator. We staff and run the program end-to-end—LOGIC does not sell software.
@@ -440,8 +440,8 @@ function ValuePillars() {
     },
     {
       title: "Differentiated Advantage",
-      lead: "Sharper story for key accounts, backed by an operating model that delivers.",
-      body: "LOGIC is built as a comprehensive care-management partner—not a narrow offering. We bring a complete operating model (sales support, implementation, and ongoing care-management operations) that's easy to explain, easy for clinics to adopt, and clearly distinct from basic CCM-only offerings.",
+      lead: "Sharper story for key accounts, backed by a full operating model.",
+      body: "LOGIC is a comprehensive care-management partner—not a narrow offering. We bring a full operating model that's easy to explain, easy for clinics to adopt, and clearly distinct from basic CCM-only offerings.",
       bullets: [
         "Clear differentiation beyond basic CCM-only programs",
         "Executive-ready talking points for administrators and clinicians",
@@ -543,7 +543,7 @@ function ValuePillars() {
               Three reasons reps love selling LOGIC
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Designed for busy physician practices and small hospitals. Built for low-lift selling: reps lead the sale and clinic activation, while LOGIC provides deal support and the operating team and workflows that deliver measurable value—without adding workload to the clinic.
+              Designed for busy physician practices and small hospitals. Built for low-lift selling: reps lead the sale and clinic activation, while LOGIC provides deal support and a full operating model—without adding workload to the clinic.
             </p>
           </div>
 
@@ -766,7 +766,7 @@ function RisksMitigated() {
       number: "01",
       title: "Relationship Risk",
       lead: "Your reputation matters—our support protects it.",
-      body: "We operate with a \"back-end owned by LOGIC\" mindset: responsive support, proactive issue resolution, and a structured escalation path so small issues don't become account-level frustrations."
+      body: "We operate with a \"LOGIC-owned execution\" mindset: responsive support, proactive issue resolution, and a structured escalation path so small issues don't become account-level problems."
     },
     {
       value: "item-2",
@@ -780,7 +780,7 @@ function RisksMitigated() {
       number: "03",
       title: "Regulatory and Compliance Stability",
       lead: "Healthcare requires clarity and consistency.",
-      body: "We provide a documented compliance posture and standard contracting framework (including HIPAA-aligned processes and applicable agreements, such as a BAA when appropriate) so you can sell professionally and consistently—without feeling like you're putting your name on something uncertain."
+      body: "We provide a documented compliance posture and standard contracting framework, including HIPAA-aligned processes and applicable agreements (such as BAAs where required), so you can sell professionally and consistently."
     }
   ];
 
@@ -867,7 +867,7 @@ function BeforeAfter() {
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-4">Why Reps are Adding Care Management</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Stop limiting your upside to one-off sales. Compare the traditional rep model to a long-term care management opportunity.</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">Experienced sellers are expanding their impact and deepening their influence.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 relative">
@@ -881,7 +881,7 @@ function BeforeAfter() {
 
           <div className="space-y-4">
             <div className="text-center mb-2">
-              <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Before Care Management</h3>
+              <h3 className="text-2xl font-bold text-slate-700 tracking-tight">Your Core Strengths…</h3>
             </div>
 
             <Card className="border-border/60 bg-white/50 shadow-none hover:shadow-sm transition-shadow">
@@ -890,8 +890,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorX} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">One-off commissions</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Compensation tied to individual product or service sales</p>
+                  <h4 className="font-bold text-foreground">Established revenue drivers</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Generate revenue through products and services you already represent.</p>
                 </div>
               </CardContent>
             </Card>
@@ -902,8 +902,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorKey} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Limited strategic value</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Multiple opportunities for revenue go undiscovered each month in each clinic you already visit</p>
+                  <h4 className="font-bold text-foreground">Strong provider relationships</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Operate with provider trust earned through past success.</p>
                 </div>
               </CardContent>
             </Card>
@@ -914,8 +914,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorClock} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Limited account signal</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Reps operate with incomplete information between interactions</p>
+                  <h4 className="font-bold text-foreground">Defined stakeholder engagement</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Work effectively with decision-makers tied to your current offering.</p>
                 </div>
               </CardContent>
             </Card>
@@ -923,7 +923,7 @@ function BeforeAfter() {
 
           <div className="space-y-4">
             <div className="text-center mb-2">
-              <h3 className="text-2xl font-bold text-primary tracking-tight">With Care Management</h3>
+              <h3 className="text-2xl font-bold text-primary tracking-tight">Expanded With Care Management</h3>
             </div>
 
             <Card className="border-primary/20 bg-white shadow-sm ring-1 ring-primary/5 hover:ring-primary/20 transition-all">
@@ -932,8 +932,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorDollar} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Durable, recurring earnings</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Earn ongoing compensation as clinics successfully adopt and sustain care-management programs</p>
+                  <h4 className="font-bold text-foreground">Expanded earning opportunities</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Add high-value clinic programs with serious per-deal commissions.</p>
                 </div>
               </CardContent>
             </Card>
@@ -944,8 +944,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorUsers} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Stronger provider relationships</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Bringing a real operating solution positions you as a trusted, long-term partner??"not just another vendor</p>
+                  <h4 className="font-bold text-foreground">Deepened trusted-advisor positioning</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Bring a powerful operating solution that elevates your strategic relevance.</p>
                 </div>
               </CardContent>
             </Card>
@@ -956,8 +956,8 @@ function BeforeAfter() {
                   <ColorfulIcon icon={MultiColorBuilding} colorClass="" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Higher-quality account insight</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Program activity creates signal around engagement and readiness??"so reps can tailor outreach and protect hard-won relationships.</p>
+                  <h4 className="font-bold text-foreground">Broader stakeholder access</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-1">Engage a broader group of clinical, operational, and administrative leadership.</p>
                 </div>
               </CardContent>
             </Card>
@@ -966,7 +966,7 @@ function BeforeAfter() {
 
         <div className="mt-12 text-center">
             <p className="text-sm font-bold text-red-500 bg-red-50 inline-block px-4 py-2 rounded-full border border-red-100">
-             100% commission, performance-driven, and built for high earners.
+             100% commission. Serious upside for serious sellers.
             </p>
         </div>
       </div>
@@ -977,25 +977,25 @@ function BeforeAfter() {
 function Features() {
   const features = [
     {
-      title: "Durable Commissions",
-      desc: "Build a book of activated clinics that generates ongoing earnings over time.",
+      title: "High-Value Commissions",
+      desc: "Earn substantial commissions from each clinic you close.",
       icon: MultiColorChart,
       color: ""
     },
     {
-      title: "Unlimited Clinics",
-      desc: "No cap on the number of practices you can activate. Scale your book of business without limits.",
+      title: "Unlimited Deal Volume",
+      desc: "Close as many clinics as you want—earnings scale with deals closed.",
       icon: MultiColorBuilding,
       color: ""
     },
     {
-      title: "Clinic-First Economics",
+      title: "Easy-to-Sell Economics",
       desc: "Sell a program clinics want—one that strengthens financial performance while improving patient outcomes.",
       icon: MultiColorHandshake,
       color: ""
     },
     {
-      title: "Low Operational Load",
+      title: "No Operational Burden",
       desc: "LOGIC Health runs care management staffing and operations end-to-end. You focus on opening doors.",
       icon: MultiColorZap,
       color: ""
@@ -1035,11 +1035,11 @@ function Zap(props: any) {
 
 function EventStream() {
   const events = [
-    "Clinic A enrolled first patients",
-    "Clinic B added an active provider",
-    "Patient adherence rate at Clinic C hit 95%",
-    "Your clinic activation commission this quarter to date: $15,000",
-    "Your active provider monthly fee last month: $2500",
+    "Clinic A services agreement executed",
+    "Clinic B granted EMR access",
+    "Clinic C PPA completed",
+    "Milestone 2 achieved — commission vested",
+    "Commission payment issued: $15,000",
   ];
 
   return (
@@ -1047,23 +1047,23 @@ function EventStream() {
       <div className="container-padding mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">
-            Clear Visibility Into Your Book of Business
+            Clear Visibility Into Your Deals and Earnings
           </h2>
           <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-            Stay plugged into your portfolio's performance. Track clinic activation, provider participation, and commission status with full transparency.
+            Stay informed on the status of your clinic deals, milestone completion, and earned commissions. Track progress from contract execution through program launch with clear, objective visibility.
           </p>
           <ul className="space-y-4">
             <li className="flex items-start gap-3">
               <CheckCircle2 className="text-green-400 mt-0.5" size={20} />
-              <span className="font-medium">Transparent reporting dashboard</span>
+              <span className="font-medium">Track deals from signing to launch</span>
             </li>
             <li className="flex items-start gap-3">
               <CheckCircle2 className="text-green-400 mt-0.5" size={20} />
-              <span className="font-medium">Monthly payout visibility</span>
+              <span className="font-medium">See exactly when commissions are earned</span>
             </li>
             <li className="flex items-start gap-3">
               <CheckCircle2 className="text-green-400 mt-0.5" size={20} />
-              <span className="font-medium">Add care-management to existing clinic discussions</span>
+              <span className="font-medium">Understand payouts with full transparency</span>
             </li>
           </ul>
         </div>
@@ -1102,7 +1102,7 @@ function Metrics() {
     { id: "hrs-frederick-83", label: "Health Recovery Solutions: Frederick Health case study (Oct 2018–Apr 2019) – 83% reduction in 30-day readmissions", url: "https://www.healthrecoverysolutions.com/hubfs/Frederick%20Health%20Case%20Study.pdf", date: "2019 data period" },
     { id: "cdc-6in10", label: "CDC (Preventing Chronic Disease): Chronic disease affects 6 in 10 adults", url: "https://www.cdc.gov/pcd/issues/2023/23_0120.htm", date: "2023" },
     { id: "cms-93pct", label: "CMS: Beneficiaries with 2+ chronic conditions account for ~93% of Medicare spending (CY2011)", url: "https://www.cms.gov/newsroom/press-releases/medicare-dashboard-advances-aca-goals-chronic-conditions", date: "2012 (press release)" },
-    { id: "internal-4", label: "Internal: 6×–12× more touchpoints model", url: null, date: "Internal" },
+    { id: "internal-4", label: "Internal: 3×–6× more touchpoints model", url: null, date: "Internal" },
     { id: "internal-0", label: "Internal: $0 cost to start (LOGIC operating model)", url: null, date: "Internal" },
     { id: "cms-stars-2026", label: "CMS: 2026 Star Ratings Technical Notes (patient experience/complaints and access measures weight = 2)", url: "https://www.cms.gov/files/document/2026-star-ratings-technical-notes.pdf", date: "09/25/2025 update" },
     { id: "internal-1", label: "Internal: 100% interaction auditing via Ambient AI workflow (LOGIC). What it does: flags missing documentation elements, tracks outreach attempts vs completed touches, supports QA review. What it does not do: diagnose, replace clinical judgment, or operate unsupervised.", url: null, date: "Internal" },
@@ -1139,9 +1139,9 @@ function Metrics() {
               <div>
                 <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
                   <SlotNumber value="83" />%
-                  {renderSourceRef(["hrs-frederick-83"], "Readmission reduction")}
+                  {renderSourceRef(["hrs-frederick-83"], "Demonstrated clinical impact in large health-system deployments")}
                 </div>
-                <div className="text-slate-700 font-medium">Readmission reduction</div>
+                <div className="text-slate-700 font-medium">Demonstrated clinical impact in large health-system deployments</div>
               </div>
               <div className="text-sm text-slate-600 font-medium">Frederick Health RPM case study.</div>
            </div>
@@ -1170,7 +1170,7 @@ function Metrics() {
            <div className="bg-emerald-100 rounded-3xl p-8 flex flex-col justify-between h-full min-h-[200px]">
               <div>
                 <div className="text-4xl font-bold font-heading text-slate-900 mb-1">
-                  <SlotNumber value="6" />×–<SlotNumber value="12" />×
+                  <SlotNumber value="3" />×–<SlotNumber value="6" />×
                   {renderSourceRef(["internal-4"], "More touchpoints")}
                 </div>
                 <div className="text-slate-700 font-medium">More touchpoints</div>
@@ -1211,7 +1211,7 @@ function Metrics() {
                 </div>
                 <div className="text-slate-700 font-medium mb-8">Interaction auditing</div>
               </div>
-              <div className="text-sm text-slate-600 font-medium">Ambient AI supports quality and brand while ensuring HIPAA compliance.</div>
+              <div className="text-sm text-slate-600 font-medium">Built-in quality assurance and compliance across patient interactions.</div>
            </div>
 
            <div className="bg-rose-100 rounded-3xl p-8 md:col-span-2 flex flex-col justify-between h-full min-h-[200px]">
@@ -1251,9 +1251,9 @@ function Metrics() {
 function WhoThrives() {
   const profiles = [
     { title: "Pharma Sales Reps", desc: "Leverage your experience calling on clinics to introduce a solution that improves continuity of care and supports clinic operations.", icon: MultiColorStethoscope, color: "" },
-    { title: "Medical Device Reps", desc: "Use the trust you've built with surgeons and specialists to improve peri-operative care and support high-risk patients between visits—within the practices you already serve.", icon: MultiColorActivity, color: "" },
+    { title: "Medical Device Reps", desc: "Use the trust you've built with providers to introduce a care-management program that complements peri-operative care and extends your strategic relevance within existing accounts.", icon: MultiColorActivity, color: "" },
     { title: "Home Health Reps", desc: "Support referring clinics with care-management programs that surface patient needs earlier and lead to better-timed, more successful home health episodes.", icon: MultiColorBuilding, color: "" },
-    { title: "Billing / RCM Reps", desc: "You're a trusted part of the practice's business team. Care management can increase clinic revenue while strengthening compliance and improving patient outcomes.", icon: MultiColorDollar, color: "" },
+    { title: "Billing & RCM Professionals", desc: "You're a trusted part of the practice's business team. Care management can increase clinic revenue while strengthening compliance and improving patient outcomes.", icon: MultiColorDollar, color: "" },
   ];
 
   return (
@@ -1261,7 +1261,7 @@ function WhoThrives() {
       <div className="container-padding mx-auto">
         <div className="text-center mb-16">
            <h2 className="text-3xl lg:text-4xl font-bold font-heading">Who Thrives in This Role?</h2>
-          <p className="text-muted-foreground mt-4">Best fit: reps with existing clinic relationships who want to add a high-value care-management program to their sales motion.</p>
+          <p className="text-muted-foreground mt-4">Best fit: reps and professionals with existing clinic relationships who want to add a high-value care-management solution to their sales motion.</p>
         </div>
 
         {/* Selling Background */}
@@ -1322,7 +1322,7 @@ function HowItWorks() {
             {[
               { num: "01", title: "Apply & Qualify", desc: "Share your background, territory, and experience working with clinics to see if you're a fit." },
               { num: "02", title: "Get Equipped", desc: "Receive full training, pitch decks, one-pagers, and access to our partner portal." },
-              { num: "03", title: "Activate Network", desc: "Approach your clinics. Once they're interested, hand off the implementation to us—LOGIC leads discovery/demo/proposal/contracting, owns implementation, then runs ongoing operations." },
+              { num: "03", title: "Engage Your Network", desc: "Introduce care management opportunities within your clinic relationships. LOGIC leads evaluation, contracting, and program launch, with rep involvement through closing." },
             ].map((step, i) => (
               <div key={i} className="flex gap-6">
                 <div className="text-4xl font-bold text-slate-700 font-heading">{step.num}</div>
@@ -1351,7 +1351,7 @@ function CompSection() {
                    <div className="font-bold text-base mt-1">2 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                   <div className="font-bold text-green-600 text-lg">$50K</div>
+                   <div className="font-bold text-green-600 text-lg">Up to $20K commission</div>
                 </div>
              </div>
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
@@ -1360,22 +1360,22 @@ function CompSection() {
                    <div className="font-bold text-base mt-1">5 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                   <div className="font-bold text-green-600 text-lg">$110K</div>
+                   <div className="font-bold text-green-600 text-lg">Up to $40K commission</div>
                 </div>
              </div>
 
              <div className="pt-4 text-center">
-                <div className="text-xs text-muted-foreground mt-2">Indicative 3-year compensation</div>
+                <div className="text-xs text-muted-foreground mt-2">Commission amounts are earned based on objective sales milestones and are not tied to utilization, billing, or ongoing clinic performance.</div>
              </div>
           </Card>
         </div>
 
         <div className="order-1 lg:order-2">
-           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">High-Upside Earnings With Flexible Commitment.</h2>
+           <h2 className="text-3xl lg:text-4xl font-bold font-heading mb-6">High-Value Commissions With Flexible Commitment.</h2>
            <div className="space-y-4">
              <div className="flex gap-3">
                <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 size={14} /></div>
-               <p className="text-lg text-muted-foreground">Commission-only compensation with long-term cash flows tied to activated clinics.</p>
+               <p className="text-lg text-muted-foreground">Commission-only compensation tied to clear, milestone-based clinic sales.</p>
              </div>
              <div className="flex gap-3">
                <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 size={14} /></div>
@@ -1383,7 +1383,7 @@ function CompSection() {
              </div>
              <div className="flex gap-3">
                <div className="w-6 h-6 rounded-full bg-blue-100 text-primary flex items-center justify-center shrink-0 mt-0.5"><CheckCircle2 size={14} /></div>
-               <p className="text-lg text-muted-foreground">Designed to bolt onto your existing portfolio immediately.</p>
+               <p className="text-lg text-muted-foreground">Designed to layer into your existing sales relationships.</p>
              </div>
            </div>
         </div>
@@ -1751,22 +1751,22 @@ function FAQ() {
   const faqs = [
     { question: "Is this commission-only?", answer: "Yes—1099 commission-only. No base salary." },
     { question: "Can I do this part-time?", answer: "Yes—built for part-time or full-time." },
-    { question: "Can I keep my current job?", answer: "Yes—non-exclusive; designed to add to your bag." },
+    { question: "Can I keep my current job?", answer: "Yes—non-exclusive, subject to standard conflict-of-interest and non-compete restrictions. Designed to add to your bag." },
     { question: "Is this cross-sell friendly?", answer: "Yes—care management integrates naturally into a clinic-focused sales portfolio." },
-    { question: "What is LOGIC?", answer: "LOGIC is an outsourced care-management operator. We hire, train, and manage the care team and run day-to-day program operations." },
+    { question: "What is LOGIC?", answer: "LOGIC is a care-management platform and operating partner for clinics. We design, deploy, and support scalable care-management programs, including hiring, training, and managing the care team, and running day-to-day program operations." },
     { question: "Who does LOGIC serve?", answer: "Provider organizations including primary care clinics, specialty clinics, small hospitals, and MSOs." },
     { question: "What programs does LOGIC operate?", answer: "Chronic Care Management, Remote Patient Monitoring, Transitional Care Management, and related CMS-recognized care-management programs." },
-    { question: "How does it work?", answer: "You introduce the provider, LOGIC leads discovery and contracting, launch and staffing, patient outreach and documentation, compliance and QA, monthly performance reporting." },
+    { question: "How does it work?", answer: "You introduce and advance the opportunity within your clinic relationships and remain involved through closing. LOGIC leads evaluation, contracting, program launch, and ongoing operations." },
     { question: "Is LOGIC compliant with CMS standards?", answer: "LOGIC operates with HIPAA-aligned workflows, executes BAAs where applicable, and maintains audit-ready documentation and outreach tracking." },
-    { question: "Do I have to run demos or handle implementation?", answer: "No. You open the door and make the intro. LOGIC runs discovery, contracting, launch, and ongoing operations." },
-    { question: "What does my involvement look like after the introduction?", answer: "Light-touch. We keep you in the loop, but LOGIC owns delivery and ongoing support." },
-    { question: "How long does it take to launch after a provider says yes?", answer: "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing so the provider isn’t burdened." },
+    { question: "Do I have to run demos or handle implementation?", answer: "No. You are not responsible for implementation or ongoing operations. You participate in sales discussions through closing; LOGIC leads evaluation, contracting, program launch, and ongoing operations." },
+    { question: "What does my involvement look like after the introduction?", answer: "Light-touch after closing. You remain involved through the sales process; LOGIC owns delivery and ongoing support." },
+    { question: "How long does it take to launch after a provider says yes?", answer: "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing to minimize provider burden." },
     { question: "Do providers need to hire staff or change their operations?", answer: "No additional headcount is required. LOGIC provides the care team and operates the workflows alongside the clinic." },
     { question: "Will this disrupt a clinic’s workflow?", answer: "Minimal disruption. LOGIC plugs into the clinic’s cadence with defined outreach, documentation, escalation paths, and reporting." },
-    { question: "What types of provider organizations are the best fit?", answer: "Organizations with chronic populations and a desire to improve outcomes, documentation, and financial performance—especially groups that want to avoid hiring and managing a care-management team." },
+    { question: "What types of provider organizations are the best fit?", answer: "Organizations with chronic populations and a desire to improve patient outcomes, and financial performance without hiring or managing an internal care team." },
     { question: "Do you work with small hospitals and rural providers?", answer: "Yes. LOGIC supports small hospitals and rural providers." },
-    { question: "Do you require a specific EMR or integration?", answer: "No. LOGIC operates without requiring disclosure of or dependency on a specific EMR vendor or FHIR build." },
-    { question: "Does LOGIC bill on behalf of the provider?", answer: "LOGIC supports documentation and billing workflows. The exact billing arrangement depends on the provider model and agreement." },
+    { question: "Do you require a specific EMR or integration?", answer: "No. LOGIC does not require dependency on a specific EMR vendor or FHIR build." },
+    { question: "Does LOGIC bill on behalf of the provider?", answer: "LOGIC supports documentation and billing workflows. Providers retain billing responsibility; specific arrangements vary by the provider model and agreement." },
     { question: "Can I bring multiple provider accounts?", answer: "Yes. This model is designed to scale across a portfolio of provider relationships." },
     { question: "Do you provide partner enablement or materials?", answer: "Yes. LOGIC provides messaging, qualification guidance, and a clear handoff process so you can sell confidently without heavy lift." },
     { question: "What if a provider asks for outcomes proof?", answer: "We share LOGIC results when available and clearly labeled industry benchmarks where appropriate, with sources." },
@@ -1933,3 +1933,21 @@ export default function Home() {
     </TakeoverProvider>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
