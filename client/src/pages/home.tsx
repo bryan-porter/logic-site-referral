@@ -1357,7 +1357,7 @@ function CompSection() {
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
                 <div className="flex-1">
                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Clinic B (Medium)</div>
-                   <div className="font-bold text-base mt-1">5 Providers</div>
+                   <div className="font-bold text-base mt-1">6 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
                    <div className="font-bold text-green-600 text-lg">Up to $40K commission</div>
