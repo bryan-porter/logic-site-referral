@@ -185,7 +185,7 @@ function Hero() {
             For Experienced Healthcare Sales Reps
           </div>
           <h1 className="text-4xl lg:text-[3.375rem] font-heading font-bold text-white leading-[1.1] mb-6 tracking-tight">
-            Sell Care Management<br className="hidden lg:block" />to Clinics. Build<br className="hidden lg:block" /><span className="text-blue-400">Unlock High-Dollar Commissions.</span>
+            Sell Care Management<br className="hidden lg:block" />to Clinics.<br className="hidden lg:block" /><span className="text-blue-400">Unlock High-Dollar Commissions.</span>
           </h1>
           <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed max-w-xl">
             LOGIC delivers high-impact care-management programs that help clinics strengthen care delivery and practice economics. You lead the sales process—positioning the opportunity and activating clinics. LOGIC handles implementation, staffing, outreach workflows, documentation, QA, and ongoing program support. Make the sales call with confidence—minimal lift, meaningful value, and strong operational support.
@@ -846,7 +846,7 @@ function Testimonial() {
           </div>
           
           <blockquote className="text-2xl lg:text-3xl font-medium font-heading leading-tight text-foreground mt-6 mb-8">
-            "Care management quickly became a compelling economic and <span className="text-primary font-bold decoration-2 underline decoration-blue-200 underline-offset-4 whitespace-nowrap">clinical win for the clinics</span> I work with. Practices were able to add a new, sustainable revenue stream while closing care gaps and advancing value-based care — all without hiring staff or investing in new infrastructure. LOGIC's operational support made the business case real."
+            "Care management quickly became a compelling economic and <span className="text-primary font-bold decoration-2 underline decoration-blue-200 underline-offset-4 whitespace-nowrap">clinical win for the clinics</span> I work with. Practices were able to add a new, sustainable revenue stream by closing care gaps and advancing value-based care — all without hiring staff or investing in new infrastructure. LOGIC's operational support made the business case real."
           </blockquote>
           
           <div className="flex items-center justify-center gap-3">
@@ -996,7 +996,7 @@ function Features() {
     },
     {
       title: "No Operational Burden",
-      desc: "LOGIC Health runs care management staffing and operations end-to-end. You focus on opening doors.",
+          desc: "LOGIC runs care management staffing and operations end-to-end. You focus on opening doors.",
       icon: MultiColorZap,
       color: ""
     },
@@ -1763,7 +1763,7 @@ function FAQ() {
     { question: "How long does it take to launch after a provider says yes?", answer: "Launch timing depends on provider readiness and scope. LOGIC manages the launch plan and staffing to minimize provider burden." },
     { question: "Do providers need to hire staff or change their operations?", answer: "No additional headcount is required. LOGIC provides the care team and operates the workflows alongside the clinic." },
     { question: "Will this disrupt a clinic’s workflow?", answer: "Minimal disruption. LOGIC plugs into the clinic’s cadence with defined outreach, documentation, escalation paths, and reporting." },
-    { question: "What types of provider organizations are the best fit?", answer: "Organizations with chronic populations and a desire to improve patient outcomes, and financial performance without hiring or managing an internal care team." },
+    { question: "What types of provider organizations are the best fit?", answer: "Organizations with chronic populations and a desire to improve patient outcomes and financial performance without hiring or managing an internal care team." },
     { question: "Do you work with small hospitals and rural providers?", answer: "Yes. LOGIC supports small hospitals and rural providers." },
     { question: "Do you require a specific EMR or integration?", answer: "No. LOGIC does not require dependency on a specific EMR vendor or FHIR build." },
     { question: "Does LOGIC bill on behalf of the provider?", answer: "LOGIC supports documentation and billing workflows. Providers retain billing responsibility; specific arrangements vary by the provider model and agreement." },
