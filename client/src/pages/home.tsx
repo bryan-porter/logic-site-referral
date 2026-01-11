@@ -1351,7 +1351,7 @@ function CompSection() {
                    <div className="font-bold text-base mt-1">3 Providers</div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                   <div className="font-bold text-green-600 text-lg">Up to $25K comission</div>
+                   <div className="font-bold text-green-600 text-lg">Up to $25K commission</div>
                 </div>
              </div>
              <div className="bg-white p-5 rounded-xl shadow-sm border border-border/50 flex justify-between items-center gap-4">
