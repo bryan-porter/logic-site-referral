@@ -20,12 +20,6 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     monoSrc: "/logos/svg-mono/02-ascension.svg",
   },
   {
-    id: "03-baycare-raster",
-    name: "BayCare (Raster)",
-    colorSrc: "/logos/svg-color/03-baycare-raster.svg",
-    monoSrc: "/logos/svg-mono/03-baycare-raster.svg",
-  },
-  {
     id: "04-baycare-vector",
     name: "BayCare (Vector)",
     colorSrc: "/logos/svg-color/04-baycare-vector.svg",
@@ -54,7 +48,7 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Frederick Health",
     colorSrc: "/logos/svg-color/08-frederick-health-white.svg",
     monoSrc: "/logos/svg-mono/08-frederick-health-white.svg",
-    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
+    className: "brightness-0",
   },
   {
     id: "10-hackensack-meridian-health",
@@ -92,14 +86,14 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Tampa General Hospital",
     colorSrc: "/logos/svg-color/16-tampa.svg",
     monoSrc: "/logos/svg-mono/16-tampa.svg",
-    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
+    className: "brightness-0",
   },
   {
     id: "17-ukhc",
     name: "UK HealthCare",
     colorSrc: "/logos/svg-color/17-ukhc.svg",
     monoSrc: "/logos/svg-mono/17-ukhc.svg",
-    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
+    className: "brightness-0",
   },
   {
     id: "18-unity",
