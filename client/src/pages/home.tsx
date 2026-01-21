@@ -51,6 +51,7 @@ import {
 
 import logicLogo from "@assets/logic_logo_transparent_1765720135384.png";
 import { SlotNumber } from "@/components/slot-number";
+import { LogoMarquee } from "@/components/LogoMarquee";
 
 // Takeover components
 import { FullPageTakeover } from "@/components/ui/full-page-takeover";
@@ -239,25 +240,6 @@ function Hero() {
 }
 
 function LogoStrip() {
-  const logos = [
-    "Hackensack Meridian",
-    "Tampa General Hospital",
-    "CommonSpirit Health",
-    "BayCare HomeCare",
-    "Piedmont Healthcare",
-    "UnityHealth",
-    "University of Kentucky",
-    "Frederick Health",
-    "LifePoint Health",
-    "Community Health Systems",
-    "The Wright Center",
-    "Prisma Health",
-    "Main Line Health",
-    "Cardiac Solutions",
-    "Ascension",
-    "Lovelace Hospital",
-  ];
-
   return (
     <section className="py-10 border-y border-border/50 bg-slate-50/50 overflow-hidden">
       <div className="container-padding mx-auto text-center mb-8">
@@ -266,19 +248,7 @@ function LogoStrip() {
         </p>
       </div>
 
-      <div className="relative w-full overflow-hidden">
-        {/* Gradient Masks for edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-
-        <div className="flex animate-scrolling-left gap-16 whitespace-nowrap w-max">
-          {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
-            <div key={i} className="text-lg lg:text-xl font-heading font-bold text-slate-400 hover:text-primary cursor-default transition-colors shrink-0">
-              {logo}
-            </div>
-          ))}
-        </div>
-      </div>
+      <LogoMarquee />
     </section>
   );
 }
