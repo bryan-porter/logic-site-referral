@@ -54,6 +54,7 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Frederick Health",
     colorSrc: "/logos/svg-color/08-frederick-health-white.svg",
     monoSrc: "/logos/svg-mono/08-frederick-health-white.svg",
+    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
   },
   {
     id: "10-hackensack-meridian-health",
