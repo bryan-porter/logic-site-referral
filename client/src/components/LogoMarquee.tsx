@@ -73,7 +73,8 @@ export function LogoMarquee({ variant, className, speed = 130 }: LogoMarqueeProp
                 aria-hidden={isDuplicate}
                 className={cn(
                   "h-8 sm:h-10 w-auto object-contain shrink-0",
-                  resolvedVariant === "mono" ? "dark:invert dark:brightness-200" : ""
+                  resolvedVariant === "mono" ? "dark:invert dark:brightness-200" : "",
+                  logo.className
                 )}
               />
             );

@@ -3,6 +3,7 @@ export type HealthSystemLogo = {
   name: string;
   colorSrc: string;
   monoSrc: string;
+  className?: string;
 };
 
 export const healthSystemLogos: HealthSystemLogo[] = [
@@ -59,6 +60,7 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Hackensack Meridian Health",
     colorSrc: "/logos/svg-color/10-hackensack-meridian-health.svg",
     monoSrc: "/logos/svg-mono/10-hackensack-meridian-health.svg",
+    className: "-ml-4",
   },
   {
     id: "11-life-point-health",
@@ -83,12 +85,6 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Main Line Health",
     colorSrc: "/logos/svg-color/14-main-line-health-logo.svg",
     monoSrc: "/logos/svg-mono/14-main-line-health-logo.svg",
-  },
-  {
-    id: "15-mainline",
-    name: "Mainline Health",
-    colorSrc: "/logos/svg-color/15-mainline.svg",
-    monoSrc: "/logos/svg-mono/15-mainline.svg",
   },
   {
     id: "16-tampa",
