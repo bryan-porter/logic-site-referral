@@ -249,7 +249,7 @@ function LogoStrip() {
       </div>
 
       <LogoMarquee />
-      <div className="container-padding mx-auto mt-6 text-center text-xs text-muted-foreground">
+      <div className="container-padding mx-auto mt-10 max-w-4xl text-center text-xs text-muted-foreground leading-relaxed [text-wrap:balance]">
         LOGIC is an outsourced care-management operator that stands up, staffs, operates, audits,
         and improves CMS-reimbursable care-management programs—without adding provider headcount.
         Logos displayed reflect organizations with publicly available care management program
