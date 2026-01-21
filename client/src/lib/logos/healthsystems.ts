@@ -91,12 +91,14 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Tampa General Hospital",
     colorSrc: "/logos/svg-color/16-tampa.svg",
     monoSrc: "/logos/svg-mono/16-tampa.svg",
+    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
   },
   {
     id: "17-ukhc",
     name: "UK HealthCare",
     colorSrc: "/logos/svg-color/17-ukhc.svg",
     monoSrc: "/logos/svg-mono/17-ukhc.svg",
+    className: "drop-shadow-[0_0_2px_rgba(15,23,42,0.65)]",
   },
   {
     id: "18-unity",
