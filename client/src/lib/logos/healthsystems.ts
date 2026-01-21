@@ -48,7 +48,6 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Frederick Health",
     colorSrc: "/logos/svg-color/08-frederick-health-white.svg",
     monoSrc: "/logos/svg-mono/08-frederick-health-white.svg",
-    className: "brightness-0",
   },
   {
     id: "10-hackensack-meridian-health",
@@ -86,14 +85,12 @@ export const healthSystemLogos: HealthSystemLogo[] = [
     name: "Tampa General Hospital",
     colorSrc: "/logos/svg-color/16-tampa.svg",
     monoSrc: "/logos/svg-mono/16-tampa.svg",
-    className: "brightness-0",
   },
   {
     id: "17-ukhc",
     name: "UK HealthCare",
     colorSrc: "/logos/svg-color/17-ukhc.svg",
     monoSrc: "/logos/svg-mono/17-ukhc.svg",
-    className: "brightness-0",
   },
   {
     id: "18-unity",
